@@ -17,7 +17,7 @@
 	
 	<%@ include file="/WEB-INF/jsp/form.jsp" %>
 
-    <div>
+    <div class="buttonForm">
       	<button class="button" type="submit" >Enregistrer</button>	
         					
 		<a href="#">
