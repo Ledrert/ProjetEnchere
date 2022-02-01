@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ServletInscription
  */
-@WebServlet(name="/ServletInscription", urlPatterns = "/inscription")
+@WebServlet(name="/ServletInscription", urlPatterns = "/Inscription")
 public class ServletInscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -20,7 +20,7 @@ public class ServletInscription extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/inscription.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Inscription.jsp");
 		rd.forward(request, response);
 
 		
