@@ -9,5 +9,24 @@ body {
 }
 
 #divSearch {
-	
+	width:"75%";
+	display:flex;
+	flex-wrap:wrap; /* dispose en-dessous si pas de place */
+	align-items: center;
+	justify-content: space-around;
+}
+
+.listEnchere{
+	display:flex;
+	flex-wrap:wrap; /* dispose en-dessous si pas de place */
+	align-items: center;
+	justify-content: space-between;
+}
+
+#cardEnchere {
+	border : 2px solid black;
+}
+
+#imgEnchere {
+	float: left;
 }
