@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ServletAccueil
  */
-@WebServlet(name="/ServletAccueil", urlPatterns = "/acceuil")
+@WebServlet(name="/ServletAccueil", urlPatterns = "/")
 public class ServletAccueil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -30,7 +30,11 @@ public class ServletAccueil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/acceuil.jsp");
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/acceuil.jsp");
+		request.setAttribute("listMenu", rd);
+		rd.forward(request, response);
+		
 	}
 
 	/**
