@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ServletInscription
  */
-@WebServlet(name="/ServletInscription", urlPatterns = "/Inscription")
+@WebServlet(name="/ServletInscription", urlPatterns = "/inscription")
 public class ServletInscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -30,7 +30,6 @@ public class ServletInscription extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
