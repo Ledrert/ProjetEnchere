@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="/css/style.css">
 <title>Je m'inscris !</title>
 </head>
 <body>
@@ -15,7 +16,7 @@
 <h1>Création d'un nouveau profil</h1>
 
 <div>
-	<form method="post">
+	<form method="post" class="form">
 		<div> 
 			<label for="pseudo">Pseudo :</label>
 			<input type="text" name="pseudo" id="pseudo" required>
@@ -66,6 +67,6 @@
 </div>
 
 </main>
-	<%@ include file="/WEB-INF/jsp/footer.jsp" %>
+<%-- 	<%@ include file="/WEB-INF/jsp/footer.jsp" %> --%>
 </body>
 </html>
