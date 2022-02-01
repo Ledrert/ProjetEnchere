@@ -31,8 +31,10 @@ public class ServletAccueil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String[] menu = {"Se connecter - S'inscrire"};
+		String[] categories = {"Toutes", "Informatique", "Ameublement", "Vêtement", "Sport & loisirs"};
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 		request.setAttribute("listMenu", menu);
+		request.setAttribute("listeCat", categories);
 		rd.forward(request, response);
 		
 	}
