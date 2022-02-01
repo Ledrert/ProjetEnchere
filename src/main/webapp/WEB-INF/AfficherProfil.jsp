@@ -20,7 +20,7 @@ Rue : <br>
 Code postal :<br>
 Ville : <br>
 </h3>
-<form><button type="submit" name="modifier" formmethod="get" formaction="ServletModifProfil">Modifier 
+<form><button type="submit" name="modifier" formmethod="get" formaction="modifProfil">Modifier 
 </button></form>
 </body>
 </html>
