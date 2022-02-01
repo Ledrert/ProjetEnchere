@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ServletAfficherProfil
  */
-@WebServlet(name="/ServletAfficherProfil", urlPatterns = "/profil")
+@WebServlet(name="/ServletAfficherProfil", urlPatterns = "/Profil")
 public class ServletAfficherProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -20,6 +20,7 @@ public class ServletAfficherProfil extends HttpServlet {
      * Default constructor. 
      */
     public ServletAfficherProfil() {
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -34,6 +35,7 @@ public class ServletAfficherProfil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

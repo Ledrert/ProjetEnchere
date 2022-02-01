@@ -5,7 +5,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/style.css">
-<title>Je m'inscris !</title>
+<title>Je modifie mon profil</title>
 </head>
 <body>
 
@@ -13,17 +13,18 @@
 
 <main>
 
-	<h1>Creation de mon profil</h1>
+	<h1>Modification de mon profil</h1>
+	
 	
 	<%@ include file="/WEB-INF/jsp/form.jsp" %>
 
     <div class="buttonForm">
-      	<button class="button" type="submit" >Enregistrer</button>	
+     	<button class="button" type="submit" >Valider</button>	
         					
 		<a href="#">
-		<button type="button" >Supprimer mon compte</button></a>
+		<button type="button" >Annuler</button></a>
 	</div>
-
+	
 </main>
 
 <%-- 	<%@ include file="/WEB-INF/jsp/footer.jsp" %> --%> </body>

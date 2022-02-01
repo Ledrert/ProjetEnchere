@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ServletModifProfil
  */
-
-@WebServlet(name="/ServletModifProfil", urlPatterns="/modifProfil")
+@WebServlet(name="/ServletModifProfil", urlPatterns="/ModifProfil")
 public class ServletModifProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
