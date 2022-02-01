@@ -18,7 +18,7 @@
 	
 	<%@ include file="/WEB-INF/jsp/form.jsp" %>
 
-	<div>
+    <div class="buttonForm">
      	<button class="button" type="submit" >Valider</button>	
         					
 		<a href="#">
