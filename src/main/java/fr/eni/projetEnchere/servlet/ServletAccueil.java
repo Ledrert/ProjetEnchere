@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ServletAccueil
  */
-@WebServlet(name="/ServletAccueil", urlPatterns = "/")
+@WebServlet(name="/ServletAccueil", urlPatterns = "/accueil")
 public class ServletAccueil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
