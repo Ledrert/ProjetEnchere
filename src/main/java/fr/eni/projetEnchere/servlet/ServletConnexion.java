@@ -1,6 +1,8 @@
 package fr.eni.projetEnchere.servlet;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,6 +30,9 @@ public class ServletConnexion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Connexion.jsp");
+		Map<String, String> menu = new HashMap<>();
+		menu.put("inscription", "Se connecter - S'inscrire");
+		request.setAttribute("listMenu", menu);
 		rd.forward(request, response);	
 		}
 

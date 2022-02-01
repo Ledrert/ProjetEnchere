@@ -1,6 +1,8 @@
 package fr.eni.projetEnchere.servlet;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -25,8 +27,12 @@ public class ServletAfficherProfil extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+	IOException {
+		Map<String, String> menu = new HashMap<>();
+		menu.put("inscription", "Se connecter - S'inscrire");
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AfficherProfil.jsp");
+		request.setAttribute("listMenu", menu);
 		rd.forward(request, response);
 	}
 
