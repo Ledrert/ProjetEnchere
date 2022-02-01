@@ -35,6 +35,7 @@ public class ServletAccueil extends HttpServlet {
 		String[] categories = {"Toutes", "Informatique", "Ameublement", "Vêtement", "Sport & loisirs"};
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 		request.setAttribute("listMenu", menu);
+		request.setAttribute("liensMenu", menu.entrySet());
 		request.setAttribute("listeCat", categories);
 		rd.forward(request, response);
 		

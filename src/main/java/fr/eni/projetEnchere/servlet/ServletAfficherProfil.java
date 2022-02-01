@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ServletAfficherProfil
  */
-@WebServlet(name="/ServletAfficherProfil", urlPatterns = "/Profil")
+@WebServlet(name="/ServletAfficherProfil", urlPatterns = "/profil")
 public class ServletAfficherProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
