@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class AjoutArticle
  */
 @WebServlet(name="/AjoutArticle", urlPatterns = "/ajouterArticle")
-public class AjoutArticle extends HttpServlet {
+public class ServletAjoutArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjoutArticle() {
+    public ServletAjoutArticle() {
         super();
     }
 
