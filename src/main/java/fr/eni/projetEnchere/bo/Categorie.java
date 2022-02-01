@@ -3,7 +3,7 @@ package fr.eni.projetEnchere.bo;
 public class Categorie {
 
 	//Declare
-	private int noCategorie;
+	private String nomCategorie;
 	private String libelle;
 	
 	
@@ -18,11 +18,11 @@ public class Categorie {
 	
 		
 	//Getters & Setters
-	public int getNoCategorie() {
-		return noCategorie;
+	public String getNomCategorie() {
+		return nomCategorie;
 	}
-	public void setNoCategorie(int noCategorie) {
-		this.noCategorie = noCategorie;
+	public void setNomCategorie(String nomCategorie) {
+		this.nomCategorie = nomCategorie;
 	}
 	public String getLibelle() {
 		return libelle;
