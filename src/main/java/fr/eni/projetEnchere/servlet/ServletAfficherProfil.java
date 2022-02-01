@@ -20,7 +20,6 @@ public class ServletAfficherProfil extends HttpServlet {
      * Default constructor. 
      */
     public ServletAfficherProfil() {
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -35,7 +34,6 @@ public class ServletAfficherProfil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
