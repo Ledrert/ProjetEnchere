@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ServletAccueil
  */
-@WebServlet(name="/ServletAccueil", urlPatterns = "/Enchere")
+@WebServlet(name="/ServletAccueil", urlPatterns = "/enchere")
 public class ServletAccueil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,7 +35,6 @@ public class ServletAccueil extends HttpServlet {
 		String[] categories = {"Toutes", "Informatique", "Ameublement", "Vêtement", "Sport & loisirs"};
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 		request.setAttribute("listMenu", menu);
-		request.setAttribute("liensMenu", menu.entrySet());
 		request.setAttribute("listeCat", categories);
 		rd.forward(request, response);
 		
