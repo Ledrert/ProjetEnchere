@@ -8,8 +8,12 @@ body {
 	float:right;
 }
 
+.formSearch {
+	justify-content: center;
+}
+
 #divSearch {
-	width:"75%";
+	width:75%;
 	display:flex;
 	flex-wrap:wrap; /* dispose en-dessous si pas de place */
 	align-items: center;
@@ -21,14 +25,17 @@ body {
 	flex-wrap:wrap; /* dispose en-dessous si pas de place */
 	align-items: center;
 	justify-content: space-between;
+	margin-top : 50px;
 }
 
 #cardEnchere {
 	border : 2px solid black;
+	width : 30%;
 }
 
 #imgEnchere {
 	float: left;
+	height:150px;
 }
 .form {
 	text-align: center;
