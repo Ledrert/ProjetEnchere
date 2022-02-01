@@ -52,7 +52,5 @@ public class Retrait {
 
     public void setVille(String ville) {
         this.ville = ville;
-    }
-
+    }    
 }
-

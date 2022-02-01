@@ -53,8 +53,5 @@ public class Enchere {
 
 	public void setMontantEnchere(int montantEnchere) {
 		this.montantEnchere = montantEnchere;
-	}
-    
-    
-    
+	}    
 }

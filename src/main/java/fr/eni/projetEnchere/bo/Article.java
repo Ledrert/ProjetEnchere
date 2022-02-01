@@ -110,6 +110,4 @@ public class Article {
     public void setNoCategorie(Categorie categorie) {
         this.categorie = categorie;
     }
-
-
 }

@@ -145,7 +145,4 @@ public class Utilisateur {
 	public void setEncheres(List<Enchere> encheres) {
 		this.encheres = encheres;
 	}
-	
-
-	
 }
