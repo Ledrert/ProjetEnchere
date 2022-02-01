@@ -40,11 +40,5 @@
 			<label for="confirmPassword">Confirmez le mot de passe :</label>
 			<input type="password" name="confirmPassword" id="confirmPassword">
 		</div>
-        <div>
-        	<button class="button" type="submit" >Valider</button>	
-        					
-			<a href="#">
-			<button type="button" >Annuler</button></a>
-		</div>
 	</form>
 </div>
