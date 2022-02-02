@@ -69,6 +69,7 @@ public class UtilisateurDAOImpl {
 			}
 	}
 		
+	
 	public void supprimerUtilisateur (Utilisateur utilisateur) {
 			try {
 				Connection cnx = ConnectionProvider.getConnection();
