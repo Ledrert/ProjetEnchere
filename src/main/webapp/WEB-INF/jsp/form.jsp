@@ -34,11 +34,11 @@
 		</div>		
 		<div>
     		<label for="password">Mot de passe :</label>
-			<input type="password" name="password" id="password">
+			<input type="password" name="password" id="password" required>
 		</div>	
 		<div> 
 			<label for="confirmPassword">Confirmez le mot de passe :</label>
-			<input type="password" name="confirmPassword" id="confirmPassword">
+			<input type="password" name="confirmPassword" id="confirmPassword" required>
 		</div>
 	</form>
 </div>
