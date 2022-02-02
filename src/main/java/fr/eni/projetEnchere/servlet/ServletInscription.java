@@ -55,7 +55,6 @@ public class ServletInscription extends HttpServlet {
 		} catch (DalException e) {
 			e.printStackTrace();
 		}
-	
 		RequestDispatcher rd = request.getRequestDispatcher("/connexion");
 		rd.forward(request, response);
 		
