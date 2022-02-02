@@ -21,7 +21,7 @@
     </div>
     <br>
     
-    <form><button type="submit" name="connexion" formmethod="get" formaction="enchere">Modifier 
+    <form><button type="submit" name="connexion" formmethod="get" formaction="enchere">Connexion 
 </button></form>
 
 <div>
