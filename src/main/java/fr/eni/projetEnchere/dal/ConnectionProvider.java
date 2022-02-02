@@ -1,7 +1,10 @@
 package fr.eni.projetEnchere.dal;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -27,5 +30,39 @@ public class ConnectionProvider {
 		return dataSource.getConnection();
 	} 
 	
-
+	public static void seDeconnecter(Statement st) throws DalException {
+		
+		try {
+			if(st != null) {
+			st.close();
+			}
+		} catch (SQLException e) {
+			throw new DalException("Problème fermeture Statement");
+		}
+		
+	}
+	
+	public static void seDeconnecter(PreparedStatement pst) throws DalException {
+		
+		try {
+			if(pst != null) {
+			pst.close();
+			}
+		} catch (SQLException e) {
+			throw new DalException("Problème fermeture PreparedStatement");
+		}
+		
+	}
+	
+	public static void seDeconnecter(CallableStatement cst) throws DalException {
+		
+		try {
+			if(cst != null) {
+			cst.close();
+			}
+		} catch (SQLException e) {
+			throw new DalException("Problème fermeture CallableStatement");
+		}
+		
+	}
 }
