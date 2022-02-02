@@ -18,10 +18,10 @@
 	<%@ include file="/WEB-INF/jsp/form.jsp" %>
 
     <div class="buttonForm">
-    	<a href="/inscription"> 
+    	<a href="inscription"> 
       	<button class="button" type="submit" >Enregistrer</button></a>
         					
-		<a href="/enchere">
+		<a href="enchere">
 		<button type="button" >Annuler</button></a>
 	</div>
 
