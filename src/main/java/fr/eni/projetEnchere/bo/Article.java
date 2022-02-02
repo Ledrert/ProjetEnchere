@@ -1,6 +1,6 @@
 package fr.eni.projetEnchere.bo;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Article {
 	
@@ -87,27 +87,27 @@ public class Article {
         this.prixVente = prixVente;
     }
 
-    public Utilisateur userVendeur() {
+    public Utilisateur getUserVendeur() {
         return userVendeur;
     }
 
-    public void setNoUtilisateurVendeur(Utilisateur userVendeur) {
+    public void setUtilisateurVendeur(Utilisateur userVendeur) {
         this.userVendeur = userVendeur;
     }
 
-    public Utilisateur userAcheteur() {
+    public Utilisateur getUserAcheteur() {
         return userAcheteur;
     }
 
-    public void setNoUtilisateurAcheteur(Utilisateur userAcheteur) {
+    public void setUtilisateurAcheteur(Utilisateur userAcheteur) {
         this.userAcheteur = userAcheteur;
     }
     
-    public Categorie getNoCategorie() {
+    public Categorie getCategorie() {
         return categorie;
     }
 
-    public void setNoCategorie(Categorie categorie) {
+    public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
     }
 }
