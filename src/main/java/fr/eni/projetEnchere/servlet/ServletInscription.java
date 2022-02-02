@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.projetEnchere.bll.UtilisateurManager;
 import fr.eni.projetEnchere.dal.DalException;
+import fr.eni.projetEnchere.helpers.HashPassword;
 
 /**
  * Servlet implementation class ServletModifProfil
@@ -40,16 +41,17 @@ public class ServletInscription extends HttpServlet {
 		String rue = request.getParameter("adresse");
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
-		String password = request.getParameter("password"); // Hash ??
+		String password = HashPassword.hashpassword(request.getParameter("password"));
 		
 		//test tel pattern
 		if(tel.contains("[0-9]+") && tel.length() == 10) {
 			//on valide
 		}
+		
 				
 		UtilisateurManager um = UtilisateurManager.getInstance();
 		try {
-			um.ajouterUtilisateur(pseudo, nom, prenom, email, rue, codePostal, ville, password);
+			um.ajouterUtilisateur(pseudo, nom, prenom, email, tel, rue, codePostal, ville, password);
 		} catch (DalException e) {
 			e.printStackTrace();
 		}
