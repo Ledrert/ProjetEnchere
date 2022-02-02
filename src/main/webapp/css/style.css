@@ -84,3 +84,17 @@ h1{
 #btmCo a {
 	text-align: justify;
 }
+
+.formProfil{
+	width:50%;
+	margin:auto;
+	display:flex;
+	flex-wrap:wrap; /* dispose en-dessous si pas de place */
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom:30px;
+}
+
+.formProfil div {
+	margin-bottom : 10px;
+}
