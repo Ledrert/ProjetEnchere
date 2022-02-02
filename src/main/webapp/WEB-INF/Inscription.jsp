@@ -15,7 +15,7 @@
 
 	<h1>Creation de mon profil</h1>
 	
-<form action="/inscription" method="post"> 
+<form action="inscription" method="post"> 
 
 	<%@ include file="/WEB-INF/jsp/form.jsp" %>
 

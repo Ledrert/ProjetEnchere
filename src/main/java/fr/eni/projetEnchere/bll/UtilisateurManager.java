@@ -19,7 +19,7 @@ public class UtilisateurManager {
 	private UtilisateurManager() {	
 	}
 
-	public void addUtilisateur(String pseudo, String nom, String prenom, String email, String rue, String codePostal, 
+	public void ajouterUtilisateur(String pseudo, String nom, String prenom, String email, String rue, String codePostal, 
 		String ville, String password) throws DalException {
 		UtilisateurDAO ud = DAOFactory.getUtilisateurDAO();
 		Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, rue, codePostal, ville, password, false);
