@@ -8,6 +8,10 @@ body {
 	float:right;
 }
 
+#menu a {
+	margin-right : 10px;
+}
+
 .formSearch {
 	justify-content: center;
 }
