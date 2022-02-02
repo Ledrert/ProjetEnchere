@@ -23,9 +23,11 @@ public class Utilisateur {
 	//Constructors
 	public Utilisateur() {	
 	}
+	
+	
 
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String rue, String codePostal, String ville, 
-		               String password, int credit, boolean admin, List<Enchere> encheres) {
+		               String password, int credit, boolean admin) {
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -36,7 +38,6 @@ public class Utilisateur {
 		this.password = password;
 		this.credit = credit;
 		this.admin = admin;
-		this.encheres = encheres;
 	}
 
 
