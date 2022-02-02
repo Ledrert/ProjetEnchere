@@ -4,6 +4,10 @@ body {
 	background-color: lightgrey;
 }
 
+h1{
+	text-align: center;
+}
+
 #menu {
 	float:right;
 }
@@ -52,4 +56,31 @@ body {
 .buttonForm {
 	text-align: center;
 	
+}
+
+#pageCo {
+	width:300px;
+	margin:auto;
+}
+
+.formCo div {
+	display:inline-block;
+}
+
+#labelCo {
+	width: 100px;
+}
+
+#btmCo {
+	margin-top : 10px;
+	margin-bottom: 25px;
+	height: 40px;
+}
+
+#btmCo button {
+	height: 40px;
+}
+
+#btmCo a {
+	text-align: justify;
 }
