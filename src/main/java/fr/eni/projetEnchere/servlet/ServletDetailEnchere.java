@@ -10,32 +10,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ServletAfficherProfil
+ * Servlet implementation class ServletDetailEnchere
  */
-@WebServlet(name="/ServletAfficherProfil", urlPatterns = "/profil")
-public class ServletAfficherProfil extends HttpServlet {
+@WebServlet(name="/ServletDetailEnchere", urlPatterns = "/detailEnchere")
+public class ServletDetailEnchere extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public ServletAfficherProfil() {
-        // TODO Auto-generated constructor stub
+    public ServletDetailEnchere() {
+        super();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AfficherProfil.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/DetailEnchere.jsp");
 		rd.forward(request, response);
+	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

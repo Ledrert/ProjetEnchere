@@ -10,24 +10,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ServletAfficherProfil
+ * Servlet implementation class AjoutArticle
  */
-@WebServlet(name="/ServletAfficherProfil", urlPatterns = "/profil")
-public class ServletAfficherProfil extends HttpServlet {
+@WebServlet(name="/AjoutArticle", urlPatterns = "/ajouterArticle")
+public class ServletAjoutArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
-     * Default constructor. 
+     * @see HttpServlet#HttpServlet()
      */
-    public ServletAfficherProfil() {
-        // TODO Auto-generated constructor stub
+    public ServletAjoutArticle() {
+        super();
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AfficherProfil.jsp");
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AjoutArticle.jsp");
 		rd.forward(request, response);
 	}
 
@@ -35,7 +36,6 @@ public class ServletAfficherProfil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
