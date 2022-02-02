@@ -24,6 +24,12 @@ public class Utilisateur {
 	public Utilisateur() {	
 	}
 	
+	public Utilisateur(String pseudo, String nom, String prenom, String password) {
+		this.pseudo = pseudo;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.password = password;
+	}
 	
 
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String rue, String codePostal, String ville, 
