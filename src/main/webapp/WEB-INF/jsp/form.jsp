@@ -18,7 +18,7 @@
 		</div>
 		<div> 
 			<label for="phone">Téléphone :</label>
-			<input type="tel" id="phone" name="phone" pattern="[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}-[0-9]{2}" placeholder="XX.XX.XX.XX.XX" required>
+			<input type="tel" id="phone" name="phone" placeholder="XXXXXXXXXX" required>
 		</div>
 		<div> 
 			<label for="adresse">Rue :</label>
