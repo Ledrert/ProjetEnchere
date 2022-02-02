@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ServletAccueil
  */
-@WebServlet(name="/ServletAccueil", urlPatterns = "/enchere")
 public class ServletAccueil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -31,11 +30,12 @@ public class ServletAccueil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> menu = new HashMap<>();
-		menu.put("/inscription", "Se connecter - S'inscrire");
+		menu.put("/connexion", "Se connecter");
+		menu.put("/inscription", "S'inscrire");
 		String[] categories = {"Toutes", "Informatique", "Ameublement", "Vêtement", "Sport & loisirs"};
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 		request.setAttribute("listMenu", menu);
-		request.setAttribute("liensMenu", menu.entrySet());
+		request.setAttribute("liensMenu", menu.keySet());
 		request.setAttribute("listeCat", categories);
 		rd.forward(request, response);
 		

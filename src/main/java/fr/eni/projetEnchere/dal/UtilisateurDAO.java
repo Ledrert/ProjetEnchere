@@ -6,10 +6,10 @@ import fr.eni.projetEnchere.bo.Utilisateur;
 
 public interface UtilisateurDAO {
 
-	public void AjouterUtilisateur(Utilisateur utilisateur);
-	public Utilisateur selectUtilisateurByiD (int index);
-	public void ModifierUtilisateur(Utilisateur utilisateur);
-	public void supprimerUtilisateur (Utilisateur utilisateur);	
-	public List<Utilisateur> selectAllUtilisateur (Utilisateur utilisateur);
+	public void AjouterUtilisateur(Utilisateur utilisateur) throws DalException;
+	public Utilisateur selectUtilisateurByiD (int index) throws DalException;
+	public void ModifierUtilisateur(Utilisateur utilisateur) throws DalException;
+	public void supprimerUtilisateur (Utilisateur utilisateur) throws DalException;	
+	public List<Utilisateur> selectAllUtilisateur (Utilisateur utilisateur) throws DalException;
 }
 
