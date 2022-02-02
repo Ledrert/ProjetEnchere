@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Types;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.eni.projetEnchere.bo.Utilisateur;
 
@@ -47,10 +49,12 @@ public class UtilisateurDAOImpl {
 		}
 	}
 	
-	public void ModifierUtilisateur(Utilisateur utilisateur) {
-			try {
-				Connection cnx = ConnectionProvider.getConnection();
-				PreparedStatement pstmt = cnx.prepareStatement(SQL_UPDATE_UTILISATEUR);
+	public void ModifierUtilisateur(Utilisateur utilisateur) throws DalException {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;	
+		try {
+				cnx = ConnectionProvider.getConnection();
+				pstmt = cnx.prepareStatement(SQL_UPDATE_UTILISATEUR);
 				pstmt.setString(1, utilisateur.getPseudo());
 				pstmt.setString(2, utilisateur.getNom());
 				pstmt.setString(3, utilisateur.getPrenom());
@@ -62,57 +66,102 @@ public class UtilisateurDAOImpl {
 				pstmt.setString(9, utilisateur.getPassword()); 
 				pstmt.setInt(10, utilisateur.getNoUtilisateur());
 				pstmt.executeUpdate();
-				
-				
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new DalException("Erreur sur la méthode Modifier()", e);
 			} finally {
-				//deconnexion
+				ConnectionProvider.seDeconnecter(pstmt);
 			}
 	}
 		
-	public void supprimerUtilisateur (Utilisateur utilisateur) {
+	public void supprimerUtilisateur (Utilisateur utilisateur) throws DalException {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;			
 			try {
-				Connection cnx = ConnectionProvider.getConnection();
-				PreparedStatement pstmt = cnx.prepareStatement(SQL_DELETE_UTILISATEUR);	
+				cnx = ConnectionProvider.getConnection();
+				pstmt = cnx.prepareStatement(SQL_DELETE_UTILISATEUR);	
 				pstmt.setInt(1, utilisateur.getNoUtilisateur());
 				pstmt.executeUpdate();
 				} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				//deconnexion
+					throw new DalException("Erreur sur la méthode Supprimer()", e);
+				} finally {
+				ConnectionProvider.seDeconnecter(pstmt);
 			}
 		}
 					
-	public Utilisateur selectUtilisateurByiD (int index) {
+	public Utilisateur selectUtilisateurByiD (int index) throws DalException {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;	
+		ResultSet rs = null;
+		Utilisateur utilisateur = null;
 		try {
-			Connection cnx = ConnectionProvider.getConnection();
-			PreparedStatement pstmt = cnx.prepareStatement(SQL_SELECT_UTILISATEUR_BY_ID);
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(SQL_SELECT_UTILISATEUR_BY_ID);
 			pstmt.setInt(1, index);
-			pstmt.executeQuery();
-			//rs ?
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				utilisateur  = new Utilisateur();
+				utilisateur.setPseudo(rs.getString("pseudo"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setEmail(rs.getString("email"));
+				utilisateur.setTelephone(rs.getString("telephone"));
+				utilisateur.setRue(rs.getString("rue"));
+				utilisateur.setCodePostal(rs.getString("code_postal"));
+				utilisateur.setVille(rs.getString("ville"));
+				utilisateur.setPassword(rs.getString("mot_de_passe"));
+				
+				String admin = rs.getString("administrateur");
+				
+				if (admin.equals("y")) {
+					utilisateur.setAdmin(true);
+				} else { 
+					utilisateur.setAdmin(false);
+				}
+			} 
+			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DalException("Erreur sur la méthode SelectById()", e); 
 		} finally {
+			ConnectionProvider.seDeconnecter(pstmt);
 		}
+		return utilisateur;
 	}
 
-	public void selectAllUtilisateur (Utilisateur utilisateur) {
+	public List<Utilisateur> selectAllUtilisateur (Utilisateur utilisateur) throws DalException {
+		List<Utilisateur> listeUtilisateur = new ArrayList<Utilisateur>();
+		Connection cnx = null;
+		Statement stmt = null;	
+		ResultSet rs = null;
 		try {
-			Connection cnx = ConnectionProvider.getConnection();
-			Statement stmt = cnx.createStatement();
-			stmt.executeQuery(SQL_SELECT_ALL);	
-			//rs ?
+			cnx = ConnectionProvider.getConnection();
+			stmt = cnx.createStatement();
+			rs = stmt.executeQuery(SQL_SELECT_ALL);
+			while (rs.next()) {
+				if (rs.next()) {
+					utilisateur  = new Utilisateur();
+					utilisateur.setPseudo(rs.getString("pseudo"));
+					utilisateur.setNom(rs.getString("nom"));
+					utilisateur.setPrenom(rs.getString("prenom"));
+					utilisateur.setEmail(rs.getString("email"));
+					utilisateur.setTelephone(rs.getString("telephone"));
+					utilisateur.setRue(rs.getString("rue"));
+					utilisateur.setCodePostal(rs.getString("code_postal"));
+					utilisateur.setVille(rs.getString("ville"));
+					utilisateur.setPassword(rs.getString("mot_de_passe"));
+					String admin = rs.getString("administrateur");
+					if (admin.equals("y")) {
+						utilisateur.setAdmin(true);
+					} else { 
+						utilisateur.setAdmin(false);
+					}
+				} 				
+					listeUtilisateur.add(utilisateur);
+			} 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new DalException("Erreur sur la méthode SelectAll()", e); 
 		} finally {
+			ConnectionProvider.seDeconnecter(stmt);
 		}
-		}
-	
-	
-	
-	
-		
+		return listeUtilisateur;
+	}
 }
-	
-
