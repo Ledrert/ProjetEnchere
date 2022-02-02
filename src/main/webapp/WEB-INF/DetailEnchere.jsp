@@ -16,6 +16,9 @@
 
 <input type="number" id="prix" name="prix"
        min="1" max="100000"><br><br>
+       
+     <form><button type="submit" name="retour" formmethod="get" formaction="enchere">Retour vers l'accueil
+</button></form><br>
 
 
 </body>
