@@ -1,6 +1,7 @@
 package fr.eni.projetEnchere.servlet;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,10 +36,16 @@ public class ServletInscription extends HttpServlet {
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
 		String email = request.getParameter("email");
+		String tel = request.getParameter("phone");
 		String rue = request.getParameter("adresse");
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
 		String password = request.getParameter("password"); // Hash ??
+		
+		//test tel pattern
+		if(tel.contains("[0-9]+") && tel.length() == 8) {
+			//on valide
+		}
 				
 		UtilisateurManager um = UtilisateurManager.getInstance();
 		try {
