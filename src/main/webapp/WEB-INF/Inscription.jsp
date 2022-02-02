@@ -15,6 +15,8 @@
 
 	<h1>Creation de mon profil</h1>
 	
+<form action="/inscription" method="post"> 
+
 	<%@ include file="/WEB-INF/jsp/form.jsp" %>
 
     <div class="buttonForm">
@@ -25,6 +27,7 @@
 		<button type="button" >Annuler</button></a>
 	</div>
 
+</form>	
 </main>
 
 <%-- 	<%@ include file="/WEB-INF/jsp/footer.jsp" %> --%> </body>
