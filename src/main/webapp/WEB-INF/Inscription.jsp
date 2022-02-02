@@ -21,7 +21,7 @@
       	<button class="button" type="submit" >Enregistrer</button>	
         					
 		<a href="#">
-		<button type="button" >Supprimer mon compte</button></a>
+		<button type="button" >Annuler</button></a>
 	</div>
 
 </main>
