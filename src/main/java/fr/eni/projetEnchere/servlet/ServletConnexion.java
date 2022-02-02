@@ -32,8 +32,10 @@ public class ServletConnexion extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Connexion.jsp");
 		Map<String, String> menu = new HashMap<>();
-		menu.put("inscription", "Se connecter - S'inscrire");
+		menu.put("/connexion", "Se connecter");
+		menu.put("/inscription", "S'inscrire");
 		request.setAttribute("listMenu", menu);
+		request.setAttribute("liensMenu", menu.keySet());
 		rd.forward(request, response);	
 		}
 
