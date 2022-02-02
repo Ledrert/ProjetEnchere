@@ -30,5 +30,6 @@ import java.security.NoSuchAlgorithmException;
 		      e.printStackTrace();
 		    }	
 		    return generatedPassword;
+		    
 		}
 	}

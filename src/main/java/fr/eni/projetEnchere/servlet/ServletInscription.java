@@ -47,6 +47,7 @@ public class ServletInscription extends HttpServlet {
 		if(tel.contains("[0-9]+") && tel.length() == 10) {
 			//on valide
 		}
+		
 				
 		UtilisateurManager um = UtilisateurManager.getInstance();
 		try {
@@ -54,6 +55,7 @@ public class ServletInscription extends HttpServlet {
 		} catch (DalException e) {
 			e.printStackTrace();
 		}
+	
 		RequestDispatcher rd = request.getRequestDispatcher("/connexion");
 		rd.forward(request, response);
 		
