@@ -1,5 +1,4 @@
 <div>
-	<form method="post" class="form">
 		<div> 
 			<label for="pseudo">Pseudo :</label>
 			<input type="text" name="pseudo" id="pseudo" maxlength="30" autofocus required>
@@ -42,5 +41,4 @@
 			<label for="confirmPassword">Confirmez le mot de passe :</label>
 			<input type="password" name="confirmPassword" id="confirmPassword" maxlength="30" required>
 		</div>
-	</form>
 </div>
