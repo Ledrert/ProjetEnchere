@@ -3,8 +3,7 @@
 		<label for="pseudo">Pseudo :</label>
 	</div>
 	<div>
-		<input type="text" name="pseudo" id="pseudo" maxlength="30" autofocus
-			required>
+		<input type="text" name="pseudo" id="pseudo" maxlength="30" autofocus required>
 	</div>
 	<div id="labelCo">
 		<label for="prenom">Prénom :</label>
@@ -42,8 +41,7 @@
 		<label for="codePostal">Code Postal :</label>
 	</div>
 	<div>
-		<input type="text" name="codePostal" id="codePostal" maxlength="15"
-			required>
+		<input type="text" name="codePostal" id="codePostal" maxlength="15" required>
 	</div>
 	<div id="labelCo">
 		<label for="ville">Ville :</label>
@@ -55,8 +53,7 @@
 		<label for="password">Mot de passe :</label>
 	</div>
 	<div>
-		<input type="password" name="password" id="password" maxlength="30"
-			required>
+		<input type="password" name="password" id="password" maxlength="30" required>
 	</div>
 	<div id="labelCo">
 		<label for="confirmPassword">Confirmez le mot de passe :</label>

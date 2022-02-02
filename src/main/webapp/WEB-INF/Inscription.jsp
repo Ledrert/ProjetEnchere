@@ -8,11 +8,8 @@
 <title>Je m'inscris !</title>
 </head>
 <body>
-
 	<%@ include file="/WEB-INF/jsp/header.jsp" %>
-
-
-
+	
 <h1>Creation de mon profil</h1>
 <div class="main">
 	
