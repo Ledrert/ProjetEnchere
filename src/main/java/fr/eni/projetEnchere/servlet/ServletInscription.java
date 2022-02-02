@@ -49,7 +49,7 @@ public class ServletInscription extends HttpServlet {
 				
 		UtilisateurManager um = UtilisateurManager.getInstance();
 		try {
-			um.ajouterUtilisateur(pseudo, nom, prenom, email, rue, codePostal, ville, password);
+			um.ajouterUtilisateur(pseudo, nom, prenom, email, tel, rue, codePostal, ville, password);
 		} catch (DalException e) {
 			e.printStackTrace();
 		}
