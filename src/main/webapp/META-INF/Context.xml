@@ -10,7 +10,7 @@
             
             driverClassName="com.microsoft.sqlserver.jdbc.SQLServerDriver"
             
-            url="jdbc:sqlserver://localhost;databasename=Site_Encheres"
+            url="jdbc:sqlserver://localhost;databasename=Site_encheres"
             maxTotal="8"
             maxIdle="4"
             maxWaitMillis="10000"	

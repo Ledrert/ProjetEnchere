@@ -14,7 +14,7 @@ import fr.eni.projetEnchere.bo.Utilisateur;
 
 public class UtilisateurDAOImpl implements UtilisateurDAO {
 
-	private final static String SQL_INSERT_UTILISATEUR = "{ call dbo.insertUtilisateur(?,?,?,?,?,?,?,?,?,?) };";
+	private final static String SQL_INSERT_UTILISATEUR = "{ call dbo.insertUtilisateur(?,?,?,?,?,?,?,?,?,?,?,?) };";
 	private final static String SQL_UPDATE_UTILISATEUR = "UPDATE UTILISATEUR SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, "
 			+ "code_postal=?, ville=?, mot_de_passe=? WHERE noUtilisateur=?);";
 	private final static String SQL_DELETE_UTILISATEUR = "DELETE FROM UTILISATEUR WHERE noUtilisateur=?";
@@ -38,6 +38,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			cstmt.setString(9, utilisateur.getVille());
 			cstmt.setString(10, utilisateur.getPassword());
 			cstmt.setInt(11, utilisateur.getCredit());
+			cstmt.setString(12, "n");
 			cstmt.registerOutParameter(1, Types.INTEGER);
 			cstmt.executeUpdate();				
 			utilisateur.setNoUtilisateur(cstmt.getInt(1));

@@ -16,11 +16,11 @@
 			<input type="email" name="email" id="email" maxlength="50" 
 				   placeholder="exemple@exemple.fr" required>
 		</div>
-		<div> 
+		<!-- <div> 
 			<label for="phone">Téléphone :</label>
 			<input type="tel" id="phone" name="phone" pattern="[0-9]{2}-[0-9]{2}-[0-9]
 			{2}-[0-9]{2}-[0-9]{2}" placeholder="XX.XX.XX.XX.XX" required>
-		</div>
+		</div> -->
 		<div> 
 			<label for="adresse">Rue :</label>
 			<input type="text" name="adresse" id="adresse" maxlength="50"  required>

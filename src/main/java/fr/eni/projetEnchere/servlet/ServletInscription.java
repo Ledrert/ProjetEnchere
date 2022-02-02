@@ -35,7 +35,7 @@ public class ServletInscription extends HttpServlet {
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
 		String email = request.getParameter("email");
-		String rue = request.getParameter("rue");
+		String rue = request.getParameter("adresse");
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
 		String password = request.getParameter("password"); // Hash ??
@@ -46,7 +46,8 @@ public class ServletInscription extends HttpServlet {
 		} catch (DalException e) {
 			e.printStackTrace();
 		}
-		response.sendRedirect(request.getContextPath()+"/login");
-		doGet(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("/connexion");
+		rd.forward(request, response);
+		
 	}
 }
