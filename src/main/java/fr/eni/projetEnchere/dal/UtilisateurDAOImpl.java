@@ -12,7 +12,7 @@ import java.util.List;
 
 import fr.eni.projetEnchere.bo.Utilisateur;
 
-public class UtilisateurDAOImpl {
+public class UtilisateurDAOImpl implements UtilisateurDAO {
 
 	private final static String SQL_INSERT_UTILISATEUR = "{ call dbo.insertUtilisateur(?,?,?,?,?,?,?,?,?,?) };";
 	private final static String SQL_UPDATE_UTILISATEUR = "UPDATE UTILISATEUR SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, "
@@ -21,7 +21,7 @@ public class UtilisateurDAOImpl {
 	private final static String SQL_SELECT_UTILISATEUR_BY_ID = "SELECT * FROM UTILISATEUR WHERE noUtilisateur=?;";
 	private final static String SQL_SELECT_ALL = "SELECT * FROM UTILISATEUR;";
 	
-	
+	@Override
 	public void AjouterUtilisateur(Utilisateur utilisateur) throws DalException {	
 		Connection cnx = null;
 		CallableStatement cstmt = null;
@@ -49,6 +49,7 @@ public class UtilisateurDAOImpl {
 		}
 	}
 	
+	@Override
 	public void ModifierUtilisateur(Utilisateur utilisateur) throws DalException {
 		Connection cnx = null;
 		PreparedStatement pstmt = null;	
@@ -73,6 +74,7 @@ public class UtilisateurDAOImpl {
 			}
 	}
 		
+	@Override
 	public void supprimerUtilisateur (Utilisateur utilisateur) throws DalException {
 		Connection cnx = null;
 		PreparedStatement pstmt = null;			
@@ -87,7 +89,8 @@ public class UtilisateurDAOImpl {
 				ConnectionProvider.seDeconnecter(pstmt);
 			}
 		}
-					
+				
+	@Override
 	public Utilisateur selectUtilisateurByiD (int index) throws DalException {
 		Connection cnx = null;
 		PreparedStatement pstmt = null;	
@@ -127,6 +130,7 @@ public class UtilisateurDAOImpl {
 		return utilisateur;
 	}
 
+	@Override
 	public List<Utilisateur> selectAllUtilisateur (Utilisateur utilisateur) throws DalException {
 		List<Utilisateur> listeUtilisateur = new ArrayList<Utilisateur>();
 		Connection cnx = null;

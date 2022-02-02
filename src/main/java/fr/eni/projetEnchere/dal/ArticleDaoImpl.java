@@ -29,6 +29,7 @@ public class ArticleDaoImpl implements ArticleDAO {
 		ResultSet rs = null;
 		List<Article> listeArticle = new ArrayList<Article>();
 		Article art;
+		UtilisateurDAOImpl user = new UtilisateurDAOImpl();
 		
 		try {
 			cnx = ConnectionProvider.getConnection();
@@ -43,8 +44,8 @@ public class ArticleDaoImpl implements ArticleDAO {
 				art.setDateFinEncheres(rs.getDate("date_fin_enchere"));
 				art.setPrixInitial(rs.getInt("prix_initial"));
 				art.setPrixVente(rs.getInt("prix_vente"));
-//				art.setUtilisateurVendeur(UtilisateurDAO.rechercherUtilisateur(rs.getInt("no_utilisateur")));
-//				art.setUtilisateurAcheteur(UtilisateurDAO.rechercherUtilisateur(rs.getInt("no_acheteur")));
+				art.setUtilisateurVendeur(user.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
+				art.setUtilisateurAcheteur(user.selectUtilisateurByiD(rs.getInt("no_acheteur")));
 				art.setCategorie(rechercherCategorie(rs.getString("nom_categorie")));
 				listeArticle.add(art);
 			}
