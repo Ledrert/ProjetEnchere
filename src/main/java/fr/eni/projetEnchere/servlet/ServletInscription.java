@@ -43,7 +43,7 @@ public class ServletInscription extends HttpServlet {
 		String password = request.getParameter("password"); // Hash ??
 		
 		//test tel pattern
-		if(tel.contains("[0-9]+") && tel.length() == 8) {
+		if(tel.contains("[0-9]+") && tel.length() == 10) {
 			//on valide
 		}
 				
