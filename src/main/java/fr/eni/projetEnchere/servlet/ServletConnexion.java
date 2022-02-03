@@ -109,8 +109,8 @@ public class ServletConnexion extends HttpServlet {
 				System.err.println("Votre adresse mail ne correspond à un aucun pseudo.");
 			}
 		}
-				HttpSession session = request.getSession();
-				session.setAttribute("user", utilisateur);
+			HttpSession session = request.getSession();
+			session.setAttribute("user", utilisateur);
 		} catch (DalException e) {
 			e.printStackTrace();
 		}
