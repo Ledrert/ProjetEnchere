@@ -179,7 +179,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		Connection cnx = null;
 		PreparedStatement pstmt = null;	
 		ResultSet rs = null;
-		String pseudo = null;
+		String pseudo = "";
 		try {
 			cnx = ConnectionProvider.getConnection();
 			pstmt = cnx.prepareStatement(SQL_SEARCH_PSEUDO);

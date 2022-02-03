@@ -22,28 +22,31 @@ import fr.eni.projetEnchere.helpers.HashPassword;
 /**
  * Servlet implementation class ServletConnexion
  */
-@WebServlet(name="/ServletConnexion", urlPatterns = "/connexion")
+@WebServlet(name = "/ServletConnexion", urlPatterns = "/connexion")
 public class ServletConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ServletConnexion() {
-        super();
-        
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ServletConnexion() {
+		super();
+
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		Map<String, String> menu = new HashMap<>();
 		HttpSession session = request.getSession();
 		boolean isConnected = true;
-		if(session != null) { //S'il y a une session (donc : un login a été fait)
-			Utilisateur user = (Utilisateur)session.getAttribute("user"); //récupération des informations de l'utilisateur connecté
-			if(user == null) {
+		if (session != null) { // S'il y a une session (donc : un login a été fait)
+			Utilisateur user = (Utilisateur) session.getAttribute("user"); // récupération des informations de
+																			// l'utilisateur connecté
+			if (user == null) {
 				isConnected = false;
 				menu.put("/connexion", "Se connecter");
 				menu.put("/inscription", "S'inscrire");
@@ -60,8 +63,8 @@ public class ServletConnexion extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Connexion.jsp");
 		request.setAttribute("listMenu", menu);
 		request.setAttribute("liensMenu", menu.keySet());
-		rd.forward(request, response);	
-		}
+		rd.forward(request, response);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
@@ -70,19 +73,32 @@ public class ServletConnexion extends HttpServlet {
 		String identifiant = request.getParameter("pseudo");
 		String password = request.getParameter("mot_de_passe");
 		UtilisateurManager um = UtilisateurManager.getInstance();
-		Utilisateur utilisateur = new Utilisateur();
+		Utilisateur utilisateur = null;
+		RequestDispatcher rd = null;
+		try {
 		if (identifiant.contains("@")) {
-			try {
-				identifiant = um.chercherPseudo(identifiant);
-				utilisateur.setPassword(HashPassword.hashpassword(password));
 				
-			} catch (DalException e) {
-					e.printStackTrace();
+					identifiant = um.chercherPseudo(identifiant);
+				
+		if (identifiant.isEmpty()) {
+			rd = request.getRequestDispatcher("/connexion");
+			System.err.println("Votre adresse mail ne correspond à un aucun pseudo.");
+		} else {
+			utilisateur = um.verifIdentifiants(identifiant, password);
+		}
+		} else {
+			utilisateur = um.verifIdentifiants(identifiant, password);
+			if(utilisateur == null) {
+				rd = request.getRequestDispatcher("/connexion");
+				System.err.println("Votre adresse mail ne correspond à un aucun pseudo.");
 			}
-		} else { 			
-			
-		} 
+		}
+				HttpSession session = request.getSession();
+				session.setAttribute("user", utilisateur);
+		} catch (DalException e) {
+			e.printStackTrace();
+		}
+				rd = request.getRequestDispatcher("/enchere");
+		rd.forward(request, response);
 	}
 }
-
-	
