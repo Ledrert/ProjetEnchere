@@ -11,7 +11,6 @@
 <h1>Informations du profil :</h1>
 
 
-
 <h3>
 Pseudo : ${requestScope.user.pseudo} <br>
 Nom : ${requestScope.user.nom } <br>

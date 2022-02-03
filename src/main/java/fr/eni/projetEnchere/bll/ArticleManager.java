@@ -20,7 +20,6 @@ public class ArticleManager {
 	}
 	
 	private ArticleManager() {
-		
 	}
 	
 	public List<String> listerCategorie() throws DalException{

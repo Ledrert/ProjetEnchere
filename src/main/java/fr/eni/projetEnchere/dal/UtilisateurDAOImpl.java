@@ -223,6 +223,4 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		throw new DalException("Erreur sur la méthode verifIdentifiants()", e); 
 	} return utilisateur;
 }
-	
-	
 }

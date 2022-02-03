@@ -16,7 +16,6 @@ function filtre(id) {
 		document.getElementById("MyVenteEC").disabled="true";
 		document.getElementById("MyVenteNC").disabled="true";
 		document.getElementById("MyVenteFin").disabled="true";
-	
 	} else {
 		if(id="vente"){
 			document.getElementById("encDebut").disabled="true";
