@@ -97,3 +97,28 @@ h1{
 .formProfil div {
 	margin-bottom : 10px;
 }
+
+.imgNewVente {
+	float: left;
+	height:150px;
+	}
+	
+.newVente {
+	width:50%;
+	margin:auto;
+	display:flex;
+	flex-wrap:wrap; /* dispose en-dessous si pas de place */
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom:30px;
+}
+
+.retrait {
+	border: 2px solid black;
+	width : 30%;
+	}
+	
+.centerNewArticle {
+	text-align: center;
+	
+}
