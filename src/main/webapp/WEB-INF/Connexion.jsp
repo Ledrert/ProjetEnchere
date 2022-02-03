@@ -10,7 +10,7 @@
 <body>
 <h1>Connexion</h1>
 <div id="pageCo">
-<form class="formCo" action="/ma-page-de-traitement" method="post">
+<form class="formCo" action="/connexion" method="post">
     <div><div id="labelCo"><label for="identifiant">Identifiant :</label></div>
         <div><input type="text" id="identifiant" name="identifiant" maxlength="30"></div>
     </div><br>
