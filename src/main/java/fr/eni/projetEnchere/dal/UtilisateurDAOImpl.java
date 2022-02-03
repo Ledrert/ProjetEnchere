@@ -202,12 +202,22 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		try {
 			cnx = ConnectionProvider.getConnection();
 			pstmt = cnx.prepareStatement(SQL_VERIF_ID);
-			pstmt.setString(1, "pseudo");
-			pstmt.setString(2, "mot_de_passe");
+			pstmt.setString(1, pseudo);
+			pstmt.setString(2, password);
+			rs = pstmt.executeQuery();
 				if (rs.next()) {
 					utilisateur = new Utilisateur();
+					utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+					utilisateur.setPrenom(rs.getString("prenom"));
+					utilisateur.setNom(rs.getString("nom"));
+					utilisateur.setEmail(rs.getString("email"));
+					utilisateur.setTelephone(rs.getString("telephone"));
+					utilisateur.setRue(rs.getString("rue"));
+					utilisateur.setCodePostal(rs.getString("code_postal"));
+					utilisateur.setVille(rs.getString("ville"));
+					utilisateur.setPassword(rs.getString("mot_de_passe"));
+					utilisateur.setCredit(rs.getInt("credit"));
 				}
-			rs = pstmt.executeQuery();
 		} catch (SQLException e) {
 		throw new DalException("Erreur sur la méthode verifIdentifiants()", e); 
 	} return utilisateur;

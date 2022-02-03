@@ -68,55 +68,55 @@ public class ServletConnexion extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String identifiant = request.getParameter("pseudo");
-		String password = request.getParameter("mot_de_passe");
-		String check = request.getParameter("saveMDP");
-		if(check.equals("save")) {
-			//creation de cookie
-			
-			   //Creation de cookies pour le pseudo et le mot de passe       
-		     Cookie cpseudo = new Cookie("pseudo",request.getParameter("pseudo"));
-		     Cookie cpassword = new Cookie("password",request.getParameter("password"));
-
-		      //Date d'expiration des cookies
-		     cpseudo.setMaxAge(60*60*24*30); 
-		     cpassword.setMaxAge(60*60*24*30); 
-
-		     response.addCookie( cpseudo );
-		     response.addCookie( cpassword );
-		}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String identifiant = request.getParameter("identifiant");
+		String password = request.getParameter("MDP");
+//		String check = request.getParameter("saveMDP");
+//		if(check.equals("save")) {
+//			//creation de cookie
+//			
+//			   //Creation de cookies pour le pseudo et le mot de passe       
+//		     Cookie cpseudo = new Cookie("pseudo",request.getParameter("pseudo"));
+//		     Cookie cpassword = new Cookie("password",request.getParameter("password"));
+//
+//		      //Date d'expiration des cookies
+//		     cpseudo.setMaxAge(60*60*24*30); 
+//		     cpassword.setMaxAge(60*60*24*30); 
+//
+//		     response.addCookie( cpseudo );
+//		     response.addCookie( cpassword );
+//		}
 		UtilisateurManager um = UtilisateurManager.getInstance();
 		Utilisateur utilisateur = null;
 		RequestDispatcher rd = null;
 		try {
-		if (identifiant.contains("@")) {
-				
-					identifiant = um.chercherPseudo(identifiant);
-				
-		if (identifiant.isEmpty()) {
-			rd = request.getRequestDispatcher("/connexion");
-			System.err.println("Votre adresse mail ne correspond à un aucun pseudo.");
-		} else {
-			utilisateur = um.verifIdentifiants(identifiant, password);
-		}
-		} else {
-			utilisateur = um.verifIdentifiants(identifiant, password);
-			if(utilisateur == null) {
-				rd = request.getRequestDispatcher("/connexion");
-				System.err.println("Votre adresse mail ne correspond à un aucun pseudo.");
+			if (identifiant.contains("@")) { //Si c'est un mail
+				identifiant = um.chercherPseudo(identifiant); //Récupération du pseudo via le mail
+				if (identifiant.isEmpty()) { //N'a pas renvoyé de pseudo car pas de mail reconnu
+					rd = request.getRequestDispatcher("/connexion");
+					System.err.println("Votre adresse mail ne correspond à un aucun pseudo.");
+				} else {
+					utilisateur = um.verifIdentifiants(identifiant, password); //récupère l'utilisateur lié
+				}
+			} else { //Si c'est un pseudo
+				utilisateur = um.verifIdentifiants(identifiant, password);
+				if (utilisateur == null) { //si pas d'utilisateur reconnu via le pseudo
+					rd = request.getRequestDispatcher("/connexion");
+					System.err.println("Identifiants erronnés");
+				}
 			}
-		}
+			System.out.println("ServletCo : " + utilisateur.toString());
 			HttpSession session = request.getSession();
 			session.setAttribute("user", utilisateur);
 		} catch (DalException e) {
 			e.printStackTrace();
 		}
-				rd = request.getRequestDispatcher("/enchere");
+		rd = request.getRequestDispatcher("/enchere");
 		rd.forward(request, response);
-		
+
 	}
 }
-

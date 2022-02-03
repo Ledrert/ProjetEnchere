@@ -22,10 +22,28 @@ h1{
 
 #divSearch {
 	width:75%;
-	display:flex;
-	flex-wrap:wrap; /* dispose en-dessous si pas de place */
+	/* display:flex;
+	flex-wrap:wrap; dispose en-dessous si pas de place
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-around; */
+}
+
+#listeSearch {
+	list-style: none;
+}
+
+#achatsSearch {
+	display : block;
+	width : 25%;
+}
+
+#mesVentesSearch {
+	display : block;
+	width : 25%;
+}
+
+#advSearch {
+	display : inline;
 }
 
 .listEnchere{
