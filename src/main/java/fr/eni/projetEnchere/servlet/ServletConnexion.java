@@ -23,28 +23,31 @@ import fr.eni.projetEnchere.helpers.HashPassword;
 /**
  * Servlet implementation class ServletConnexion
  */
-@WebServlet(name="/ServletConnexion", urlPatterns = "/connexion")
+@WebServlet(name = "/ServletConnexion", urlPatterns = "/connexion")
 public class ServletConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ServletConnexion() {
-        super();
-        
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public ServletConnexion() {
+		super();
+
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		Map<String, String> menu = new HashMap<>();
 		HttpSession session = request.getSession();
 		boolean isConnected = true;
-		if(session != null) { //S'il y a une session (donc : un login a été fait)
-			Utilisateur user = (Utilisateur)session.getAttribute("user"); //récupération des informations de l'utilisateur connecté
-			if(user == null) {
+		if (session != null) { // S'il y a une session (donc : un login a été fait)
+			Utilisateur user = (Utilisateur) session.getAttribute("user"); // récupération des informations de
+																			// l'utilisateur connecté
+			if (user == null) {
 				isConnected = false;
 				menu.put("/connexion", "Se connecter");
 				menu.put("/inscription", "S'inscrire");
@@ -61,45 +64,59 @@ public class ServletConnexion extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Connexion.jsp");
 		request.setAttribute("listMenu", menu);
 		request.setAttribute("liensMenu", menu.keySet());
-		rd.forward(request, response);	
-		}
+		rd.forward(request, response);
+	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String identifiant = request.getParameter("pseudo");
-		String password = request.getParameter("mot_de_passe");
-		String check = request.getParameter("saveMDP");
-		if(check.equals("save")) {
-			//creation de cookie
-			
-			   //Creation de cookies pour le pseudo et le mot de passe       
-		     Cookie cpseudo = new Cookie("pseudo",request.getParameter("pseudo"));
-		     Cookie cpassword = new Cookie("password",request.getParameter("password"));
-
-		      //Date d'expiration des cookies
-		     cpseudo.setMaxAge(60*60*24*30); 
-		     cpassword.setMaxAge(60*60*24*30); 
-
-		     response.addCookie( cpseudo );
-		     response.addCookie( cpassword );
-		}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String identifiant = request.getParameter("identifiant");
+		String password = request.getParameter("MDP");
+//		String check = request.getParameter("saveMDP");
+//		if(check.equals("save")) {
+//			//creation de cookie
+//			
+//			   //Creation de cookies pour le pseudo et le mot de passe       
+//		     Cookie cpseudo = new Cookie("pseudo",request.getParameter("pseudo"));
+//		     Cookie cpassword = new Cookie("password",request.getParameter("password"));
+//
+//		      //Date d'expiration des cookies
+//		     cpseudo.setMaxAge(60*60*24*30); 
+//		     cpassword.setMaxAge(60*60*24*30); 
+//
+//		     response.addCookie( cpseudo );
+//		     response.addCookie( cpassword );
+//		}
 		UtilisateurManager um = UtilisateurManager.getInstance();
-		Utilisateur utilisateur = new Utilisateur();
-		if (identifiant.contains("@")) {
-			try {
-				identifiant = um.chercherPseudo(identifiant);
-				utilisateur.setPassword(HashPassword.hashpassword(password));
-				
-			} catch (DalException e) {
-					e.printStackTrace();
+		Utilisateur utilisateur = null;
+		RequestDispatcher rd = null;
+		try {
+			if (identifiant.contains("@")) { //Si c'est un mail
+				identifiant = um.chercherPseudo(identifiant); //Récupération du pseudo via le mail
+				if (identifiant.isEmpty()) { //N'a pas renvoyé de pseudo car pas de mail reconnu
+					rd = request.getRequestDispatcher("/connexion");
+					System.err.println("Votre adresse mail ne correspond à un aucun pseudo.");
+				} else {
+					utilisateur = um.verifIdentifiants(identifiant, password); //récupère l'utilisateur lié
+				}
+			} else { //Si c'est un pseudo
+				utilisateur = um.verifIdentifiants(identifiant, password);
+				if (utilisateur == null) { //si pas d'utilisateur reconnu via le pseudo
+					rd = request.getRequestDispatcher("/connexion");
+					System.err.println("Identifiants erronnés");
+				}
 			}
-		} else { 			
-			
-		} 
+			System.out.println("ServletCo : " + utilisateur.toString());
+			HttpSession session = request.getSession();
+			session.setAttribute("user", utilisateur);
+		} catch (DalException e) {
+			e.printStackTrace();
+		}
+		rd = request.getRequestDispatcher("/enchere");
+		rd.forward(request, response);
+
 	}
 }
-
-
-	

@@ -16,10 +16,10 @@
     </div><br>
        <div>
         <div id="labelCo"><label for="mot de passe">Mot de passe :</label></div>
-        <div><input type="password" id="mot de passe" name="mot de passe" maxlength="30"></div>
+        <div><input type="password" id="MDP" name="MDP" maxlength="30"></div>
     </div>
     <div id="btmCo">
-    <button type="submit" name="connexion" formmethod="get" formaction="enchere">Connexion 
+    <button type="submit" name="connexion" formmethod="post" formaction="connexion">Connexion 
 </button>
 <input type="checkbox" id="saveMDP" name="saveMDP">  
   <label for="saveMDP">Se souvenir de moi</label>

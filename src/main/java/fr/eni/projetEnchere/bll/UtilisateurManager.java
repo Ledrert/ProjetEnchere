@@ -27,6 +27,7 @@ public class UtilisateurManager {
 		ud.AjouterUtilisateur(utilisateur);
 	}
 
+	
 	public String chercherPseudo(String email) throws DalException {
 		UtilisateurDAO ud = DAOFactory.getUtilisateurDAO();
 		return ud.chercherPseudo(email);

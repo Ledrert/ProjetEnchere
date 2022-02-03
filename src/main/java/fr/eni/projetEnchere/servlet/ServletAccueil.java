@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,7 +50,7 @@ public class ServletAccueil extends HttpServlet {
 			menu.put("/connexion", "Se connecter");
 			menu.put("/inscription", "S'inscrire");
 		}
-		
+//		System.out.println(session.getAttribute("user").toString());
 		String[] categories = {"Toutes", "Informatique", "Ameublement", "Vêtement", "Sport & loisirs"};
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 		request.setAttribute("listMenu", menu);
@@ -69,4 +68,5 @@ public class ServletAccueil extends HttpServlet {
 		doGet(request, response);
 	}
 
+	
 }

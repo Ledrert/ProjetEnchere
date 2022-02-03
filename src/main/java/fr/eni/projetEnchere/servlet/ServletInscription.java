@@ -41,12 +41,13 @@ public class ServletInscription extends HttpServlet {
 		String rue = request.getParameter("adresse");
 		String codePostal = request.getParameter("codePostal");
 		String ville = request.getParameter("ville");
-		String password = HashPassword.hashpassword(request.getParameter("password"));
-		
+//		String password = HashPassword.hashpassword(request.getParameter("password"));
+		String password = request.getParameter("password");
 		//test tel pattern
 		if(tel.contains("[0-9]+") && tel.length() == 10) {
 			//on valide
 		}
+		
 		
 				
 		UtilisateurManager um = UtilisateurManager.getInstance();
@@ -55,7 +56,7 @@ public class ServletInscription extends HttpServlet {
 		} catch (DalException e) {
 			e.printStackTrace();
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/connexion");
+		RequestDispatcher rd = request.getRequestDispatcher("/enchere");
 		rd.forward(request, response);
 		
 	}
