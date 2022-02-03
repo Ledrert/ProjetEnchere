@@ -10,6 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import fr.eni.projetEnchere.bo.Utilisateur;
 
 /**
  * Servlet implementation class ServletConnexion
@@ -30,10 +33,26 @@ public class ServletConnexion extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Connexion.jsp");
 		Map<String, String> menu = new HashMap<>();
-		menu.put("/connexion", "Se connecter");
-		menu.put("/inscription", "S'inscrire");
+		HttpSession session = request.getSession();
+		boolean isConnected = true;
+		if(session != null) { //S'il y a une session (donc : un login a été fait)
+			Utilisateur user = (Utilisateur)session.getAttribute("user"); //récupération des informations de l'utilisateur connecté
+			if(user == null) {
+				isConnected = false;
+				menu.put("/connexion", "Se connecter");
+				menu.put("/inscription", "S'inscrire");
+			} else {
+				menu.put("/vendre", "Vendre un article");
+				menu.put("/profil", "Mon profil");
+				menu.put("/deconnexion", "Déconnexion");
+			}
+		} else {
+			isConnected = false;
+			menu.put("/connexion", "Se connecter");
+			menu.put("/inscription", "S'inscrire");
+		}
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/Connexion.jsp");
 		request.setAttribute("listMenu", menu);
 		request.setAttribute("liensMenu", menu.keySet());
 		rd.forward(request, response);	
