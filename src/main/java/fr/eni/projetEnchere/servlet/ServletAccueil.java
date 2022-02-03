@@ -10,6 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import fr.eni.projetEnchere.bo.Utilisateur;
 
 /**
  * Servlet implementation class ServletAccueil
@@ -30,8 +33,25 @@ public class ServletAccueil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> menu = new HashMap<>();
-		menu.put("/connexion", "Se connecter");
-		menu.put("/inscription", "S'inscrire");
+		HttpSession session = request.getSession();
+		boolean isConnected = true;
+		if(session != null) { //S'il y a une session (donc : un login a été fait)
+			Utilisateur user = (Utilisateur)session.getAttribute("user"); //récupération des informations de l'utilisateur connecté
+			if(user == null) {
+				isConnected = false;
+				menu.put("/connexion", "Se connecter");
+				menu.put("/inscription", "S'inscrire");
+			} else {
+				menu.put("/vendre", "Vendre un article");
+				menu.put("/profil", "Mon profil");
+				menu.put("/deconnexion", "Déconnexion");
+			}
+		} else {
+			isConnected = false;
+			menu.put("/connexion", "Se connecter");
+			menu.put("/inscription", "S'inscrire");
+		}
+		
 		String[] categories = {"Toutes", "Informatique", "Ameublement", "Vêtement", "Sport & loisirs"};
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 		request.setAttribute("listMenu", menu);
