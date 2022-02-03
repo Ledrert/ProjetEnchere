@@ -9,10 +9,7 @@
 <title>Informations profil</title>
 </head>
 <body>
-<center>
 <h1>Informations du profil :</h1>
-</center>
-
 
 
 <div class="afficherProfil">

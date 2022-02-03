@@ -109,7 +109,6 @@ public class ServletConnexion extends HttpServlet {
 					System.err.println("Identifiants erronnés");
 				}
 			}
-			System.out.println("ServletCo : " + utilisateur.toString());
 			HttpSession session = request.getSession();
 			session.setAttribute("user", utilisateur);
 		} catch (DalException e) {

@@ -134,10 +134,18 @@ h1{
 .retrait {
 	border: 2px solid black;
 	width : 30%;
+	display:flex;
+	flex-wrap:wrap; /* dispose en-dessous si pas de place */
+	align-items: center;
+	justify-content: space-between;
+	margin-top : 50px;
+	
 	}
 	
 .centerNewArticle {
 	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
 }	
 	
 .afficherProfil {

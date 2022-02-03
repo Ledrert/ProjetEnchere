@@ -10,13 +10,21 @@
 <script type="text/javascript">
 function filtre(id) { 
 	if(id="achat")
-		$("input[type=checkbox][value=vente]").attr("disabled", "disabled"); 
-		$("input[type=checkbox][value=achat]").removeAttr("disabled"); 
-	
+		document.getElementById("encDebut").disabled="false";
+		document.getElementById("MyEncEC").disabled="false";
+		document.getElementById("MyEncWin").disabled="false";
+		document.getElementById("MyVenteEC").disabled="true";
+		document.getElementById("MyVenteNC").disabled="true";
+		document.getElementById("MyVenteFin").disabled="true";
 	} else {
 		if(id="vente"){
-		$("input[type=checkbox][value=achat]").attr("disabled", "disabled"); 
-		$("input[type=checkbox][value=vente]").removeAttr("disabled"); }
+			document.getElementById("encDebut").disabled="true";
+			document.getElementById("MyEncEC").disabled="true";
+			document.getElementById("MyEncWin").disabled="true";
+			document.getElementById("MyVenteEC").disabled="false";
+			document.getElementById("MyVenteNC").disabled="false";
+			document.getElementById("MyVenteFin").disabled="false";
+		}
 	}
 });
 	  
@@ -31,8 +39,10 @@ function filtre(id) {
 <label for="filtre">Filtres :</label>
 <input type="text">
 <label for="categorie">Catégories :</label>
-<select><c:forEach var="libCat" items="${listeCat }">
+<select><option>Toutes</option>
+<c:forEach var="libCat" items="${listeCat }">
 <option>${libCat }</option></c:forEach></select></div>
+<c:if test="${!empty sessionScope.user }">
 <div id="advSearch">
 <div id="achatsSearch">
 <input type="radio" id="RdAchat" name="radioVente" onclick="filtre(achat)" checked><label for="RdAchat">Achats</label><ul id="listeSearch">
@@ -47,6 +57,7 @@ function filtre(id) {
 <li><input type="checkbox" id="MyVenteFin" name="MyVenteFin" value="vente"><label for="MyVenteFin">ventes terminées</label></li>
 </ul></div>
 </div>
+</c:if>
 </div>
 <div>
 <button class="btnSearch" type="button" onclick="" >Rechercher</button>
