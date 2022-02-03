@@ -32,7 +32,6 @@
 		<option value="valeur3">Sport & Loisirs</option>
 	</select>
 
-
 	<form method="post" action="page.php" enctype="multipart/form-data">
 		<label for="photo">Photo de l'article </label> <input type="file"
 			id="photo" name="photo" accept="image/png, image/jpeg">
