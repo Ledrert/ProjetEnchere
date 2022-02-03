@@ -38,6 +38,4 @@ public class UtilisateurManager {
 		return ud.verifIdentifiants(pseudo, password);
 		
 	}
-
-	
 }

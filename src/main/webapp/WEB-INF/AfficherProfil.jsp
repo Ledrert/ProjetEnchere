@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/css/style.css">    
 <title>Informations profil</title>
 </head>
 <body>
@@ -14,7 +15,7 @@
 
 
 
-<h3>
+<div class="afficherProfil">
 Pseudo : ${requestScope.user.pseudo} <br>
 Nom : ${requestScope.user.nom } <br>
 Prénom : ${requestScope.user.prenom} <br>
@@ -23,7 +24,7 @@ Téléphone : ${requestScope.user.telephone}  <br>
 Rue : ${requestScope.user.rue}  <br>
 Code postal : ${requestScope.user.codePostal}  <br>
 Ville : ${requestScope.user.ville}  <br>
-</h3>
+</div>
 
 <form><button type="submit" name="modifier" formmethod="get" formaction="modifProfil">Modifier 
 </button></form>
