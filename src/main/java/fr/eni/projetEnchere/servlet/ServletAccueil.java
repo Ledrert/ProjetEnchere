@@ -1,7 +1,9 @@
 package fr.eni.projetEnchere.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -11,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.projetEnchere.bll.ArticleManager;
 import fr.eni.projetEnchere.bo.Utilisateur;
+import fr.eni.projetEnchere.dal.DalException;
 
 /**
  * Servlet implementation class ServletAccueil
@@ -33,11 +37,10 @@ public class ServletAccueil extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> menu = new HashMap<>();
 		HttpSession session = request.getSession();
-		boolean isConnected = true;
+		ArticleManager artM = ArticleManager.getInstance();
 		if(session != null) { //S'il y a une session (donc : un login a été fait)
 			Utilisateur user = (Utilisateur)session.getAttribute("user"); //récupération des informations de l'utilisateur connecté
 			if(user == null) {
-				isConnected = false;
 				menu.put("/connexion", "Se connecter");
 				menu.put("/inscription", "S'inscrire");
 			} else {
@@ -46,16 +49,20 @@ public class ServletAccueil extends HttpServlet {
 				menu.put("/deconnexion", "Déconnexion");
 			}
 		} else {
-			isConnected = false;
 			menu.put("/connexion", "Se connecter");
 			menu.put("/inscription", "S'inscrire");
 		}
-//		System.out.println(session.getAttribute("user").toString());
-		String[] categories = {"Toutes", "Informatique", "Ameublement", "Vêtement", "Sport & loisirs"};
+		List<String> listeCat = new ArrayList<String>();
+		try {
+			listeCat = artM.listerCategorie();
+		} catch (DalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 		request.setAttribute("listMenu", menu);
 		request.setAttribute("liensMenu", menu.keySet());
-		request.setAttribute("listeCat", categories);
+		request.setAttribute("listeCat", listeCat);
 		rd.forward(request, response);
 		
 	}
