@@ -48,6 +48,7 @@ public class ServletInscription extends HttpServlet {
 			//on valide
 		}
 		
+		
 				
 		UtilisateurManager um = UtilisateurManager.getInstance();
 		try {
