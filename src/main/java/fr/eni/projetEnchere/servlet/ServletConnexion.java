@@ -11,6 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.projetEnchere.bll.UtilisateurManager;
+import fr.eni.projetEnchere.bo.Utilisateur;
+import fr.eni.projetEnchere.dal.DalException;
+import fr.eni.projetEnchere.helpers.HashPassword;
+
 /**
  * Servlet implementation class ServletConnexion
  */
@@ -43,7 +48,22 @@ public class ServletConnexion extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		String identifiant = request.getParameter("pseudo");
+		String password = request.getParameter("mot_de_passe");
+		UtilisateurManager um = UtilisateurManager.getInstance();
+		Utilisateur utilisateur = new Utilisateur();
+		if (identifiant.contains("@")) {
+			try {
+				identifiant = um.chercherPseudo(identifiant);
+				utilisateur.setPassword(HashPassword.hashpassword(password));
+				
+			} catch (DalException e) {
+					e.printStackTrace();
+			}
+		} else { 			
+			
+		} 
 	}
-
 }
+
+	
