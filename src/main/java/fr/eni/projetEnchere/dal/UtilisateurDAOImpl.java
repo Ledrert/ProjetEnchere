@@ -20,6 +20,9 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	private final static String SQL_DELETE_UTILISATEUR = "DELETE FROM UTILISATEUR WHERE noUtilisateur=?";
 	private final static String SQL_SELECT_UTILISATEUR_BY_ID = "SELECT * FROM UTILISATEUR WHERE noUtilisateur=?;";
 	private final static String SQL_SELECT_ALL = "SELECT * FROM UTILISATEUR;";
+	private final static String SQL_SEARCH_PSEUDO = "SELECT pseudo FROM UTILISATEUR WHERE email=?;";
+	private final static String SQL_VERIF_ID = "SELECT * FROM UTILISATEUR WHERE pseudo=? AND mot_de_passe=?;";
+	
 	
 	@Override
 	public void AjouterUtilisateur(Utilisateur utilisateur) throws DalException {	
@@ -169,4 +172,46 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		}
 		return listeUtilisateur;
 	}
+	
+
+	@Override
+	public String chercherPseudo(String email) throws DalException {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;	
+		ResultSet rs = null;
+		String pseudo = null;
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(SQL_SEARCH_PSEUDO);
+			pstmt.setString(5, email);
+			rs = pstmt.executeQuery();
+				if (rs.next()) {
+					pseudo = rs.getString("email");
+				}
+		} catch (SQLException e) {
+		throw new DalException("Erreur sur la méthode chercherPseudo()", e); 
+	} return pseudo;
+}
+	
+	@Override
+	public Utilisateur verifIdentifiants(String pseudo, String password) throws DalException {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;	
+		ResultSet rs = null;
+		Utilisateur utilisateur = null;
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(SQL_VERIF_ID);
+			pstmt.setString(1, "pseudo");
+			pstmt.setString(2, "mot_de_passe");
+				if (rs.next()) {
+					utilisateur = new Utilisateur();
+				}
+			rs = pstmt.executeQuery();
+		} catch (SQLException e) {
+		throw new DalException("Erreur sur la méthode verifIdentifiants()", e); 
+	} return utilisateur;
+}
+	
+	
 }

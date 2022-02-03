@@ -27,6 +27,16 @@ public class UtilisateurManager {
 		ud.AjouterUtilisateur(utilisateur);
 	}
 
+	public String chercherPseudo(String email) throws DalException {
+		UtilisateurDAO ud = DAOFactory.getUtilisateurDAO();
+		return ud.chercherPseudo(email);
+	}
 	
+	public Utilisateur verifIdentifiants(String pseudo, String password) throws DalException {
+		UtilisateurDAO ud = DAOFactory.getUtilisateurDAO();
+		return ud.verifIdentifiants(pseudo, password);
+		
+	}
+
 	
 }
