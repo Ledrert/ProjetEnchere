@@ -3,7 +3,7 @@
 		<label for="pseudo">Pseudo :</label>
 	</div>
 	<div>
-		<input type="text" name="pseudo" id="pseudo" maxlength="30" autofocus required>
+		<input type="text" name="pseudo" id="pseudo" pattern="([A-z0-9]){4,}" maxlength="30" autofocus required>
 	</div>
 	<div id="labelCo">
 		<label for="prenom">Prénom :</label>
