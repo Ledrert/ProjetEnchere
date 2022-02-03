@@ -100,5 +100,6 @@ public class ServletConnexion extends HttpServlet {
 		}
 				rd = request.getRequestDispatcher("/enchere");
 		rd.forward(request, response);
+		
 	}
 }
