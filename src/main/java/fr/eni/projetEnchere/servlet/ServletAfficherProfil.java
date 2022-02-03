@@ -8,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import fr.eni.projetEnchere.bo.Utilisateur;
 
 /**
  * Servlet implementation class ServletAfficherProfil
@@ -28,6 +31,9 @@ public class ServletAfficherProfil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AfficherProfil.jsp");
+		HttpSession session = request.getSession();
+		Utilisateur utilisateur = (Utilisateur) session.getAttribute("user");
+		request.setAttribute("user", utilisateur);
 		rd.forward(request, response);
 	}
 
@@ -35,8 +41,8 @@ public class ServletAfficherProfil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+
 	}
 
 }

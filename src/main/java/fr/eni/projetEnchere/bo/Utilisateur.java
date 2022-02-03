@@ -47,7 +47,6 @@ public class Utilisateur {
 	}
 
 
-
 	//Getters And Setters
 	public int getNoUtilisateur() {
 		return noUtilisateur;
