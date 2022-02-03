@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -69,6 +70,21 @@ public class ServletConnexion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String identifiant = request.getParameter("pseudo");
 		String password = request.getParameter("mot_de_passe");
+		String check = request.getParameter("saveMDP");
+		if(check.equals("save")) {
+			//creation de cookie
+			
+			   //Creation de cookies pour le pseudo et le mot de passe       
+		     Cookie cpseudo = new Cookie("pseudo",request.getParameter("pseudo"));
+		     Cookie cpassword = new Cookie("password",request.getParameter("password"));
+
+		      //Date d'expiration des cookies
+		     cpseudo.setMaxAge(60*60*24*30); 
+		     cpassword.setMaxAge(60*60*24*30); 
+
+		     response.addCookie( cpseudo );
+		     response.addCookie( cpassword );
+		}
 		UtilisateurManager um = UtilisateurManager.getInstance();
 		Utilisateur utilisateur = new Utilisateur();
 		if (identifiant.contains("@")) {
