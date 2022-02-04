@@ -16,6 +16,7 @@
 
 	<h1>Modification de mon profil</h1>
 	
+<form action="modifProfil" method="post"> 	
 <div class="formProfil">
 	<div id="labelCo">
 		<label for="pseudo">Pseudo :</label>
@@ -80,13 +81,14 @@
 </div>
     <div class="buttonForm">
 
-    	<a href="modifProfil"> 
-      	<button class="button" type="submit" >Modifier</button></a>
+    	 
+      	<button class="button" type="submit" >Modifier</button>
         					
 		<a href="#">
 		<button type="button" >Annuler</button></a>
 	</div>
 	
+</form>	
 </main>
 
 <%-- 	<%@ include file="/WEB-INF/jsp/footer.jsp" %> --%> </body>

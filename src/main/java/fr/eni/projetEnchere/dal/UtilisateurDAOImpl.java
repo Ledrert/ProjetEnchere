@@ -16,9 +16,9 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 
 	private final static String SQL_INSERT_UTILISATEUR = "{ call dbo.insertUtilisateur(?,?,?,?,?,?,?,?,?,?,?,?) };";
 	private final static String SQL_UPDATE_UTILISATEUR = "UPDATE UTILISATEUR SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, "
-			+ "code_postal=?, ville=?, mot_de_passe=? WHERE noUtilisateur=?);";
-	private final static String SQL_DELETE_UTILISATEUR = "DELETE FROM UTILISATEUR WHERE noUtilisateur=?";
-	private final static String SQL_SELECT_UTILISATEUR_BY_ID = "SELECT * FROM UTILISATEUR WHERE noUtilisateur=?;";
+			+ "code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=?;";
+	private final static String SQL_DELETE_UTILISATEUR = "DELETE FROM UTILISATEUR WHERE no_utilisateur=?";
+	private final static String SQL_SELECT_UTILISATEUR_BY_ID = "SELECT * FROM UTILISATEUR WHERE no_utilisateur=?;";
 	private final static String SQL_SELECT_ALL = "SELECT * FROM UTILISATEUR;";
 	private final static String SQL_SEARCH_PSEUDO = "SELECT pseudo FROM UTILISATEUR WHERE email=?;";
 	private final static String SQL_VERIF_ID = "SELECT * FROM UTILISATEUR WHERE pseudo=? AND mot_de_passe=?;";
@@ -63,7 +63,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 				pstmt.setString(1, utilisateur.getPseudo());
 				pstmt.setString(2, utilisateur.getNom());
 				pstmt.setString(3, utilisateur.getPrenom());
-				pstmt.setString(4, utilisateur.getEmail() );
+				pstmt.setString(4, utilisateur.getEmail());
 				pstmt.setString(5, utilisateur.getTelephone());
 				pstmt.setString(6, utilisateur.getRue());
 				pstmt.setString(7, utilisateur.getCodePostal()); 
