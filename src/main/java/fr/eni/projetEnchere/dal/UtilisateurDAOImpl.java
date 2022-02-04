@@ -186,7 +186,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 				if (rs.next()) {
-					pseudo = rs.getString("email");
+					pseudo = rs.getString("pseudo");
 				}
 		} catch (SQLException e) {
 		throw new DalException("Erreur sur la méthode chercherPseudo()", e); 
