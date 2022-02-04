@@ -16,7 +16,6 @@
 
 	<h1>Modification de mon profil</h1>
 	
-	
 <div class="formProfil">
 	<div id="labelCo">
 		<label for="pseudo">Pseudo :</label>
