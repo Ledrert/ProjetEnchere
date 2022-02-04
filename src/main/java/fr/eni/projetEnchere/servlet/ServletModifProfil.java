@@ -38,7 +38,6 @@ public class ServletModifProfil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Utilisateur user = (Utilisateur) session.getAttribute("user");
-		System.out.println("UserSession = "+user);
 		UtilisateurManager um = UtilisateurManager.getInstance();
 		Utilisateur utilisateur = new Utilisateur();
 
@@ -52,14 +51,14 @@ public class ServletModifProfil extends HttpServlet {
 		utilisateur.setCodePostal(request.getParameter("codePostal"));
 		utilisateur.setVille(request.getParameter("ville"));
 		utilisateur.setPassword(request.getParameter("password"));
-		System.out.println("userModif = "+utilisateur);
 		try {
 			um.ModifierUtilisateur(utilisateur);
+			session.setAttribute("user", utilisateur);
 		} catch (DalException e) {
 			System.out.println("erreur la méthode ModifierUtilisateur()");
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher("profil").forward(request, response);
+		request.getRequestDispatcher("/profil").forward(request, response);
 	}
 
 }
