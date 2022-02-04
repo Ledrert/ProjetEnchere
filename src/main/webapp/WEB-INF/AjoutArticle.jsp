@@ -23,7 +23,7 @@
 				id="description" name="description" maxlength="30">
 		</div>
 
-		<label for="catégorie">Catégorie </label> <select id="catégorie">
+		<label for="categorie">Catégorie </label> <select id="categorie">
 			<option value="valeur1">Informatique</option>
 			<option value="valeur2">Ameublement</option>
 			<option value="valeur3">Vêtement</option>
@@ -37,7 +37,7 @@
 
 		<label for="prix">Mise à prix : </label> <input type="number"
 			id="prix" name="prix" min="1" max="100000"> 
-		<label for="prix">Début de l'enchère : </label> <input type="date" id="début" name="début"> 
+		<label for="prix">Début de l'enchère : </label> <input type="date" id="debut" name="début"> 
 		<label for="prix">Fin de l'enchère : </label> <input type="date" id="fin" name="fin">
 
 	</div>
