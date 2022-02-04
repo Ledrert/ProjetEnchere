@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>    
+<%@page import="fr.eni.projetEnchere.bo.Utilisateur"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,64 +22,61 @@
 		<label for="pseudo">Pseudo :</label>
 	</div>
 	<div>
-		<input type="text" name="pseudo" id="pseudo" pattern="([A-z0-9]){4,}" maxlength="30" autofocus required>
+		<input type="text" name="pseudo" id="pseudo" pattern="([A-z0-9]){4,}" value="${user.pseudo}" maxlength="30" autofocus required>
 	</div>
 	<div id="labelCo">
 		<label for="prenom">Prénom :</label>
 	</div>
 	<div>
-		<input type="text" name="prenom" id="prenom" maxlength="30" required>
+		<input type="text" name="prenom" id="prenom" maxlength="30" value="${user.nom}" required>
 	</div>
 	<div id="labelCo">
 		<label for="nom">Nom :</label>
 	</div>
 	<div>
-		<input type="text" name="nom" id="nom" maxlength="30" required>
+		<input type="text" name="nom" id="nom" maxlength="30" value="${user.prenom}" required>
 	</div>
 	<div id="labelCo">
 		<label for="email">Email :</label>
 	</div>
 	<div>
-		<input type="email" name="email" id="email" maxlength="50"
-			placeholder="exemple@exemple.fr" required>
+		<input type="email" name="email" id="email" maxlength="50" value="${user.email}" required>
 	</div>
 	<div id="labelCo">
 		<label for="phone">Téléphone :</label>
 	</div>
 	<div>
-		<input type="tel" id="phone" name="phone" placeholder="XXXXXXXXXX"
-			required>
+		<input type="tel" id="phone" name="phone" value="${user.telephone}"required>
 	</div>
 	<div id="labelCo">
 		<label for="adresse">Rue :</label>
 	</div>
 	<div>
-		<input type="text" name="adresse" id="adresse" maxlength="50" required>
+		<input type="text" name="adresse" id="adresse" maxlength="50" value="${user.rue}" required>
 	</div>
 	<div id="labelCo">
 		<label for="codePostal">Code Postal :</label>
 	</div>
 	<div>
-		<input type="text" name="codePostal" id="codePostal" maxlength="15" required>
+		<input type="text" name="codePostal" id="codePostal" maxlength="15" value="${user.codePostal}" required>
 	</div>
 	<div id="labelCo">
 		<label for="ville">Ville :</label>
 	</div>
 	<div>
-		<input type="text" name="ville" id="ville" maxlength="30" required>
+		<input type="text" name="ville" id="ville" maxlength="30" value="${user.ville}" required>
 	</div>
 	<div id="labelCo">
 		<label for="password">Mot de passe :</label>
 	</div>
 	<div>
-		<input type="password" name="password" id="password" maxlength="30" required>
+		<input type="password" name="password" id="password" maxlength="30"  required>
 	</div>
 	<div id="labelCo">
 		<label for="confirmPassword">Confirmez le mot de passe :</label>
 	</div>
 	<div>
-		<input type="password" name="confirmPassword" id="confirmPassword"
-			maxlength="30" required>
+		<input type="password" name="confirmPassword" id="confirmPassword"	maxlength="30" required>
 	</div>
 </div>
     <div class="buttonForm">
