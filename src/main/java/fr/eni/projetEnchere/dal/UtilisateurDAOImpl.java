@@ -183,7 +183,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		try {
 			cnx = ConnectionProvider.getConnection();
 			pstmt = cnx.prepareStatement(SQL_SEARCH_PSEUDO);
-			pstmt.setString(5, email);
+			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 				if (rs.next()) {
 					pseudo = rs.getString("email");
