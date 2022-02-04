@@ -84,9 +84,9 @@
     	 
       	<button class="button" type="submit" >Modifier</button>
         					
-		<a href="#">
+<a href="enchere">
 		<button type="button" >Annuler</button></a>
-	</div>
+		</div>
 	
 </form>	
 </main>
