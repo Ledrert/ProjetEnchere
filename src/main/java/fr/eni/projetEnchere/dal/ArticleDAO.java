@@ -9,7 +9,8 @@ public interface ArticleDAO {
 	
 	public List<Article> listerArticle() throws DalException;
 	public List<Categorie> listerCategorie() throws DalException;
-	public Categorie rechercherCategorie(String nom) throws DalException;
+	public Categorie rechercherCategorieParNom(String nom) throws DalException;
+	public Categorie rechercherCategorieParLibelle(String libelle) throws DalException;
 	public void modifierArticle(Article art) throws DalException;
 	public void ajouterArticle(Article art) throws DalException;
 	public void supprimerArticle(int index) throws DalException;

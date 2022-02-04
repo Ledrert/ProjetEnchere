@@ -43,4 +43,9 @@ public class ArticleManager {
 		return liste;
 	}
 	
+	public Categorie rechercherCategorie(String libelle) throws DalException {
+		ArticleDAO dao = DAOFactory.getArticleDAO();
+		return dao.rechercherCategorieParLibelle(libelle);
+	}
+	
 }
