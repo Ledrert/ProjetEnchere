@@ -24,6 +24,9 @@ Ville : ${requestScope.user.ville}  <br>
 </div>
 
 <form><button type="submit" name="modifier" formmethod="get" formaction="modifProfil">Modifier 
-</button></form>
+</button>
+<a href="enchere">
+		<button type="button" >Annuler</button></a>
+</form>
 </body>
 </html>
