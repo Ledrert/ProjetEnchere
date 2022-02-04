@@ -18,6 +18,7 @@ public class ArticleDaoImpl implements ArticleDAO {
 	private final static String SELECT_ALL = "SELECT * FROM article;";
 	private final static String SELECT_CATEGORIE = "SELECT * FROM categorie;";
 	private final static String CAT_BY_NOARTICLE = "SELECT nom_categorie, libelle FROM categorie WHERE nom_categorie = ?;";
+	private final static String CAT_BY_LIBEL = "SELECT nom_categorie, libelle FROM categorie WHERE libelle = ?;";
 	private final static String UPDATE_ARTICLE = "UPDATE article SET (nom_article, description, date_debut, date_fin, prix_initial, nom_categorie VALUES (?,?,?,?,?,?) WHERE no_article = ?;";
 	private final static String INSERT_ARTICLE = "{call dbo.insertArticle (?,?,?,?,?,?,?,?)}";
 	private final static String DELETE_ARTICLE = "DELETE FROM article WHERE no_article = ?;";
@@ -46,7 +47,7 @@ public class ArticleDaoImpl implements ArticleDAO {
 				art.setPrixVente(rs.getInt("prix_vente"));
 				art.setUtilisateurVendeur(user.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
 				art.setUtilisateurAcheteur(user.selectUtilisateurByiD(rs.getInt("no_acheteur")));
-				art.setCategorie(rechercherCategorie(rs.getString("nom_categorie")));
+				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
 				listeArticle.add(art);
 			}
 		} catch (SQLException e) {
@@ -83,7 +84,7 @@ public class ArticleDaoImpl implements ArticleDAO {
 	}
 	
 	@Override
-	public Categorie rechercherCategorie(String nom) throws DalException {
+	public Categorie rechercherCategorieParNom(String nom) throws DalException {
 		Connection cnx = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -92,6 +93,32 @@ public class ArticleDaoImpl implements ArticleDAO {
 		try {
 			cnx = ConnectionProvider.getConnection();
 			pst = cnx.prepareStatement(CAT_BY_NOARTICLE);
+			pst.setString(1, nom);
+			rs = pst.executeQuery();
+			if(rs.next()) {
+				cat = new Categorie();
+				cat.setNomCategorie(rs.getString("nom_categorie"));
+				cat.setLibelle(rs.getString("libelle"));
+			}
+		} catch (SQLException e) {
+			throw new DalException("Erreur SQL rechercherCategorie()", e);
+		} finally {
+			ConnectionProvider.seDeconnecter(pst);
+		}
+		return cat;
+	}
+	
+	@Override
+	public Categorie rechercherCategorieParLibelle(String libelle) throws DalException {
+		Connection cnx = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		Categorie cat = null;
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pst = cnx.prepareStatement(CAT_BY_LIBEL);
+			pst.setString(0, libelle);
 			rs = pst.executeQuery();
 			if(rs.next()) {
 				cat = new Categorie();
