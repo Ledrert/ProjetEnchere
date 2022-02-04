@@ -38,6 +38,13 @@ public class UtilisateurManager {
 		return ud.verifIdentifiants(pseudo, password);
 		
 	}
+
+	public void ModifierUtilisateur(Utilisateur utilisateur) throws DalException {
+		UtilisateurDAO ud = DAOFactory.getUtilisateurDAO();
+		ud.ModifierUtilisateur(utilisateur);
+	}
+
+
 }
 
 
