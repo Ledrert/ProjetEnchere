@@ -79,7 +79,9 @@
 	</div>
 </div>
     <div class="buttonForm">
-     	<button class="button" type="submit" >Valider</button>	
+
+    	<a href="modifProfil"> 
+      	<button class="button" type="submit" >Modifier</button></a>
         					
 		<a href="#">
 		<button type="button" >Annuler</button></a>
