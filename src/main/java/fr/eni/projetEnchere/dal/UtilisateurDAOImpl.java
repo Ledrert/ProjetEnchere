@@ -136,36 +136,36 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public List<Utilisateur> selectAllUtilisateur (Utilisateur utilisateur) throws DalException {
+	public List<Utilisateur> selectAllUtilisateur() throws DalException {
 		List<Utilisateur> listeUtilisateur = new ArrayList<Utilisateur>();
 		Connection cnx = null;
 		Statement stmt = null;	
 		ResultSet rs = null;
+		Utilisateur utilisateur = null;
 		try {
 			cnx = ConnectionProvider.getConnection();
 			stmt = cnx.createStatement();
 			rs = stmt.executeQuery(SQL_SELECT_ALL);
 			while (rs.next()) {
-				if (rs.next()) {
-					utilisateur  = new Utilisateur();
-					utilisateur.setPseudo(rs.getString("pseudo"));
-					utilisateur.setNom(rs.getString("nom"));
-					utilisateur.setPrenom(rs.getString("prenom"));
-					utilisateur.setEmail(rs.getString("email"));
-					utilisateur.setTelephone(rs.getString("telephone"));
-					utilisateur.setRue(rs.getString("rue"));
-					utilisateur.setCodePostal(rs.getString("code_postal"));
-					utilisateur.setVille(rs.getString("ville"));
-					utilisateur.setPassword(rs.getString("mot_de_passe"));
-					String admin = rs.getString("administrateur");
-					if (admin.equals("y")) {
-						utilisateur.setAdmin(true);
-					} else { 
-						utilisateur.setAdmin(false);
-					}
-				} 				
-					listeUtilisateur.add(utilisateur);
-			} 
+				utilisateur  = new Utilisateur();
+				utilisateur.setPseudo(rs.getString("pseudo"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setEmail(rs.getString("email"));
+				utilisateur.setTelephone(rs.getString("telephone"));
+				utilisateur.setRue(rs.getString("rue"));
+				utilisateur.setCodePostal(rs.getString("code_postal"));
+				utilisateur.setVille(rs.getString("ville"));
+				utilisateur.setPassword(rs.getString("mot_de_passe"));
+				String admin = rs.getString("administrateur");
+				if (admin.equals("y")) {
+					utilisateur.setAdmin(true);
+				} else { 
+					utilisateur.setAdmin(false);
+				}
+				listeUtilisateur.add(utilisateur);
+			} 				
+					
 		} catch (SQLException e) {
 			throw new DalException("Erreur sur la méthode SelectAll()", e); 
 		} finally {
