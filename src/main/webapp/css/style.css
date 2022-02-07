@@ -57,6 +57,7 @@ h1{
 #cardEnchere {
 	border : 2px solid black;
 	width : 30%;
+	margin-bottom: 5px;
 }
 
 #imgEnchere {

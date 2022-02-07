@@ -59,7 +59,7 @@ function filtre(id) {
 </div>
 </div>
 <div>
-<button class="btnSearchAdv" type="button" formaction="enchere" formmethod="post" >Rechercher</button>
+<button class="btnSearchAdv" type="submit" formaction="enchere" formmethod="post" >Rechercher</button>
 </div>
 </c:when>
 <c:otherwise>
@@ -73,7 +73,7 @@ function filtre(id) {
 <option>${libCat }</option></c:forEach></select></div>
 </div>
 <div>
-<button class="btnSearch" type="button" formaction="enchere" formmethod="post" >Rechercher</button>
+<button class="btnSearch" type="submit" formaction="enchere" formmethod="post" >Rechercher</button>
 </div>
 </c:otherwise>
 </c:choose>
