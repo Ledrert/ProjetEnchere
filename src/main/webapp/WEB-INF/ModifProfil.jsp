@@ -81,10 +81,11 @@
 </div>
     <div class="buttonForm">
     	 
-      	<button class="button" type="submit" >Modifier</button>
-        					
-<a href="enchere">
-		<button type="button" >Retour</button></a>
+      	<button class="button" type="submit" >Modifier</button>					
+		<button type="submit" name="retour" formmethod="get" formaction="enchere">Annuler</button>
+		<button type="submit" name="suppression" formmethod="get" formaction="enchere">Supprimer mon compte</button>
+		
+		
 		</div>
 	
 </form>	
