@@ -59,7 +59,7 @@
 		<label for="codePostal">Code Postal :</label>
 	</div>
 	<div>
-		<input type="text" name="codePostal" id="codePostal" maxlength="8" pattern="([0-9])" required>
+		<input type="text" name="codePostal" id="codePostal" maxlength="8" pattern="([0-9]+)" required>
 	</div>
 	<div id="labelCo">
 		<label for="ville">Ville :</label>

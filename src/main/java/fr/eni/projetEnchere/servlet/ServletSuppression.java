@@ -37,12 +37,9 @@ public class ServletSuppression extends HttpServlet {
 		HttpSession session = request.getSession();
 		Utilisateur user = (Utilisateur) session.getAttribute("user");
 		UtilisateurManager um = UtilisateurManager.getInstance();
-		Utilisateur utilisateur = new Utilisateur();
-		
-		utilisateur.getNoUtilisateur();
-		
+
 		try {
-			um.supprimerUtilisateur(utilisateur);
+			um.supprimerUtilisateur(user);
 			session.invalidate();
 		} catch (DalException e) {
 			System.out.println("erreur la méthode SupprimerUtilisateur()");
