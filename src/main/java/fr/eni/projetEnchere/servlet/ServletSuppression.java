@@ -51,7 +51,5 @@ public class ServletSuppression extends HttpServlet {
 		request.getRequestDispatcher("/enchere").forward(request, response);		
 	}
 
-	
-	
-	
+
 }

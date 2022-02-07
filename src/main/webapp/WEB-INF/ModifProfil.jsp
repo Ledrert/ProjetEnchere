@@ -70,6 +70,7 @@
 		<label for="password">Mot de passe :</label>
 	</div>
 	<div>
+	
 		<input type="password" name="password" id="password" maxlength="30"  required>
 	</div>
 	<div id="labelCo">
