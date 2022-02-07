@@ -184,7 +184,6 @@ public class ArticleDaoImpl implements ArticleDAO {
 			ConnectionProvider.seDeconnecter(cst);
 			seDeconnecter(cnx);
 		}
-		
 	}
 	
 	@Override
