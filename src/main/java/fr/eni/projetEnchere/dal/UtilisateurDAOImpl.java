@@ -80,16 +80,16 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	@Override
 	public void supprimerUtilisateur (Utilisateur utilisateur) throws DalException {
 		Connection cnx = null;
-		PreparedStatement pstmt = null;			
+		CallableStatement cstmt = null;			
 			try {
 				cnx = ConnectionProvider.getConnection();
-				pstmt = cnx.prepareStatement(SQL_DELETE_UTILISATEUR);	
-				pstmt.setInt(1, utilisateur.getNoUtilisateur());
-				pstmt.executeUpdate();
+				cstmt = cnx.prepareCall(SQL_DELETE_UTILISATEUR);	
+				cstmt.setInt(1, utilisateur.getNoUtilisateur());
+				cstmt.executeUpdate();
 				} catch (SQLException e) {
 					throw new DalException("Erreur sur la méthode Supprimer()", e);
 				} finally {
-				ConnectionProvider.seDeconnecter(pstmt);
+				ConnectionProvider.seDeconnecter(cstmt);
 			}
 		}
 				
