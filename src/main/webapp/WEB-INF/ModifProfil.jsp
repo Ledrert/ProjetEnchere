@@ -85,7 +85,7 @@
       	<button class="button" type="submit" >Modifier</button>
         					
 <a href="enchere">
-		<button type="button" >Annuler</button></a>
+		<button type="button" >Retour</button></a>
 		</div>
 	
 </form>	
