@@ -42,7 +42,7 @@ public class ArticleDaoImpl implements ArticleDAO {
 				art.setNomArticle(rs.getString("nom_article"));
 				art.setDescription(rs.getString("description"));
 				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
-				art.setDateFinEncheres(rs.getDate("date_fin_enchere"));
+				art.setDateFinEncheres(rs.getDate("date_fin_encheres"));
 				art.setPrixInitial(rs.getInt("prix_initial"));
 				art.setPrixVente(rs.getInt("prix_vente"));
 				art.setUtilisateurVendeur(user.selectUtilisateurByiD(rs.getInt("no_utilisateur")));

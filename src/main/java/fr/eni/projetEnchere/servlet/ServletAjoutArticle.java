@@ -51,6 +51,7 @@ public class ServletAjoutArticle extends HttpServlet {
 		String article = request.getParameter("article");
 		String description = request.getParameter("description");
 		String categorie = request.getParameter("categorie");
+		System.out.println(categorie);
 		Categorie cat=null;
 		
 			cat = am.rechercherCategorie(categorie);

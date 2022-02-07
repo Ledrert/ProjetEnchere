@@ -23,11 +23,11 @@
 				id="description" name="description" maxlength="30">
 		</div>
 
-		<label for="categorie">Catégorie </label> <select id="categorie">
-			<option value="valeur1">Informatique</option>
-			<option value="valeur2">Ameublement</option>
-			<option value="valeur3">Vêtement</option>
-			<option value="valeur3">Sport & Loisirs</option>
+		<label for="categorie">Catégorie </label> <select id="categorie" name="categorie">
+			<option>Informatique</option>
+			<option>Ameublement</option>
+			<option>Vêtement</option>
+			<option>Sport & Loisirs</option>
 		</select>
 
 		<!-- <form method="post" action="page.php" enctype="multipart/form-data">
