@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.projetEnchere.bll.ArticleManager;
+import fr.eni.projetEnchere.bo.Article;
 import fr.eni.projetEnchere.bo.Utilisateur;
 import fr.eni.projetEnchere.dal.DalException;
 
@@ -37,6 +38,7 @@ public class ServletAccueil extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> menu = new HashMap<>();
 		HttpSession session = request.getSession();
+		ArticleManager artM;
 		if(session != null) { //S'il y a une session (donc : un login a été fait)
 			Utilisateur user = (Utilisateur)session.getAttribute("user"); //récupération des informations de l'utilisateur connecté
 			if(user == null) {
@@ -53,9 +55,12 @@ public class ServletAccueil extends HttpServlet {
 			menu.put("/inscription", "S'inscrire");
 		}
 		List<String> listeCat = new ArrayList<String>();
+		List<Article> listeArt = new ArrayList<Article>();
 		try {
-			ArticleManager artM = ArticleManager.getInstance();
+
+			artM = ArticleManager.getInstance();
 			listeCat = artM.listerCategorie();
+			listeArt = artM.listerArticle();
 		} catch (DalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,6 +69,7 @@ public class ServletAccueil extends HttpServlet {
 		request.setAttribute("listMenu", menu);
 		request.setAttribute("liensMenu", menu.keySet());
 		request.setAttribute("listeCat", listeCat);
+		request.setAttribute("listeArt", listeArt);
 		rd.forward(request, response);
 		
 	}
@@ -72,8 +78,45 @@ public class ServletAccueil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		Map<String, String> menu = new HashMap<>();
+		HttpSession session = request.getSession();
+		List<Article> articles = new ArrayList<Article>();
+		List<String> listeCat = new ArrayList<String>();
+		List<Article> listArtFiltre = null;
+		ArticleManager artM;
+		
+		try {
+			artM = ArticleManager.getInstance();
+			articles = artM.listerArticle();
+			System.out.println(request.getParameter("catSelect") + " & "+ request.getParameter("keyword"));
+			listArtFiltre = filtrerListe(articles, request.getParameter("catSelect"), request.getParameter("keyword"));
+			
+		} catch (DalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
+		request.setAttribute("listMenu", menu);
+		request.setAttribute("liensMenu", menu.keySet());
+		request.setAttribute("listeCat", listeCat);
+		request.setAttribute("listeArt", listArtFiltre);
+		rd.forward(request, response);
+	}
+	
+	private List<Article> filtrerListe(List<Article> liste , String catSelect, String keywords){
+		List<Article> listArtFiltre = new ArrayList<Article>();
+		for(Article art : liste) {
+			if(!(catSelect.equals("Toutes"))) { //categorie sélectionnée autre que "Toutes"
+				if(art.getCategorie().getLibelle().equals(catSelect)) {
+					if(art.getNomArticle().contains(keywords)) {
+						listArtFiltre.add(art);
+					}
+				}
+			}
+		}
+		
+		return listArtFiltre;
 	}
 
 }
