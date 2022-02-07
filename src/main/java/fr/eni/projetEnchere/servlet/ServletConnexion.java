@@ -98,16 +98,16 @@ public class ServletConnexion extends HttpServlet {
 			if (identifiant.contains("@")) { //Si c'est un mail
 				identifiant = um.chercherPseudo(identifiant); //Récupération du pseudo via le mail
 				if (identifiant.isEmpty()) { //N'a pas renvoyé de pseudo car pas de mail reconnu
-					rd = request.getRequestDispatcher("/connexion");
-					System.err.println("Votre adresse mail ne correspond à un aucun pseudo.");
+					response.sendRedirect("connexion?error=1");
+					return;
 				} else {
 					utilisateur = um.verifIdentifiants(identifiant, password); //récupère l'utilisateur lié
 				}
 			} else { //Si c'est un pseudo
 				utilisateur = um.verifIdentifiants(identifiant, password);
 				if (utilisateur == null) { //si pas d'utilisateur reconnu via le pseudo
-					rd = request.getRequestDispatcher("/connexion");
-					System.err.println("Identifiants erronnés");
+					response.sendRedirect("connexion?error=1");
+					return;
 				}
 			}
 			HttpSession session = request.getSession();

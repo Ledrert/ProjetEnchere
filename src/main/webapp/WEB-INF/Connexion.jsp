@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,10 +17,15 @@
     <div><div id="labelCo"><label for="identifiant">Identifiant :</label></div>
         <div><input type="text" id="identifiant" name="identifiant" maxlength="30"></div>
     </div><br>
-       <div>
+    <div>
         <div id="labelCo"><label for="mot de passe">Mot de passe :</label></div>
         <div><input type="password" id="MDP" name="MDP" maxlength="30"></div>
     </div>
+	
+	<c:if test="${param.error == 1}">	
+    <p style="color : red">Votre Email/Pseudo ou Mdp est incorrect, veuillez réessayer.</p>
+	</c:if>
+	
     <div id="btmCo">
     <button type="submit" name="connexion" formmethod="post" formaction="connexion">Connexion 
 </button>
