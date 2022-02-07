@@ -46,7 +46,7 @@
 		<label for="phone">Téléphone :</label>
 	</div>
 	<div>
-		<input type="tel" id="phone" name="phone" value="${user.telephone}"required>
+		<input type="tel" id="phone" name="phone" value="${user.telephone}" required>
 	</div>
 	<div id="labelCo">
 		<label for="adresse">Rue :</label>
@@ -81,7 +81,7 @@
 </div>
     <div class="buttonForm">
     	 
-      	<button class="button" type="submit" >Modifier</button>					
+      	<button type="submit" name="modification" formmethod="post" formaction="modifProfil">Modifier</button>					
 		<button type="submit" name="retour" formmethod="get" formaction="enchere">Annuler</button>
 		<button type="submit" name="suppression" formmethod="get" formaction="SuppressionProfil">Supprimer mon compte</button>
 		

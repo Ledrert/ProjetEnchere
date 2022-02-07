@@ -23,7 +23,6 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	private final static String SQL_SEARCH_PSEUDO = "SELECT pseudo FROM UTILISATEUR WHERE email=?;";
 	private final static String SQL_VERIF_ID = "SELECT * FROM UTILISATEUR WHERE pseudo=? AND mot_de_passe=?;";
 	
-	
 	@Override
 	public void AjouterUtilisateur(Utilisateur utilisateur) throws DalException {	
 		Connection cnx = null;
