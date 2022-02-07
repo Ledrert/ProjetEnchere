@@ -12,8 +12,10 @@
 <h1>Etes vous sur de vouloir supprimer votre compte ?</h1>
 attention, vos crédits vont disparaitre. vous ne pourrez pas les récuperer.
 
-<button type="submit" name="suppression" formmethod="get" formaction="enchere">Supprimer</button>					
-<button type="submit" name="retour" formmethod="get" formaction="modifProfil">Annuler</button>					
+<form>
+<button type="submit" name="suppression" formmethod="post" formaction="SuppressionProfil">Supprimer</button>					
+<button type="submit" name="retour" formmethod="get" formaction="enchere">Annuler</button>					
+</form>
 
 
 

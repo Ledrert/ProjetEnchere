@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.projetEnchere.bll.UtilisateurManager;
 import fr.eni.projetEnchere.bo.Utilisateur;
+import fr.eni.projetEnchere.dal.DalException;
 
 /**
  * Servlet implementation class ServletSuppression
@@ -32,8 +34,23 @@ public class ServletSuppression extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		HttpSession session = request.getSession();
+		Utilisateur user = (Utilisateur) session.getAttribute("user");
+		UtilisateurManager um = UtilisateurManager.getInstance();
+		Utilisateur utilisateur = new Utilisateur();
+		
+		utilisateur.getNoUtilisateur();
+		
+		try {
+			um.supprimerUtilisateur(utilisateur);
+			session.invalidate();
+		} catch (DalException e) {
+			System.out.println("erreur la méthode SupprimerUtilisateur()");
+			e.printStackTrace();
+		}
+		request.getRequestDispatcher("/enchere").forward(request, response);		
 	}
 
+	
+	
 }

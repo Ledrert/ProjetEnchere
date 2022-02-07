@@ -17,7 +17,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 	private final static String SQL_INSERT_UTILISATEUR = "{ call dbo.insertUtilisateur(?,?,?,?,?,?,?,?,?,?,?,?) };";
 	private final static String SQL_UPDATE_UTILISATEUR = "UPDATE UTILISATEUR SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, "
 			+ "code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=?;";
-	private final static String SQL_DELETE_UTILISATEUR = "DELETE FROM UTILISATEUR WHERE no_utilisateur=?";
+	private final static String SQL_DELETE_UTILISATEUR = "{call dbo.suppressionUtilisateur (?) };";
 	private final static String SQL_SELECT_UTILISATEUR_BY_ID = "SELECT * FROM UTILISATEUR WHERE no_utilisateur=?;";
 	private final static String SQL_SELECT_ALL = "SELECT * FROM UTILISATEUR;";
 	private final static String SQL_SEARCH_PSEUDO = "SELECT pseudo FROM UTILISATEUR WHERE email=?;";

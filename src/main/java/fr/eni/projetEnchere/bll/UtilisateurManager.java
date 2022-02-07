@@ -26,7 +26,6 @@ public class UtilisateurManager {
 		utilisateur.setTelephone(tel);
 		ud.AjouterUtilisateur(utilisateur);
 	}
-
 	
 	public String chercherPseudo(String email) throws DalException {
 		UtilisateurDAO ud = DAOFactory.getUtilisateurDAO();
@@ -42,6 +41,11 @@ public class UtilisateurManager {
 	public void ModifierUtilisateur(Utilisateur utilisateur) throws DalException {
 		UtilisateurDAO ud = DAOFactory.getUtilisateurDAO();
 		ud.ModifierUtilisateur(utilisateur);
+	}
+
+	public void supprimerUtilisateur (Utilisateur utilisateur) throws DalException {
+		UtilisateurDAO ud = DAOFactory.getUtilisateurDAO();
+		ud.supprimerUtilisateur(utilisateur);
 	}
 
 
