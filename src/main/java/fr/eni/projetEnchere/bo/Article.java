@@ -20,16 +20,17 @@ public class Article {
     //Constructors
     public Article() {
     }
-    
-    public Article(String nomArticle, String description,Date dateDebutEncheres,Date dateFinEncheres, Utilisateur userVendeur, Categorie categorie) {
+
+    public Article(String nomArticle, String description, int prix, Date dateDebutEncheres,Date dateFinEncheres, Utilisateur userVendeur, Categorie categorie) {
         this.nomArticle = nomArticle;
         this.description = description;
+        this.prixInitial = prix;
         this.dateDebutEncheres = dateDebutEncheres;
         this.dateFinEncheres = dateFinEncheres;
         this.userVendeur = userVendeur;
         this.categorie = categorie;
     }
-
+    
     //Getters And Setters
     public int getNoArticle() {
         return noArticle;
