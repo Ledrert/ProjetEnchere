@@ -36,9 +36,9 @@ public class ServletSuppression extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Utilisateur user = (Utilisateur) session.getAttribute("user");
-		UtilisateurManager um = UtilisateurManager.getInstance();
-
+		UtilisateurManager um;
 		try {
+			um = UtilisateurManager.getInstance();
 			um.supprimerUtilisateur(user);
 			session.invalidate();
 		} catch (DalException e) {

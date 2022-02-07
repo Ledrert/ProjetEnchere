@@ -91,10 +91,11 @@ public class ServletConnexion extends HttpServlet {
 //		     response.addCookie( cpseudo );
 //		     response.addCookie( cpassword );
 //		}
-		UtilisateurManager um = UtilisateurManager.getInstance();
+		UtilisateurManager um;
 		Utilisateur utilisateur = null;
 		RequestDispatcher rd = null;
 		try {
+			um = UtilisateurManager.getInstance();
 			if (identifiant.contains("@")) { //Si c'est un mail
 				identifiant = um.chercherPseudo(identifiant); //Récupération du pseudo via le mail
 				if (identifiant.isEmpty()) { //N'a pas renvoyé de pseudo car pas de mail reconnu

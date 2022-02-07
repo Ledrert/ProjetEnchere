@@ -31,7 +31,7 @@ public class ArticleManager {
 			listeCat = dao.listerCategorie();
 			listeArticles = dao.listerArticle();
 		} catch (DalException e) {
-			throw new DalException("erreur chargement liste", e);
+			throw new DalException("erreur chargement liste article", e);
 		}
 	}
 	
