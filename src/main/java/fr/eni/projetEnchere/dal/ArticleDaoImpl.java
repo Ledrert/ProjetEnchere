@@ -15,7 +15,7 @@ import fr.eni.projetEnchere.bo.Categorie;
 
 public class ArticleDaoImpl implements ArticleDAO {
 
-	private final static String SELECT_ALL = "SELECT * FROM article;";
+	private final static String SELECT_ALL = "SELECT * FROM article ;";
 	private final static String SELECT_CATEGORIE = "SELECT * FROM categorie;";
 	private final static String CAT_BY_NOARTICLE = "SELECT nom_categorie, libelle FROM categorie WHERE nom_categorie = ?;";
 	private final static String CAT_BY_LIBEL = "SELECT nom_categorie, libelle FROM categorie WHERE libelle = ?;";
@@ -102,9 +102,10 @@ public class ArticleDaoImpl implements ArticleDAO {
 			}
 		} catch (SQLException e) {
 			throw new DalException("Erreur SQL rechercherCategorie()", e);
-		} finally {
-			ConnectionProvider.seDeconnecter(pst);
 		}
+//		} finally {
+//			ConnectionProvider.seDeconnecter(pst);
+//		}
 		return cat;
 	}
 	
