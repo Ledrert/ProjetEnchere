@@ -56,6 +56,11 @@ public class ServletAccueil extends HttpServlet {
 		List<Article> listArtFiltre = null;
 		ArticleManager artM;
 		
+		System.out.println(request.getParameter("achat"));
+		if(request.getParameter("EncDebut") != null) {
+			//Enchères ouvertes
+		}
+		
 		try {
 			artM = ArticleManager.getInstance();
 			articles = artM.listerArticle();
@@ -69,7 +74,7 @@ public class ServletAccueil extends HttpServlet {
 		
 	}
 	
-	private List<Article> filtrerListe(List<Article> liste , String catSelect, String keywords){
+	private List<Article> filtrerListe(List<Article> liste ,String catSelect, String keywords){
 		List<Article> listArtFiltre = new ArrayList<Article>();
 		for(Article art : liste) {
 			
@@ -84,6 +89,38 @@ public class ServletAccueil extends HttpServlet {
 			}
 		}
 		
+		return listArtFiltre;
+	}
+	
+	private List<Article> filtrerAchat(List<Article> liste ,String begin, String ec, String win){
+		List<Article> listArtFiltre = new ArrayList<Article>();
+		for(Article art : liste) {
+			if(begin != null) {
+				//tous les articles qui sont actuellement en cours d'enchères
+			}
+			if(ec != null) {
+				//A une enchère sur cette article dont la date d'enchère n'est pas terminé
+			}
+			if(win != null) {
+				//est l'acheteur de l'article
+			}
+		}
+		return listArtFiltre;
+	}
+	
+	private List<Article> filtrerVente(List<Article> liste ,String ec, String prep, String end){
+		List<Article> listArtFiltre = new ArrayList<Article>();
+		for(Article art : liste) {
+			if(ec != null) {
+				//les articles de l'utilisateur qui ont débuté mais qui ne sont pas terminés
+			}
+			if(prep != null) {
+				//les articles de l'utilisateur qui n'ont pas commencés
+			}
+			if(end != null) {
+				//les articles de l'utilisateur dont l'enchère a terminé
+			}
+		}
 		return listArtFiltre;
 	}
 	
