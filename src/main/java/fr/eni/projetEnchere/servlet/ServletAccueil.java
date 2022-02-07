@@ -37,7 +37,6 @@ public class ServletAccueil extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> menu = new HashMap<>();
 		HttpSession session = request.getSession();
-		ArticleManager artM = ArticleManager.getInstance();
 		if(session != null) { //S'il y a une session (donc : un login a été fait)
 			Utilisateur user = (Utilisateur)session.getAttribute("user"); //récupération des informations de l'utilisateur connecté
 			if(user == null) {
@@ -55,6 +54,7 @@ public class ServletAccueil extends HttpServlet {
 		}
 		List<String> listeCat = new ArrayList<String>();
 		try {
+			ArticleManager artM = ArticleManager.getInstance();
 			listeCat = artM.listerCategorie();
 		} catch (DalException e) {
 			// TODO Auto-generated catch block
