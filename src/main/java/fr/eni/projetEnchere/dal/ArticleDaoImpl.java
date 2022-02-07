@@ -102,10 +102,9 @@ public class ArticleDaoImpl implements ArticleDAO {
 			}
 		} catch (SQLException e) {
 			throw new DalException("Erreur SQL rechercherCategorie()", e);
+		} finally {
+			ConnectionProvider.seDeconnecter(pst);
 		}
-//		} finally {
-//			ConnectionProvider.seDeconnecter(pst);
-//		}
 		return cat;
 	}
 	

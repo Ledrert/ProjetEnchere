@@ -14,43 +14,53 @@ import fr.eni.projetEnchere.dal.DalException;
 public class ArticleManager {
 
 	private static ArticleManager instance;
+	private ArticleDAO dao;
+	private static List<Article> listeArticles;
+	private static List<Categorie> listeCat;
 	
-	public static ArticleManager getInstance() {
+	public static ArticleManager getInstance() throws DalException {
 		if(instance == null) {
 			instance = new ArticleManager();
 		}
 		return instance;
 	}
 	
-	private ArticleManager() {
+	private ArticleManager() throws DalException {
+		dao = DAOFactory.getArticleDAO();
+		try {
+			listeCat = dao.listerCategorie();
+			listeArticles = dao.listerArticle();
+		} catch (DalException e) {
+			throw new DalException("erreur chargement liste", e);
+		}
 	}
 	
 	
 	public void ajouterArticle(String article, String description, Categorie categorie, int prix, Date dateDebut, Date dateFin, Utilisateur utilisateur) throws DalException {
-			ArticleDAO ad = DAOFactory.getArticleDAO();
 			Article art = new Article(article, description, prix, dateDebut, dateFin, utilisateur, categorie);
-			art.setPrixInitial(prix);
-			ad.ajouterArticle(art);
+			dao.ajouterArticle(art);
+			listeArticles.add(art);
 		}
 	
 	public List<Article> listerArticle() throws DalException {
-		ArticleDAO ad = DAOFactory.getArticleDAO();
-		return ad.listerArticle();
+		return listeArticles;
 	}
 	
 	public List<String> listerCategorie() throws DalException{
-		ArticleDAO dao = DAOFactory.getArticleDAO();
-		List<Categorie> cats = dao.listerCategorie();
 		List<String> liste = new ArrayList<String>();
-		for(Categorie cat : cats) {
+		for(Categorie cat : listeCat) {
 			liste.add(cat.getLibelle());
 		}
 		return liste;
 	}
 	
 	public Categorie rechercherCategorie(String libelle) throws DalException {
-		ArticleDAO dao = DAOFactory.getArticleDAO();
-		return dao.rechercherCategorieParLibelle(libelle);
+		for(Categorie cat : listeCat) {
+			if(cat.getLibelle().equals(libelle)) {
+				return cat;
+			}
+		}
+		return null;
 	}
 	
 }
