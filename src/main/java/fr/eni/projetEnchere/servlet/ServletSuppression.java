@@ -13,7 +13,7 @@ import fr.eni.projetEnchere.bo.Utilisateur;
 /**
  * Servlet implementation class ServletSuppression
  */
-@WebServlet("/ServletSuppression")
+@WebServlet(name="/ServletSuppression", urlPatterns="/SuppressionProfil")
 public class ServletSuppression extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
