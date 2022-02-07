@@ -54,6 +54,7 @@ public class ArticleDaoImpl implements ArticleDAO {
 			throw new DalException("Erreur SQL listerArticle()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(st);
+			seDeconnecter(cnx);
 		}
 		return listeArticle;
 	}
@@ -79,6 +80,7 @@ public class ArticleDaoImpl implements ArticleDAO {
 			throw new DalException("Erreur SQL listerCategorie()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(st);
+			seDeconnecter(cnx);
 		}
 		return listeCat;
 	}
@@ -104,6 +106,7 @@ public class ArticleDaoImpl implements ArticleDAO {
 			throw new DalException("Erreur SQL rechercherCategorie()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
+			seDeconnecter(cnx);
 		}
 		return cat;
 	}
@@ -129,6 +132,7 @@ public class ArticleDaoImpl implements ArticleDAO {
 			throw new DalException("Erreur SQL rechercherCategorie()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
+			seDeconnecter(cnx);
 		}
 		return cat;
 	}
@@ -151,6 +155,7 @@ public class ArticleDaoImpl implements ArticleDAO {
 			throw new DalException("Erreur SQL modifierArticle()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
+			seDeconnecter(cnx);
 		}
 	}
 	
@@ -177,6 +182,7 @@ public class ArticleDaoImpl implements ArticleDAO {
 			throw new DalException("Erreur SQL ajouterArticle()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(cst);
+			seDeconnecter(cnx);
 		}
 		
 	}
@@ -195,7 +201,17 @@ public class ArticleDaoImpl implements ArticleDAO {
 			throw new DalException("Erreur SQL supprimerArticle()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
+			seDeconnecter(cnx);
 		}
 		
+	}
+	
+	private void seDeconnecter(Connection cnx) {
+		try {
+			cnx.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

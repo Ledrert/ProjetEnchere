@@ -115,7 +115,9 @@ public class ServletConnexion extends HttpServlet {
 		} catch (DalException e) {
 			e.printStackTrace();
 		}
-		rd = request.getRequestDispatcher("/enchere");
-		rd.forward(request, response);
+		//rd = request.getRequestDispatcher("/enchere");
+		//rd.forward(request, response);
+		
+		response.sendRedirect("/ProjetEnchere/enchere");
 	}
 }
