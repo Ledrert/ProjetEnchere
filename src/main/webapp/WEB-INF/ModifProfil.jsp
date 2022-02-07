@@ -80,7 +80,6 @@
 	</div>
 </div>
     <div class="buttonForm">
-
     	 
       	<button class="button" type="submit" >Modifier</button>
         					
