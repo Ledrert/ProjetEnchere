@@ -45,21 +45,21 @@ function filtre(id) {
 <option>${libCat }</option></c:forEach></select></div>
 <div id="advSearch">
 <div id="achatsSearch">
-<input type="radio" id="RdAchat" name="radioVente" onclick="filtre('achat')" checked><label for="RdAchat">Achats</label><ul id="listeSearch">
-<li><input type="checkbox" id="EncDebut" name="EncDebut" value="achat"><label for="EncDebut">Enchères ouvertes</label></li>
-<li><input type="checkbox" id="MyEncEC" name="MyEncEC" value="achat"><label for="MyEncEC">Mes enchères en cours</label></li>
-<li><input type="checkbox" id="MyEncWin" name="MyEncWin" value="achat"><label for="MyEncWin">Mes enchères remportées</label></li>
+<input type="radio" id="RdAchat" name="radioAchat" onclick="filtre('achat')" checked><label for="RdAchat">Achats</label><ul id="listeSearch">
+<li><input type="checkbox" id="EncDebut" name="EncDebut"><label for="EncDebut">Enchères ouvertes</label></li>
+<li><input type="checkbox" id="MyEncEC" name="MyEncEC"><label for="MyEncEC">Mes enchères en cours</label></li>
+<li><input type="checkbox" id="MyEncWin" name="MyEncWin"><label for="MyEncWin">Mes enchères remportées</label></li>
 </ul></div>
 <div id="mesVentesSearch">
 <input type="radio" id="RdVente" name="radioVente" onclick="filtre('vente')"><label for="RdVente">Mes ventes</label><ul id="listeSearch">
-<li><input type="checkbox" id="MyVenteEC" name="MyVenteEC" value="vente" disabled="disabled"><label for="MyVenteEC">Mes ventes en cours</label></li>
-<li><input type="checkbox" id="MyVenteNC" name="MyVenteNC" value="vente" disabled="disabled"><label for="MyVenteNC">ventes non débutées</label></li>
-<li><input type="checkbox" id="MyVenteFin" name="MyVenteFin" value="vente" disabled="disabled"><label for="MyVenteFin">ventes terminées</label></li>
+<li><input type="checkbox" id="MyVenteEC" name="MyVenteEC" disabled="disabled"><label for="MyVenteEC">Mes ventes en cours</label></li>
+<li><input type="checkbox" id="MyVenteNC" name="MyVenteNC" disabled="disabled"><label for="MyVenteNC">ventes non débutées</label></li>
+<li><input type="checkbox" id="MyVenteFin" name="MyVenteFin" disabled="disabled"><label for="MyVenteFin">ventes terminées</label></li>
 </ul></div>
 </div>
 </div>
 <div>
-<button class="btnSearchAdv" type="button" formaction="enchere" formmethod="post" >Rechercher</button>
+<button class="btnSearchAdv" type="submit" formaction="enchere" formmethod="post" >Rechercher</button>
 </div>
 </c:when>
 <c:otherwise>
@@ -73,7 +73,7 @@ function filtre(id) {
 <option>${libCat }</option></c:forEach></select></div>
 </div>
 <div>
-<button class="btnSearch" type="button" formaction="enchere" formmethod="post" >Rechercher</button>
+<button class="btnSearch" type="submit" formaction="enchere" formmethod="post" >Rechercher</button>
 </div>
 </c:otherwise>
 </c:choose>
@@ -82,7 +82,7 @@ function filtre(id) {
 <c:forEach var="article" items="${listeArt}"> <!-- Pour chaque enchère : une case -->
 <div id="cardEnchere">
 <img alt="img" src="" id="imgEnchere">
-<a id="nomArticle" href="#">${article.getNomArticle() }</a>
+<a id="nomArticle" href="detailEnchere?id=${article.getNoArticle()}">${article.getNomArticle() }</a>
 <p id="detailArticle">Prix : ${article.getPrixInitial() }</p>
 <p>Fin de l'enchère : ${article.getDateFinEncheres() }</p>
 <p>Vendeur : <a href="#">${article.getUserVendeur().getPseudo() }</a></p>

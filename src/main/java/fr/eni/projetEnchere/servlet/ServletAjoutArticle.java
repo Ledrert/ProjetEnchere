@@ -3,6 +3,7 @@ package fr.eni.projetEnchere.servlet;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
@@ -25,8 +26,9 @@ import fr.eni.projetEnchere.dal.DalException;
 @WebServlet(name="/AjoutArticle", urlPatterns = "/vendre")
 public class ServletAjoutArticle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
+
+
+	/**
      * @see HttpServlet#HttpServlet()
      */
     public ServletAjoutArticle() {
@@ -39,8 +41,16 @@ public class ServletAjoutArticle extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AjoutArticle.jsp");
+		
+		
+		LocalDate today = LocalDate.now();
+		request.setAttribute("today", today);
+		
 		rd.forward(request, response);
+		
 	}
+	
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

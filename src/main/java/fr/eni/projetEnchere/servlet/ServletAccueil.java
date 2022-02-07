@@ -36,6 +36,58 @@ public class ServletAccueil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ArticleManager artM;
+		List<Article> listeArt = new ArrayList<Article>();
+		try {
+			artM = ArticleManager.getInstance();
+			listeArt = artM.listerArticle();
+		} catch (DalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		doRedirect(request, response, listeArt);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<Article> articles = new ArrayList<Article>();
+		List<Article> listArtFiltre = null;
+		ArticleManager artM;
+		
+		try {
+			artM = ArticleManager.getInstance();
+			articles = artM.listerArticle();
+			listArtFiltre = filtrerListe(articles, request.getParameter("catSelect"), request.getParameter("keyword").trim().toLowerCase());
+			
+		} catch (DalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		doRedirect(request, response, listArtFiltre);
+		
+	}
+	
+	private List<Article> filtrerListe(List<Article> liste , String catSelect, String keywords){
+		List<Article> listArtFiltre = new ArrayList<Article>();
+		for(Article art : liste) {
+			
+		if(art.getNomArticle().trim().toLowerCase().contains(keywords)) {
+			if(!(catSelect.equals("Toutes"))) { //categorie sélectionnée autre que "Toutes"
+				if(art.getCategorie().getLibelle().equals(catSelect)) {
+						listArtFiltre.add(art);
+					}
+				} else {
+					listArtFiltre.add(art);
+				}
+			}
+		}
+		
+		return listArtFiltre;
+	}
+	
+	private void doRedirect(HttpServletRequest request, HttpServletResponse response, List<Article> liste) throws ServletException, IOException {
 		Map<String, String> menu = new HashMap<>();
 		HttpSession session = request.getSession();
 		ArticleManager artM;
@@ -55,12 +107,9 @@ public class ServletAccueil extends HttpServlet {
 			menu.put("/inscription", "S'inscrire");
 		}
 		List<String> listeCat = new ArrayList<String>();
-		List<Article> listeArt = new ArrayList<Article>();
 		try {
-
 			artM = ArticleManager.getInstance();
 			listeCat = artM.listerCategorie();
-			listeArt = artM.listerArticle();
 		} catch (DalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,54 +118,8 @@ public class ServletAccueil extends HttpServlet {
 		request.setAttribute("listMenu", menu);
 		request.setAttribute("liensMenu", menu.keySet());
 		request.setAttribute("listeCat", listeCat);
-		request.setAttribute("listeArt", listeArt);
+		request.setAttribute("listeArt", liste);
 		rd.forward(request, response);
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Map<String, String> menu = new HashMap<>();
-		HttpSession session = request.getSession();
-		List<Article> articles = new ArrayList<Article>();
-		List<String> listeCat = new ArrayList<String>();
-		List<Article> listArtFiltre = null;
-		ArticleManager artM;
-		
-		try {
-			artM = ArticleManager.getInstance();
-			articles = artM.listerArticle();
-			System.out.println(request.getParameter("catSelect") + " & "+ request.getParameter("keyword"));
-			listArtFiltre = filtrerListe(articles, request.getParameter("catSelect"), request.getParameter("keyword"));
-			
-		} catch (DalException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
-		request.setAttribute("listMenu", menu);
-		request.setAttribute("liensMenu", menu.keySet());
-		request.setAttribute("listeCat", listeCat);
-		request.setAttribute("listeArt", listArtFiltre);
-		rd.forward(request, response);
-	}
-	
-	private List<Article> filtrerListe(List<Article> liste , String catSelect, String keywords){
-		List<Article> listArtFiltre = new ArrayList<Article>();
-		for(Article art : liste) {
-			if(!(catSelect.equals("Toutes"))) { //categorie sélectionnée autre que "Toutes"
-				if(art.getCategorie().getLibelle().equals(catSelect)) {
-					if(art.getNomArticle().contains(keywords)) {
-						listArtFiltre.add(art);
-					}
-				}
-			}
-		}
-		
-		return listArtFiltre;
 	}
 
 }
