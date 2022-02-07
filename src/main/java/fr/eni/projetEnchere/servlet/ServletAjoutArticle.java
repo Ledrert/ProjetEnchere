@@ -1,6 +1,7 @@
 package fr.eni.projetEnchere.servlet;
 
 import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -53,8 +54,8 @@ public class ServletAjoutArticle extends HttpServlet {
 			cat = am.rechercherCategorie(categorie);
 		
 		int prix = Integer.valueOf(request.getParameter("prix"));
-		String debut = request.getParameter("debut");
-		String fin = request.getParameter("fin");
+		Date debut = request.getParameter("debut");
+		Date fin = request.getParameter("fin");
 		HttpSession session = request.getSession();
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("user");
 

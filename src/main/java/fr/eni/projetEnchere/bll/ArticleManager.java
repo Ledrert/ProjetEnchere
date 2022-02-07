@@ -1,6 +1,7 @@
 package fr.eni.projetEnchere.bll;
 
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 import fr.eni.projetEnchere.bo.Article;
@@ -9,7 +10,6 @@ import fr.eni.projetEnchere.bo.Utilisateur;
 import fr.eni.projetEnchere.dal.ArticleDAO;
 import fr.eni.projetEnchere.dal.DAOFactory;
 import fr.eni.projetEnchere.dal.DalException;
-import fr.eni.projetEnchere.dal.UtilisateurDAO;
 
 public class ArticleManager {
 
@@ -26,10 +26,11 @@ public class ArticleManager {
 	}
 	
 	
-	public void ajouterArticle(String article, String description, Categorie categorie, int prix, String début, String fin, Utilisateur utilisateur) throws DalException {
+	public void ajouterArticle(String article, String description, Categorie categorie, int prix, Date debut, Date fin, Utilisateur utilisateur) throws DalException {
 			ArticleDAO ad = DAOFactory.getArticleDAO();
-			Article article = new Article(article, description, prix, début, fin, utilisateur , categorie);
-			ad.ajouterArticle(article);
+			Article art = new Article(article, description, debut, fin, utilisateur, categorie);
+			art.setPrixInitial(prix);
+			ad.ajouterArticle(art);
 		}
 	
 	

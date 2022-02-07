@@ -46,10 +46,10 @@
 	<div class="retrait">
 		<h2>Retrait :</h2>
 		<label for="rue">Rue : </label> <input type="text" id="rue" name="rue"
-			maxlength="50"> <label for="codePostal">Code postal :
-		</label> <input type="text" id="codePostal" name="codePostal" maxlength="10">
+			maxlength="50" value="${user.rue}"> <label for="codePostal">Code postal :
+		</label> <input type="text" id="codePostal" name="codePostal" maxlength="10" value="${user.codePostal}">
 		<label for="ville">Ville : </label> <input type="text" id="ville"
-			name="ville" maxlength="30">
+			name="ville" maxlength="30" value="${user.ville}">
 	</div>
 
 

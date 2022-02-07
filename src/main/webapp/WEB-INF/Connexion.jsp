@@ -29,7 +29,10 @@
 </form>
 
    <form><button type="submit" name="inscription" formmethod="get" formaction="inscription">Créer un compte 
-</button></form>
+</button>
+<a href="enchere">
+		<button type="button" >Annuler</button></a>
+		</form>
 </div>
 </body>
 </html>
