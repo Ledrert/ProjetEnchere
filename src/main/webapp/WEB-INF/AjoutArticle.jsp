@@ -11,9 +11,9 @@
 <body>
 	<imgNewVente> </imgNewVente>
 	<h1>Nouvelle vente</h1>
-
+<form>
 	<div class="centerNewArticle">
-
+	
 		<div>
 			<label for="article">Article :</label> <input type="text"
 				id="article" name="article" maxlength="30">
@@ -30,14 +30,14 @@
 			<option value="valeur3">Sport & Loisirs</option>
 		</select>
 
-		<form method="post" action="page.php" enctype="multipart/form-data">
+		<!-- <form method="post" action="page.php" enctype="multipart/form-data">
 			<label for="photo">Photo de l'article </label> <input type="file"
 				id="photo" name="photo" accept="image/png, image/jpeg">
-		</form>
+		</form> -->
 
 		<label for="prix">Mise à prix : </label> <input type="number"
 			id="prix" name="prix" min="1" max="100000"> 
-		<label for="prix">Début de l'enchère : </label> <input type="date" id="debut" name="début"> 
+		<label for="prix">Début de l'enchère : </label> <input type="date" id="debut" name="debut"> 
 		<label for="prix">Fin de l'enchère : </label> <input type="date" id="fin" name="fin">
 
 	</div>
@@ -53,17 +53,17 @@
 	</div>
 
 
-	<form>
-		<button type="submit" name="enregistrer" formmethod="get"
-			formaction="enchere">Enregistrer</button>
-	</form>
+	<div class="boutton">
+	<a href="enchere"> 
+      	<button class="button" type="submit" formmethod="post" formaction="vendre">Enregistrer</button></a>
 	<br>
 
-	<form>
+	
 		<button type="submit" name="annuler" formmethod="get"
 			formaction="enchere">Annuler</button>
-	</form>
-
+			
+	</div>
+</form>
 
 
 </body>

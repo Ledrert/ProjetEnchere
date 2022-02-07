@@ -1,7 +1,9 @@
 package fr.eni.projetEnchere.servlet;
 
 import java.io.IOException;
-import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.sql.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -35,7 +37,7 @@ public class ServletAjoutArticle extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		HttpSession session = request.getSession();
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/AjoutArticle.jsp");
 		rd.forward(request, response);
 	}
@@ -54,13 +56,19 @@ public class ServletAjoutArticle extends HttpServlet {
 			cat = am.rechercherCategorie(categorie);
 		
 		int prix = Integer.valueOf(request.getParameter("prix"));
-		Date debut = request.getParameter("debut");
-		Date fin = request.getParameter("fin");
+		String debut = request.getParameter("debut");
+		java.util.Date jdated = new SimpleDateFormat("yyyy-MM-dd").parse(debut);
+        Date dateDebut = new Date(jdated.getTime());
+		String fin = request.getParameter("fin");
+		java.util.Date jdatef = new SimpleDateFormat("yyyy-MM-dd").parse(fin);
+        Date dateFin = new Date(jdatef.getTime());
 		HttpSession session = request.getSession();
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("user");
 
-			am.ajouterArticle(article, description, cat, prix, debut, fin, utilisateur);
+			am.ajouterArticle(article, description, cat, prix, dateDebut, dateFin, utilisateur);
 		} catch (DalException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/enchere");

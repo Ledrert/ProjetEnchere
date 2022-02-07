@@ -118,7 +118,7 @@ public class ArticleDaoImpl implements ArticleDAO {
 		try {
 			cnx = ConnectionProvider.getConnection();
 			pst = cnx.prepareStatement(CAT_BY_LIBEL);
-			pst.setString(0, libelle);
+			pst.setString(1, libelle);
 			rs = pst.executeQuery();
 			if(rs.next()) {
 				cat = new Categorie();

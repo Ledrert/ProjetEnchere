@@ -26,9 +26,9 @@ public class ArticleManager {
 	}
 	
 	
-	public void ajouterArticle(String article, String description, Categorie categorie, int prix, Date debut, Date fin, Utilisateur utilisateur) throws DalException {
+	public void ajouterArticle(String article, String description, Categorie categorie, int prix, Date dateDebut, Date dateFin, Utilisateur utilisateur) throws DalException {
 			ArticleDAO ad = DAOFactory.getArticleDAO();
-			Article art = new Article(article, description, debut, fin, utilisateur, categorie);
+			Article art = new Article(article, description, dateDebut, dateFin, utilisateur, categorie);
 			art.setPrixInitial(prix);
 			ad.ajouterArticle(art);
 		}
