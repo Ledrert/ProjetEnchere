@@ -15,5 +15,5 @@ public interface ArticleDAO {
 	public void modifierArticle(Article art) throws DalException;
 	public void ajouterArticle(Article art) throws DalException;
 	public void supprimerArticle(int index) throws DalException;
-	public Article SelectByID(int no_article) throws DalException;
+	public Article selectByID(int no_article) throws DalException;
 }

@@ -15,7 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.projetEnchere.bll.ArticleManager;
+import fr.eni.projetEnchere.bo.Article;
 import fr.eni.projetEnchere.bo.Utilisateur;
+import fr.eni.projetEnchere.dal.ArticleDAO;
+import fr.eni.projetEnchere.dal.ArticleDaoImpl;
 import fr.eni.projetEnchere.dal.DalException;
 
 /**
@@ -53,11 +56,22 @@ public class ServletDetailEnchere extends HttpServlet {
 			menu.put("/connexion", "Se connecter");
 			menu.put("/inscription", "S'inscrire");
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/DetailEnchere.jsp");
-		request.setAttribute("listMenu", menu);
-		request.setAttribute("liensMenu", menu.keySet());
-		rd.forward(request, response);
-	
+		
+		try {
+			
+			int id =  Integer.valueOf(request.getParameter("id"));
+			Article article = ArticleManager.getInstance().getById(id);
+			
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/DetailEnchere.jsp");
+			request.setAttribute("listMenu", menu);
+			request.setAttribute("article", article);
+			request.setAttribute("liensMenu", menu.keySet());
+			rd.forward(request, response);
+			
+		} catch (DalException e) {
+			response.sendRedirect("/ProjetEnchere/");
+			return;
+		}
 	}
 
 	/**

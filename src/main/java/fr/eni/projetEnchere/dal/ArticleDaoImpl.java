@@ -42,6 +42,7 @@ public class ArticleDaoImpl implements ArticleDAO {
 			
 			while(rs.next()) {
 				art = new Article();
+				art.setNoArticle(rs.getInt("no_article"));
 				art.setNomArticle(rs.getString("nom_article"));
 				art.setDescription(rs.getString("description"));
 				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
@@ -219,7 +220,7 @@ public class ArticleDaoImpl implements ArticleDAO {
 	
 	
 	@Override
-	public Article SelectByID(int no_article) throws DalException {
+	public Article selectByID(int no_article) throws DalException {
 		Connection cnx = null;
 		PreparedStatement pstmt = null;	
 		ResultSet rs = null;
@@ -227,17 +228,24 @@ public class ArticleDaoImpl implements ArticleDAO {
 		try {
 			cnx = ConnectionProvider.getConnection();
 			pstmt = cnx.prepareStatement(SELECT_BY_ID);
-			pstmt.setInt(1, art.getNoArticle());
+			pstmt.setInt(1, no_article);
 			rs = pstmt.executeQuery();
-				if (rs.next()) {
-					art = new Article();
-					pstmt.setString(1, art.getNomArticle());
-					pstmt.setString(2, art.getDescription());
-					pstmt.setDate(3, art.getDateDebutEncheres());
-					pstmt.setDate(4, art.getDateFinEncheres());
-					pstmt.setInt(5, art.getPrixInitial());
-					pstmt.setString(6, art.getCategorie().getNomCategorie());
-				}
+			
+			UtilisateurDAOImpl userDAO = new UtilisateurDAOImpl();
+			
+			if (rs.next()) {
+				art = new Article();
+				art.setNoArticle(rs.getInt("no_article"));
+				art.setNomArticle(rs.getString("nom_article"));
+				art.setDescription(rs.getString("description"));
+				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
+				art.setDateFinEncheres(rs.getDate("date_fin_encheres"));
+				art.setPrixInitial(rs.getInt("prix_initial"));
+				art.setPrixVente(rs.getInt("prix_vente"));
+				art.setUtilisateurVendeur(userDAO.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
+				art.setUtilisateurAcheteur(userDAO.selectUtilisateurByiD(rs.getInt("no_acheteur")));
+				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
+			}
 		} catch (SQLException e) {
 		throw new DalException("Erreur sur la méthode select art by id", e); 
 		} finally {

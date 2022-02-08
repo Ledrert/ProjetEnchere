@@ -63,4 +63,13 @@ public class ArticleManager {
 		return null;
 	}
 	
+	public Article getById(int id) throws DalException{
+		dao = DAOFactory.getArticleDAO();
+		try {
+			return dao.selectByID(id);
+		} catch (DalException e) {
+			throw new DalException("erreur chargement de l'article", e);
+		}
+	}
+	
 }
