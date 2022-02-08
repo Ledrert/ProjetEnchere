@@ -9,6 +9,7 @@
 <title>Informations profil</title>
 </head>
 <body>
+<jsp:include page="jsp/header.jsp"></jsp:include>
 <h1>Informations du profil :</h1>
 
 

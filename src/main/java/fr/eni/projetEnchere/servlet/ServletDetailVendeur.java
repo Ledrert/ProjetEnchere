@@ -43,7 +43,6 @@ public class ServletDetailVendeur extends HttpServlet {
 				menu.put("/connexion", "Se connecter");
 				menu.put("/inscription", "S'inscrire");
 			} else {
-				menu.put("/enchere", "Enchères");
 				menu.put("/vendre", "Vendre un article");
 				menu.put("/profil", "Mon profil");
 				menu.put("/deconnexion", "Déconnexion");

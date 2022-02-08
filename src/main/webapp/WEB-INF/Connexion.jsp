@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/css/style.css">
 </head>
 <body>
+<jsp:include page="jsp/header.jsp"></jsp:include>
 <h1>Connexion</h1>
 <div id="pageCo">
 <form class="formCo" action="/connexion" method="post">

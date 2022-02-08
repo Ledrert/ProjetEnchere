@@ -43,22 +43,18 @@ public class ServletConnexion extends HttpServlet {
 			throws ServletException, IOException {
 		Map<String, String> menu = new HashMap<>();
 		HttpSession session = request.getSession();
-		boolean isConnected = true;
 		if (session != null) { // S'il y a une session (donc : un login a été fait)
 			Utilisateur user = (Utilisateur) session.getAttribute("user"); // récupération des informations de
 																			// l'utilisateur connecté
 			if (user == null) {
-				isConnected = false;
 				menu.put("/connexion", "Se connecter");
 				menu.put("/inscription", "S'inscrire");
 			} else {
-				menu.put("/enchere", "Enchères");
 				menu.put("/vendre", "Vendre un article");
 				menu.put("/profil", "Mon profil");
 				menu.put("/deconnexion", "Déconnexion");
 			}
 		} else {
-			isConnected = false;
 			menu.put("/connexion", "Se connecter");
 			menu.put("/inscription", "S'inscrire");
 		}

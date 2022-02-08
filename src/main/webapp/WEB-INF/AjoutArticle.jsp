@@ -9,6 +9,7 @@
 	href="${pageContext.request.contextPath }/css/style.css">
 </head>
 <body>
+<jsp:include page="jsp/header.jsp"></jsp:include>
 	<imgNewVente> </imgNewVente>
 	<h1>Nouvelle vente</h1>
 <form>

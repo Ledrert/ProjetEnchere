@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import fr.eni.projetEnchere.bll.ArticleManager;
 import fr.eni.projetEnchere.bo.Article;
 import fr.eni.projetEnchere.bo.Utilisateur;
-import fr.eni.projetEnchere.dal.DAOFactory;
 import fr.eni.projetEnchere.dal.DalException;
 
 /**
@@ -200,7 +199,6 @@ public class ServletAccueil extends HttpServlet {
 				menu.put("/connexion", "Se connecter");
 				menu.put("/inscription", "S'inscrire");
 			} else {
-				menu.put("/enchere", "Enchères");
 				menu.put("/vendre", "Vendre un article");
 				menu.put("/profil", "Mon profil");
 				menu.put("/deconnexion", "Déconnexion");
