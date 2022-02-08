@@ -14,6 +14,5 @@ public interface UtilisateurDAO {
 	public String chercherPseudo (String email) throws DalException;
 	public Utilisateur verifIdentifiants(String pseudo, String password) throws DalException;
 	
-
 }
 

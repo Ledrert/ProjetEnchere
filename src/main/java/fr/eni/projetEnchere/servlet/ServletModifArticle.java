@@ -72,5 +72,4 @@ public class ServletModifArticle extends HttpServlet {
 		request.getRequestDispatcher("/profil").forward(request, response);
 
 	}
-
 }
