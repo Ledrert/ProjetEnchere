@@ -178,7 +178,6 @@ public class UtilisateurDAOImpl extends DAO implements UtilisateurDAO {
 		}
 		return listeUtilisateur;
 	}
-	
 
 	@Override
 	public String chercherPseudo(String email) throws DalException {
