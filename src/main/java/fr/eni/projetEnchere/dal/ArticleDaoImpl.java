@@ -14,7 +14,7 @@ import fr.eni.projetEnchere.bo.Article;
 import fr.eni.projetEnchere.bo.Categorie;
 import fr.eni.projetEnchere.bo.Utilisateur;
 
-public class ArticleDaoImpl implements ArticleDAO {
+public class ArticleDaoImpl extends DAO implements ArticleDAO {
 
 	private final static String SELECT_ALL = "SELECT * FROM article ;";
 	private final static String SELECT_CATEGORIE = "SELECT * FROM categorie;";
@@ -208,16 +208,7 @@ public class ArticleDaoImpl implements ArticleDAO {
 		}
 		
 	}
-	
-	private void seDeconnecter(Connection cnx) {
-		try {
-			cnx.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
+
 	
 	@Override
 	public Article selectByID(int no_article) throws DalException {
@@ -250,6 +241,7 @@ public class ArticleDaoImpl implements ArticleDAO {
 		throw new DalException("Erreur sur la méthode select art by id", e); 
 		} finally {
 			ConnectionProvider.seDeconnecter(pstmt);
+			seDeconnecter(cnx);
 		}
 		return art;
 	}
