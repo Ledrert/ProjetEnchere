@@ -28,13 +28,13 @@
 		<label for="prenom">Prénom :</label>
 	</div>
 	<div>
-		<input type="text" name="prenom" id="prenom" maxlength="30" value="${user.nom}" required>
+		<input type="text" name="prenom" id="prenom" maxlength="30" value="${user.nom}" required disabled="disabled">
 	</div>
 	<div id="labelCo">
 		<label for="nom">Nom :</label>
 	</div>
 	<div>
-		<input type="text" name="nom" id="nom" maxlength="30" value="${user.prenom}" required>
+		<input type="text" name="nom" id="nom" maxlength="30" value="${user.prenom}" required disabled="disabled"> 
 	</div>
 	<div id="labelCo">
 		<label for="email">Email :</label>
