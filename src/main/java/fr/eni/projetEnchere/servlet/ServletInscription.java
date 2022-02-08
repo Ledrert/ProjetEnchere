@@ -47,8 +47,6 @@ public class ServletInscription extends HttpServlet {
 		if(tel.contains("[0-9]+") && tel.length() == 10) {
 			//on valide
 		}
-		
-		
 				
 		UtilisateurManager um;
 		try {

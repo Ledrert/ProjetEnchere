@@ -47,6 +47,4 @@ public class ServletSuppression extends HttpServlet {
 		}
 		response.sendRedirect("/ProjetEnchere/enchere");	
 	}
-
-
 }
