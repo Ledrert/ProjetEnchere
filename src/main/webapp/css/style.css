@@ -8,6 +8,10 @@ h1{
 	text-align: center;
 }
 
+#imgLogo {
+	width : 100px;
+}
+
 #menu {
 	float:right;
 }
