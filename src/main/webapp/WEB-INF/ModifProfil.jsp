@@ -83,7 +83,6 @@
     <div class="buttonForm">
     	 
       	<button type="submit" name="modification" formmethod="post" formaction="modifProfil">Modifier</button>					
-		<button type="submit" name="retour" formmethod="get" formaction="enchere">Annuler</button>
 		<button type="submit" name="suppression" formmethod="get" formaction="SuppressionProfil">Supprimer mon compte</button>
 		
 		
