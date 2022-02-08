@@ -11,7 +11,7 @@
 <body>
 <jsp:include page="jsp/header.jsp"></jsp:include>
 
-<h1>Détail du vendeur</h1>
+<h1>Détails du vendeur</h1>
 
 <div class = infoVendeur>
 

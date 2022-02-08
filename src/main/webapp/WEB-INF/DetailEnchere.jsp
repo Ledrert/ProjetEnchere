@@ -10,7 +10,7 @@
 <body>
 <jsp:include page="jsp/header.jsp"></jsp:include>
 
-<h1>Détail vente</h1>
+<h1>Détails vente</h1>
 
 <div class= infoEnchere>
 <p id="nomArticle">${article.nomArticle}</p>
