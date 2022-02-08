@@ -45,7 +45,7 @@ public class ServletSuppression extends HttpServlet {
 			System.out.println("erreur la méthode SupprimerUtilisateur()");
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher("/enchere").forward(request, response);		
+		response.sendRedirect("/ProjetEnchere/enchere");	
 	}
 
 

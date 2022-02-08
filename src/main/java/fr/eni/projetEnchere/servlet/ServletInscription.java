@@ -57,8 +57,7 @@ public class ServletInscription extends HttpServlet {
 		} catch (DalException e) {
 			e.printStackTrace();
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/enchere");
-		rd.forward(request, response);
+		response.sendRedirect("/ProjetEnchere/enchere");
 		
 	}
 }
