@@ -1,6 +1,7 @@
 package fr.eni.projetEnchere.bll;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.sql.Date;
 import java.util.List;
 
@@ -61,6 +62,21 @@ public class ArticleManager {
 			}
 		}
 		return null;
+	}
+	
+	public List<Article> encheresEnCours(List<Article> listeArt, Utilisateur user) throws DalException {
+		for(Article art : dao.listerAchats(user)) listeArt.add(art);
+		return listeArt;
+	}
+	
+	public List<Article> mesEncheresEnCours(List<Article> listeArt, Utilisateur user) throws DalException{
+		for(Article art : dao.listerEnchereEnCours(user)) listeArt.add(art);
+		return listeArt;
+	}
+	
+	public List<Article> mesEncheresGagnes(List<Article> listeArt, Utilisateur user) throws DalException{
+		for(Article art : dao.chercherEnchereRemportee(user)) listeArt.add(art);
+		return listeArt;
 	}
 	
 }
