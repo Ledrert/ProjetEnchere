@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.eni.projetEnchere.bo.Article;
 import fr.eni.projetEnchere.bo.Categorie;
+import fr.eni.projetEnchere.bo.Utilisateur;
 
 public interface ArticleDAO {
 	
@@ -14,4 +15,5 @@ public interface ArticleDAO {
 	public void modifierArticle(Article art) throws DalException;
 	public void ajouterArticle(Article art) throws DalException;
 	public void supprimerArticle(int index) throws DalException;
+	public Article SelectByID(int no_article) throws DalException;
 }

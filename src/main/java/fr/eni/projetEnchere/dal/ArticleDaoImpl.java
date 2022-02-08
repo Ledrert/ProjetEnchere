@@ -12,6 +12,7 @@ import java.util.List;
 
 import fr.eni.projetEnchere.bo.Article;
 import fr.eni.projetEnchere.bo.Categorie;
+import fr.eni.projetEnchere.bo.Utilisateur;
 
 public class ArticleDaoImpl implements ArticleDAO {
 
@@ -22,6 +23,8 @@ public class ArticleDaoImpl implements ArticleDAO {
 	private final static String UPDATE_ARTICLE = "UPDATE article SET (nom_article, description, date_debut, date_fin, prix_initial, nom_categorie VALUES (?,?,?,?,?,?) WHERE no_article = ?;";
 	private final static String INSERT_ARTICLE = "{call dbo.insertArticle (?,?,?,?,?,?,?,?)}";
 	private final static String DELETE_ARTICLE = "DELETE FROM article WHERE no_article = ?;";
+	
+	private final static String SELECT_BY_ID = "SELECT * FROM article WHERE no_article =?;";
 	
 	@Override
 	public List<Article> listerArticle() throws DalException {
@@ -213,4 +216,34 @@ public class ArticleDaoImpl implements ArticleDAO {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	@Override
+	public Article SelectByID(int no_article) throws DalException {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;	
+		ResultSet rs = null;
+		Article art = null;
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(SELECT_BY_ID);
+			pstmt.setInt(1, art.getNoArticle());
+			rs = pstmt.executeQuery();
+				if (rs.next()) {
+					art = new Article();
+					pstmt.setString(1, art.getNomArticle());
+					pstmt.setString(2, art.getDescription());
+					pstmt.setDate(3, art.getDateDebutEncheres());
+					pstmt.setDate(4, art.getDateFinEncheres());
+					pstmt.setInt(5, art.getPrixInitial());
+					pstmt.setString(6, art.getCategorie().getNomCategorie());
+				}
+		} catch (SQLException e) {
+		throw new DalException("Erreur sur la méthode select art by id", e); 
+		} finally {
+			ConnectionProvider.seDeconnecter(pstmt);
+		}
+		return art;
+	}
 }
+
