@@ -12,7 +12,6 @@
 <jsp:include page="jsp/header.jsp"></jsp:include>
 <h1>Informations du profil :</h1>
 
-
 <div class="afficherProfil">
 Pseudo : ${requestScope.user.pseudo} <br>
 Nom : ${requestScope.user.nom } <br>
@@ -26,7 +25,7 @@ Ville : ${requestScope.user.ville}  <br>
 
 <form>
 <button type="submit" name="modifier" formmethod="get" formaction="modifProfil">Modifier</button>
-<button type="submit" name="retour" formmethod="get" formaction="enchere" >Retour</button>
+<button type="submit" name="retour" formmethod="get" formaction="enchere" >Retour vers l'accueil</button>
 
 </form>
 </body>

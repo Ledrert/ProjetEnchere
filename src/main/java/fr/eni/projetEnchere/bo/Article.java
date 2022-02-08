@@ -1,6 +1,8 @@
 package fr.eni.projetEnchere.bo;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 
 public class Article {
 	
@@ -16,7 +18,7 @@ public class Article {
     private Utilisateur userVendeur;
     private Utilisateur userAcheteur;
 	private Categorie categorie;
-
+	
     //Constructors
     public Article() {
     }

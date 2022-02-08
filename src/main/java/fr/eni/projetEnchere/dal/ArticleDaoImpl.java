@@ -604,4 +604,3 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 		}
 	}
 }
-
