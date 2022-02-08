@@ -1,5 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
-<header><img src="img/img.png">
+<header>
+<a href="enchere">
+<img src="img/img.png">
+</a>
 <nav id="menu"><c:forEach var="lien" items="${liensMenu }">
 <a href="${pageContext.request.contextPath }${lien}">${listMenu.get(lien)}</a></c:forEach>
 </nav>
