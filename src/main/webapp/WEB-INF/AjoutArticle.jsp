@@ -63,7 +63,7 @@
 
 	
 		<button type="submit" name="annuler" formmethod="get"
-			formaction="enchere">Annuler</button>
+			formaction="enchere">Retour vers l'accueil</button>
 			
 	</div>
 </form>

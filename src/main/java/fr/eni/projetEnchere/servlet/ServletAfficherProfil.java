@@ -48,7 +48,6 @@ public class ServletAfficherProfil extends HttpServlet {
 				menu.put("/inscription", "S'inscrire");
 			} else {
 				menu.put("/vendre", "Vendre un article");
-				menu.put("/profil", "Mon profil");
 				menu.put("/deconnexion", "Déconnexion");
 			}
 		} else {

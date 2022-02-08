@@ -86,7 +86,7 @@
       	<button class="button" type="submit" >Enregistrer</button></a>
         					
 		<a href="enchere">
-		<button type="button" >Annuler</button></a>
+		<button type="button" >Retour vers l'accueil</button></a>
 	</div>
 
 </form>	

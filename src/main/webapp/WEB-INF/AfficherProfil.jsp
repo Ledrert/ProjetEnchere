@@ -26,7 +26,7 @@ Ville : ${requestScope.user.ville}  <br>
 
 <form>
 <button type="submit" name="modifier" formmethod="get" formaction="modifProfil">Modifier</button>
-<button type="submit" name="retour" formmethod="get" formaction="enchere" >Retour</button>
+<button type="submit" name="retour" formmethod="get" formaction="enchere" >Retour vers l'accueil</button>
 
 </form>
 </body>
