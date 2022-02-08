@@ -236,6 +236,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			rs = pst.executeQuery();
 			while(rs.next()) {
 				art = new Article();
+				art.setNoArticle(rs.getInt("no_article"));
 				art.setNomArticle(rs.getString("nom_article"));
 				art.setDescription(rs.getString("description"));
 				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
@@ -273,6 +274,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			rs = pst.executeQuery();
 			while(rs.next()) {
 				art = new Article();
+				art.setNoArticle(rs.getInt("no_article"));
 				art.setNomArticle(rs.getString("nom_article"));
 				art.setDescription(rs.getString("description"));
 				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
@@ -310,6 +312,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			rs = pst.executeQuery();
 			while(rs.next()) {
 				art = new Article();
+				art.setNoArticle(rs.getInt("no_article"));
 				art.setNomArticle(rs.getString("nom_article"));
 				art.setDescription(rs.getString("description"));
 				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
@@ -346,6 +349,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			rs = pst.executeQuery();
 			while(rs.next()) {
 				art = new Article();
+				art.setNoArticle(rs.getInt("no_article"));
 				art.setNomArticle(rs.getString("nom_article"));
 				art.setDescription(rs.getString("description"));
 				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
@@ -382,6 +386,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			rs = pst.executeQuery();
 			while(rs.next()) {
 				art = new Article();
+				art.setNoArticle(rs.getInt("no_article"));
 				art.setNomArticle(rs.getString("nom_article"));
 				art.setDescription(rs.getString("description"));
 				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
@@ -418,6 +423,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			rs = pst.executeQuery();
 			while(rs.next()) {
 				art = new Article();
+				art.setNoArticle(rs.getInt("no_article"));
 				art.setNomArticle(rs.getString("nom_article"));
 				art.setDescription(rs.getString("description"));
 				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
@@ -454,6 +460,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			rs = pst.executeQuery();
 			while(rs.next()) {
 				art = new Article();
+				art.setNoArticle(rs.getInt("no_article"));
 				art.setNomArticle(rs.getString("nom_article"));
 				art.setDescription(rs.getString("description"));
 				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
@@ -490,6 +497,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			rs = pst.executeQuery();
 			while(rs.next()) {
 				art = new Article();
+				art.setNoArticle(rs.getInt("no_article"));
 				art.setNomArticle(rs.getString("nom_article"));
 				art.setDescription(rs.getString("description"));
 				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));

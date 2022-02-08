@@ -69,8 +69,6 @@ public class ServletAjoutArticle extends HttpServlet {
 		String debut = request.getParameter("debut");
 		java.util.Date jdated = new SimpleDateFormat("yyyy-MM-dd").parse(debut);
         Date dateDebut = new Date(jdated.getTime());
-        java.util.Date test = dateDebut;
-        System.out.println(test);
 		String fin = request.getParameter("fin");
 		java.util.Date jdatef = new SimpleDateFormat("yyyy-MM-dd").parse(fin);
         Date dateFin = new Date(jdatef.getTime());
