@@ -79,5 +79,4 @@ public class ServletDetailVendeur extends HttpServlet {
 		doGet(request, response);
 	}
 
-	
 }
