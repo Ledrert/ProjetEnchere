@@ -70,27 +70,27 @@ public class ServletAccueil extends HttpServlet {
 		if(request.getParameter("MyEncEC") == null) {
 			enchEC = "no";
 		} else {
-			enchEC = request.getParameter("EncDebut");
+			enchEC = request.getParameter("MyEncEC");
 		}
 		if(request.getParameter("MyEncWin") == null) {
 			enchEnd = "no";
 		} else {
-			enchEnd = request.getParameter("EncDebut");
+			enchEnd = request.getParameter("MyEncWin");
 		}
 		if(request.getParameter("MyVenteEC") == null) {
 			venteEC = "no";
 		} else {
-			venteEC = request.getParameter("EncDebut");
+			venteEC = request.getParameter("MyVenteEC");
 		}
 		if(request.getParameter("MyVenteNC") == null) {
 			venteNC = "no";
 		} else {
-			venteNC = request.getParameter("EncDebut");
+			venteNC = request.getParameter("MyVenteNC");
 		}
 		if(request.getParameter("MyVenteFin") == null) {
 			venteFin = "no";
 		} else {
-			venteFin = request.getParameter("EncDebut");
+			venteFin = request.getParameter("MyVenteFin");
 		}
 		
 		try {
@@ -149,6 +149,9 @@ public class ServletAccueil extends HttpServlet {
 					//est l'acheteur de l'article
 					listArtFiltre = am.mesEncheresGagnes(listArtFiltre, user);
 				}
+				if(begin.equals("no") & ec.equals("no") & win.equals("no")) {
+					listArtFiltre = am.mesAchats(listArtFiltre, user);
+				}
 		} catch (DalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -158,16 +161,30 @@ public class ServletAccueil extends HttpServlet {
 	}
 	
 	private List<Article> filtrerVente(String ec, String prep, String end, Utilisateur user){
+		ArticleManager am;
 		List<Article> listArtFiltre = new ArrayList<Article>();
+		try {
+			am = ArticleManager.getInstance();
 			if(ec.equals("on")) {
 				//les articles de l'utilisateur qui ont débuté mais qui ne sont pas terminés
+				listArtFiltre = am.mesVentesEnCours(listArtFiltre, user);
 			}
 			if(prep.equals("on")) {
 				//les articles de l'utilisateur qui n'ont pas commencés
+				listArtFiltre = am.mesVentesNonDebutees(listArtFiltre, user);
 			}
 			if(end.equals("on")) {
 				//les articles de l'utilisateur dont l'enchère a terminé
+				listArtFiltre = am.mesVentesTerminees(listArtFiltre, user);
 			}
+			if(prep.equals("no") & ec.equals("no") & end.equals("no")) {
+				listArtFiltre = am.mesVentes(listArtFiltre, user);
+			}
+		} catch (DalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
 		return listArtFiltre;
 	}
 	

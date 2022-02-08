@@ -63,18 +63,51 @@ public class ArticleManager {
 		return null;
 	}
 	
-	public List<Article> encheresEnCours(List<Article> listeArt, Utilisateur user) throws DalException {
+	public List<Article> mesAchats(List<Article> listeArt, Utilisateur user) throws DalException {
+		if(!dao.listerAchats(user).isEmpty())
 		for(Article art : dao.listerAchats(user)) listeArt.add(art);
 		return listeArt;
 	}
 	
+	public List<Article> encheresOuvertes(List<Article> listeArt, Utilisateur user) throws DalException {
+		if(!dao.listerEnchereEnCours(user).isEmpty())
+		for(Article art : dao.listerEnchereOuvertes(user)) listeArt.add(art);
+		return listeArt;
+	}
+	
 	public List<Article> mesEncheresEnCours(List<Article> listeArt, Utilisateur user) throws DalException{
-		for(Article art : dao.listerEnchereEnCours(user)) listeArt.add(art);
+		if(!dao.listerEnchereEnCours(user).isEmpty())
+		for(Article art : dao.chercherEnchereEnCours(user)) listeArt.add(art);
 		return listeArt;
 	}
 	
 	public List<Article> mesEncheresGagnes(List<Article> listeArt, Utilisateur user) throws DalException{
+		if(!dao.listerEnchereEnCours(user).isEmpty())
 		for(Article art : dao.chercherEnchereRemportee(user)) listeArt.add(art);
+		return listeArt;
+	}
+	
+	public List<Article> mesVentes(List<Article> listeArt, Utilisateur user) throws DalException{
+		if(!dao.listerVentes(user).isEmpty())
+		for(Article art : dao.listerVentes(user)) listeArt.add(art);
+		return listeArt;
+	}
+	
+	public List<Article> mesVentesEnCours(List<Article> listeArt, Utilisateur user) throws DalException{
+		if(!dao.listerVentesEnCours(user).isEmpty())
+		for(Article art : dao.listerVentesEnCours(user)) listeArt.add(art);
+		return listeArt;
+	}
+	
+	public List<Article> mesVentesNonDebutees(List<Article> listeArt, Utilisateur user) throws DalException{
+		if(!dao.listerVentesNonDebut(user).isEmpty())
+		for(Article art : dao.listerVentesNonDebut(user)) listeArt.add(art);
+		return listeArt;
+	}
+	
+	public List<Article> mesVentesTerminees(List<Article> listeArt, Utilisateur user) throws DalException{
+		if(!dao.listerVentesTerminees(user).isEmpty())
+		for(Article art : dao.listerVentesTerminees(user)) listeArt.add(art);
 		return listeArt;
 	}
 
