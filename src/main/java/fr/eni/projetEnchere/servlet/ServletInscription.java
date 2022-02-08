@@ -47,8 +47,6 @@ public class ServletInscription extends HttpServlet {
 		if(tel.contains("[0-9]+") && tel.length() == 10) {
 			//on valide
 		}
-		
-		
 				
 		UtilisateurManager um;
 		try {
@@ -57,8 +55,6 @@ public class ServletInscription extends HttpServlet {
 		} catch (DalException e) {
 			e.printStackTrace();
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/enchere");
-		rd.forward(request, response);
-		
+		response.sendRedirect("/ProjetEnchere/enchere");
 	}
 }

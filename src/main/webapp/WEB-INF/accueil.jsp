@@ -45,13 +45,13 @@ function filtre(id) {
 <option>${libCat }</option></c:forEach></select></div>
 <div id="advSearch">
 <div id="achatsSearch">
-<input type="radio" id="RdAchat" name="radioAchat" onclick="filtre('achat')" checked><label for="RdAchat">Achats</label><ul id="listeSearch">
+<input type="radio" id="RdAchat" name="radioFiltre" value="achat" onclick="filtre('achat')" checked><label for="RdAchat">Achats</label><ul id="listeSearch">
 <li><input type="checkbox" id="EncDebut" name="EncDebut"><label for="EncDebut">Enchères ouvertes</label></li>
 <li><input type="checkbox" id="MyEncEC" name="MyEncEC"><label for="MyEncEC">Mes enchères en cours</label></li>
 <li><input type="checkbox" id="MyEncWin" name="MyEncWin"><label for="MyEncWin">Mes enchères remportées</label></li>
 </ul></div>
 <div id="mesVentesSearch">
-<input type="radio" id="RdVente" name="radioVente" onclick="filtre('vente')"><label for="RdVente">Mes ventes</label><ul id="listeSearch">
+<input type="radio" id="RdVente" name="radioFiltre" value="vente" onclick="filtre('vente')"><label for="RdVente">Mes ventes</label><ul id="listeSearch">
 <li><input type="checkbox" id="MyVenteEC" name="MyVenteEC" disabled="disabled"><label for="MyVenteEC">Mes ventes en cours</label></li>
 <li><input type="checkbox" id="MyVenteNC" name="MyVenteNC" disabled="disabled"><label for="MyVenteNC">ventes non débutées</label></li>
 <li><input type="checkbox" id="MyVenteFin" name="MyVenteFin" disabled="disabled"><label for="MyVenteFin">ventes terminées</label></li>

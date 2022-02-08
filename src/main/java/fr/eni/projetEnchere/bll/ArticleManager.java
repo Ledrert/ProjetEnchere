@@ -63,6 +63,21 @@ public class ArticleManager {
 		return null;
 	}
 	
+	public List<Article> encheresEnCours(List<Article> listeArt, Utilisateur user) throws DalException {
+		for(Article art : dao.listerAchats(user)) listeArt.add(art);
+		return listeArt;
+	}
+	
+	public List<Article> mesEncheresEnCours(List<Article> listeArt, Utilisateur user) throws DalException{
+		for(Article art : dao.listerEnchereEnCours(user)) listeArt.add(art);
+		return listeArt;
+	}
+	
+	public List<Article> mesEncheresGagnes(List<Article> listeArt, Utilisateur user) throws DalException{
+		for(Article art : dao.chercherEnchereRemportee(user)) listeArt.add(art);
+		return listeArt;
+	}
+
 	public Article getById(int id) throws DalException{
 		dao = DAOFactory.getArticleDAO();
 		try {
@@ -70,6 +85,7 @@ public class ArticleManager {
 		} catch (DalException e) {
 			throw new DalException("erreur chargement de l'article", e);
 		}
+
 	}
 	
 }

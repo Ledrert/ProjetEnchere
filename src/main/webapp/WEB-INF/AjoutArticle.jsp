@@ -20,7 +20,7 @@
 		</div>
 		<div>
 			<label for="description">Description :</label> <input type="text"
-				id="description" name="description" maxlength="30">
+				id="description" name="description" maxlength="300">
 		</div>
 
 		<label for="categorie">Catégorie </label> <select id="categorie" name="categorie">

@@ -19,7 +19,6 @@ import fr.eni.projetEnchere.dal.DalException;
 public class ServletSuppression extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -45,8 +44,6 @@ public class ServletSuppression extends HttpServlet {
 			System.out.println("erreur la méthode SupprimerUtilisateur()");
 			e.printStackTrace();
 		}
-		request.getRequestDispatcher("/enchere").forward(request, response);		
+		response.sendRedirect("/ProjetEnchere/enchere");	
 	}
-
-
 }

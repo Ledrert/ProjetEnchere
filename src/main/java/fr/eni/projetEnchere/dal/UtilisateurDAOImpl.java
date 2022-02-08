@@ -94,6 +94,7 @@ public class UtilisateurDAOImpl extends DAO implements UtilisateurDAO {
 					throw new DalException("Erreur sur la méthode Supprimer()", e);
 				} finally {
 				ConnectionProvider.seDeconnecter(cstmt);
+				seDeconnecter(cnx);		
 			}
 		}
 				

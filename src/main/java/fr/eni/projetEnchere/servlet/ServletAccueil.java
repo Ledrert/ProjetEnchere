@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import fr.eni.projetEnchere.bll.ArticleManager;
 import fr.eni.projetEnchere.bo.Article;
 import fr.eni.projetEnchere.bo.Utilisateur;
+import fr.eni.projetEnchere.dal.DAOFactory;
 import fr.eni.projetEnchere.dal.DalException;
 
 /**
@@ -55,16 +56,56 @@ public class ServletAccueil extends HttpServlet {
 		List<Article> articles = new ArrayList<Article>();
 		List<Article> listArtFiltre = null;
 		ArticleManager artM;
-		
-		System.out.println(request.getParameter("achat"));
-		if(request.getParameter("EncDebut") != null) {
-			//Enchères ouvertes
+		String radioF, enchDebut, enchEC, enchEnd, venteEC, venteNC, venteFin;
+		if(request.getParameter("radioFiltre") == null) {
+			radioF = "no";
+		} else {
+			radioF = request.getParameter("radioFiltre");
+		}
+		if(request.getParameter("EncDebut") == null) {
+			enchDebut = "no";
+		} else {
+			enchDebut = request.getParameter("EncDebut");
+		}
+		if(request.getParameter("MyEncEC") == null) {
+			enchEC = "no";
+		} else {
+			enchEC = request.getParameter("EncDebut");
+		}
+		if(request.getParameter("MyEncWin") == null) {
+			enchEnd = "no";
+		} else {
+			enchEnd = request.getParameter("EncDebut");
+		}
+		if(request.getParameter("MyVenteEC") == null) {
+			venteEC = "no";
+		} else {
+			venteEC = request.getParameter("EncDebut");
+		}
+		if(request.getParameter("MyVenteNC") == null) {
+			venteNC = "no";
+		} else {
+			venteNC = request.getParameter("EncDebut");
+		}
+		if(request.getParameter("MyVenteFin") == null) {
+			venteFin = "no";
+		} else {
+			venteFin = request.getParameter("EncDebut");
 		}
 		
 		try {
 			artM = ArticleManager.getInstance();
-			articles = artM.listerArticle();
-			listArtFiltre = filtrerListe(articles, request.getParameter("catSelect"), request.getParameter("keyword").trim().toLowerCase());
+			if(radioF.equals("no")) {
+				listArtFiltre = artM.listerArticle();
+			} else { 
+				HttpSession session = request.getSession();
+				Utilisateur user = (Utilisateur)session.getAttribute("user");
+				if(radioF.equals("vente")) {
+					listArtFiltre = filtrerVente(venteEC, venteNC, venteFin, user);
+				} else {
+					listArtFiltre = filtrerAchat(enchDebut, enchEC, enchEnd, user);
+			} }
+			listArtFiltre = filtrerListe(listArtFiltre, request.getParameter("catSelect"), request.getParameter("keyword").trim().toLowerCase());
 			
 		} catch (DalException e) {
 			// TODO Auto-generated catch block
@@ -92,35 +133,41 @@ public class ServletAccueil extends HttpServlet {
 		return listArtFiltre;
 	}
 	
-	private List<Article> filtrerAchat(List<Article> liste ,String begin, String ec, String win){
+	private List<Article> filtrerAchat(String begin, String ec, String win, Utilisateur user){
+		ArticleManager am;
 		List<Article> listArtFiltre = new ArrayList<Article>();
-		for(Article art : liste) {
-			if(begin != null) {
-				//tous les articles qui sont actuellement en cours d'enchères
-			}
-			if(ec != null) {
-				//A une enchère sur cette article dont la date d'enchère n'est pas terminé
-			}
-			if(win != null) {
-				//est l'acheteur de l'article
-			}
+		try {
+			am = ArticleManager.getInstance();
+				if(begin.equals("on")) {
+					listArtFiltre = am.encheresEnCours(listArtFiltre, user);
+				}
+				if(ec.equals("on")) {
+					//A une enchère sur cette article dont la date d'enchère n'est pas terminé
+					listArtFiltre = am.mesEncheresEnCours(listArtFiltre, user);
+				}
+				if(win.equals("on")) {
+					//est l'acheteur de l'article
+					listArtFiltre = am.mesEncheresGagnes(listArtFiltre, user);
+				}
+		} catch (DalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 		return listArtFiltre;
 	}
 	
-	private List<Article> filtrerVente(List<Article> liste ,String ec, String prep, String end){
+	private List<Article> filtrerVente(String ec, String prep, String end, Utilisateur user){
 		List<Article> listArtFiltre = new ArrayList<Article>();
-		for(Article art : liste) {
-			if(ec != null) {
+			if(ec.equals("on")) {
 				//les articles de l'utilisateur qui ont débuté mais qui ne sont pas terminés
 			}
-			if(prep != null) {
+			if(prep.equals("on")) {
 				//les articles de l'utilisateur qui n'ont pas commencés
 			}
-			if(end != null) {
+			if(end.equals("on")) {
 				//les articles de l'utilisateur dont l'enchère a terminé
 			}
-		}
 		return listArtFiltre;
 	}
 	
