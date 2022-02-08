@@ -1,11 +1,13 @@
 package fr.eni.projetEnchere.bll;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.sql.Date;
 import java.util.List;
 
 import fr.eni.projetEnchere.bo.Article;
 import fr.eni.projetEnchere.bo.Categorie;
+import fr.eni.projetEnchere.bo.Enchere;
 import fr.eni.projetEnchere.bo.Utilisateur;
 import fr.eni.projetEnchere.dal.ArticleDAO;
 import fr.eni.projetEnchere.dal.DAOFactory;
@@ -30,11 +32,23 @@ public class ArticleManager {
 		try {
 			listeCat = dao.listerCategorie();
 			listeArticles = dao.listerArticle();
+			verifierFinEnchere();
 		} catch (DalException e) {
 			throw new DalException("erreur chargement liste article", e);
 		}
 	}
 	
+	private void verifierFinEnchere() throws DalException {
+		Date now = new Date(Calendar.getInstance().getTime().getTime());
+		for(Article art : listeArticles) {
+			if(art.getDateFinEncheres().after(now)) {
+				Enchere vente = dao.dernierEncherisseur(art);
+				dao.updateFinEnchere(art, vente);
+				art.setUtilisateurAcheteur(vente.getNoEncherisseur());
+				art.setPrixVente(vente.getMontantEnchere());
+			}
+		}
+	}
 	
 	public void ajouterArticle(String article, String description, Categorie categorie, int prix, Date dateDebut, Date dateFin, Utilisateur utilisateur) throws DalException {
 			Article art = new Article(article, description, prix, dateDebut, dateFin, utilisateur, categorie);
