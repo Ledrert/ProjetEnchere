@@ -12,7 +12,7 @@ import java.util.List;
 
 import fr.eni.projetEnchere.bo.Utilisateur;
 
-public class UtilisateurDAOImpl implements UtilisateurDAO {
+public class UtilisateurDAOImpl extends DAO implements UtilisateurDAO {
 
 	private final static String SQL_INSERT_UTILISATEUR = "{ call dbo.insertUtilisateur(?,?,?,?,?,?,?,?,?,?,?,?) };";
 	private final static String SQL_UPDATE_UTILISATEUR = "UPDATE UTILISATEUR SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, "
@@ -49,6 +49,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			throw new DalException("Erreur SQL ajouterutilisateur()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(cstmt);
+			seDeconnecter(cnx);		
 		}
 	}
 	
@@ -74,6 +75,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 				throw new DalException("Erreur sur la méthode Modifier()", e);
 			} finally {
 				ConnectionProvider.seDeconnecter(pstmt);
+				seDeconnecter(cnx);		
 			}
 	}
 		
@@ -131,6 +133,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 			throw new DalException("Erreur sur la méthode SelectById()", e); 
 		} finally {
 			ConnectionProvider.seDeconnecter(pstmt);
+			seDeconnecter(cnx);		
 		}
 		return utilisateur;
 	}
@@ -191,7 +194,10 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 				}
 		} catch (SQLException e) {
 		throw new DalException("Erreur sur la méthode chercherPseudo()", e); 
-	} return pseudo;
+		} finally {
+			ConnectionProvider.seDeconnecter(pstmt);
+			seDeconnecter(cnx);		
+		} return pseudo;
 }
 	
 	@Override
@@ -222,7 +228,10 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 				}
 		} catch (SQLException e) {
 		throw new DalException("Erreur sur la méthode verifIdentifiants()", e); 
-	} return utilisateur;
+		} finally {
+			ConnectionProvider.seDeconnecter(pstmt);
+			seDeconnecter(cnx);		
+		} return utilisateur;
 }
 }
 
