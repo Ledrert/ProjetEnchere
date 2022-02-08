@@ -15,8 +15,6 @@
 <div class = infoVendeur>
 
 
-
-
 </div>
 
 </body>
