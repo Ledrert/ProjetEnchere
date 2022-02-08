@@ -134,7 +134,5 @@ public class ArticleManager {
 		} catch (DalException e) {
 			throw new DalException("erreur chargement de l'article", e);
 		}
-
 	}
-	
 }

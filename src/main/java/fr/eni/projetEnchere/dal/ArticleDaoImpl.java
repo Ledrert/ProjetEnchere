@@ -12,6 +12,7 @@ import java.util.List;
 
 import fr.eni.projetEnchere.bo.Article;
 import fr.eni.projetEnchere.bo.Categorie;
+import fr.eni.projetEnchere.bo.Enchere;
 import fr.eni.projetEnchere.bo.Utilisateur;
 
 public class ArticleDaoImpl extends DAO implements ArticleDAO {
@@ -36,6 +37,10 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 	private final static String MY_VENTE_END = "select * from article WHERE date_fin_encheres < getdate()and no_utilisateur = ?;";
 
 	private final static String SELECT_BY_ID = "SELECT * FROM article WHERE no_article =?;";
+	private final static String SELECT_ACHETEUR = "SELECT no_utilisateur, montant_enchere FROM enchere e INNER JOIN \r\n"
+			+ "(select no_article, MAX(date_enchere) as lastEnchere from enchere where no_article = ? group by no_article) m \r\n"
+			+ "ON e.no_article = m.no_article and e.date_enchere = m.lastEnchere;";
+	private final static String UPDATE_FIN_ENCHERE = "UPDATE article SET no_acheteur = ? AND prix_vente = ? WHERE no_article = ?;";
 	
 	@Override
 	public List<Article> listerArticle() throws DalException {
@@ -551,6 +556,52 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			seDeconnecter(cnx);
 		}
 		return art;
+	}
+	
+	@Override
+	public Enchere dernierEncherisseur(Article art) throws DalException {
+		Connection cnx = null;
+		PreparedStatement pst = null;	
+		ResultSet rs = null;
+		Enchere vente = null;
+		UtilisateurDAOImpl userDAO = new UtilisateurDAOImpl();
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pst = cnx.prepareStatement(SELECT_ACHETEUR);
+			pst.setInt(1, art.getNoArticle());
+			rs = pst.executeQuery();
+			if(rs.next()) {
+				Utilisateur user = userDAO.selectUtilisateurByiD(rs.getInt("no_utilisateur"));
+				int montant = rs.getInt("montant_enchere");
+			}
+		} catch (SQLException | DalException e) {
+			throw new DalException("Erreur sur la méthode dernierEncherisseur()", e); 
+		} finally {
+			ConnectionProvider.seDeconnecter(pst);
+			seDeconnecter(cnx);
+		}
+		return vente;
+	}
+	
+	@Override
+	public void updateFinEnchere(Article art, Enchere vente) throws DalException {
+		Connection cnx = null;
+		PreparedStatement pst = null;
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pst = cnx.prepareStatement(UPDATE_FIN_ENCHERE);
+			pst.setInt(1, vente.getNoEncherisseur().getNoUtilisateur());
+			pst.setInt(2, vente.getMontantEnchere());
+			pst.setInt(3, art.getNoArticle());
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			throw new DalException("Erreur sur la méthode updateFinEnchere()", e); 
+		} finally {
+			ConnectionProvider.seDeconnecter(pst);
+			seDeconnecter(cnx);
+		}
 	}
 }
 
