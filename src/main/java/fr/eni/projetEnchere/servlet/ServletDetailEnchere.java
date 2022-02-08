@@ -1,9 +1,7 @@
 package fr.eni.projetEnchere.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -17,8 +15,6 @@ import javax.servlet.http.HttpSession;
 import fr.eni.projetEnchere.bll.ArticleManager;
 import fr.eni.projetEnchere.bo.Article;
 import fr.eni.projetEnchere.bo.Utilisateur;
-import fr.eni.projetEnchere.dal.ArticleDAO;
-import fr.eni.projetEnchere.dal.ArticleDaoImpl;
 import fr.eni.projetEnchere.dal.DalException;
 
 /**

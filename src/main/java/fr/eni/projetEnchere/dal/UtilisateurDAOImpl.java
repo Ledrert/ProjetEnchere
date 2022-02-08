@@ -111,6 +111,7 @@ public class UtilisateurDAOImpl extends DAO implements UtilisateurDAO {
 			rs = pstmt.executeQuery();
 			if (rs.next()) {
 				utilisateur  = new Utilisateur();
+				utilisateur.setNoUtilisateur(index);
 				utilisateur.setPseudo(rs.getString("pseudo"));
 				utilisateur.setNom(rs.getString("nom"));
 				utilisateur.setPrenom(rs.getString("prenom"));

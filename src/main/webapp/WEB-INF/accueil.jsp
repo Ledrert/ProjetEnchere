@@ -85,7 +85,7 @@ function filtre(id) {
 <a id="nomArticle" href="detailEnchere?id=${article.getNoArticle()}">${article.getNomArticle() }</a>
 <p id="detailArticle">Prix : ${article.getPrixInitial() }</p>
 <p>Fin de l'enchère : ${article.getDateFinEncheres() }</p>
-<p>Vendeur : <a href="detailVendeur">${article.getUserVendeur().getPseudo() }</a></p>
+<p>Vendeur : <a href="detailVendeur?id=${article.getUserVendeur().getNoUtilisateur()}">${article.getUserVendeur().getPseudo() }</a></p>
 </div>
 </c:forEach>
 </div>
