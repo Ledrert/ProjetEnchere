@@ -96,23 +96,27 @@ public class ServletConnexion extends HttpServlet {
 		RequestDispatcher rd = null;
 		try {
 			um = UtilisateurManager.getInstance();
-			if (identifiant.contains("@")) { //Si c'est un mail
-				identifiant = um.chercherPseudo(identifiant); //Récupération du pseudo via le mail
-				if (identifiant.isEmpty()) { //N'a pas renvoyé de pseudo car pas de mail reconnu
-					response.sendRedirect("connexion?error=1");
-					return;
-				} else {
-					utilisateur = um.verifIdentifiants(identifiant, password); //récupère l'utilisateur lié
-				}
-			} else { //Si c'est un pseudo
-				utilisateur = um.verifIdentifiants(identifiant, password);
-				if (utilisateur == null) { //si pas d'utilisateur reconnu via le pseudo
+			if (identifiant.contains("@")) { // Si c'est un mail
+				identifiant = um.chercherPseudo(identifiant); // Récupération du pseudo via le mail
+				if (identifiant.isEmpty()) { // N'a pas renvoyé de pseudo car pas de mail reconnu
 					response.sendRedirect("connexion?error=1");
 					return;
 				}
 			}
-			HttpSession session = request.getSession();
-			session.setAttribute("user", utilisateur);
+
+			utilisateur = um.verifIdentifiants(identifiant, password);
+			if (password.isEmpty()) {
+				response.sendRedirect("connexion?error=1");
+				return;
+			} else if (utilisateur == null) { // si pas d'utilisateur reconnu via le pseudo
+				response.sendRedirect("connexion?error=1");
+				return;
+
+			} else {
+				HttpSession session = request.getSession();
+				session.setAttribute("user", utilisateur);
+			}
+
 		} catch (DalException e) {
 			e.printStackTrace();
 		}

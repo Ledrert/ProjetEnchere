@@ -1,7 +1,6 @@
 package fr.eni.projetEnchere.bll;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.sql.Date;
 import java.util.List;
 
@@ -77,6 +76,16 @@ public class ArticleManager {
 	public List<Article> mesEncheresGagnes(List<Article> listeArt, Utilisateur user) throws DalException{
 		for(Article art : dao.chercherEnchereRemportee(user)) listeArt.add(art);
 		return listeArt;
+	}
+
+	public Article getById(int id) throws DalException{
+		dao = DAOFactory.getArticleDAO();
+		try {
+			return dao.selectByID(id);
+		} catch (DalException e) {
+			throw new DalException("erreur chargement de l'article", e);
+		}
+
 	}
 	
 }

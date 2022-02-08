@@ -30,15 +30,17 @@
 			<option>Sport & Loisirs</option>
 		</select>
 
-		<!-- <form method="post" action="page.php" enctype="multipart/form-data">
+		<!--  <form method="post" action="page.php" enctype="multipart/form-data">
 			<label for="photo">Photo de l'article </label> <input type="file"
 				id="photo" name="photo" accept="image/png, image/jpeg">
 		</form> -->
 
 		<label for="prix">Mise à prix : </label> <input type="number"
 			id="prix" name="prix" min="1" max="100000"> 
-		<label for="prix">Début de l'enchère : </label> <input type="date" id="debut" name="debut"> 
-		<label for="prix">Fin de l'enchère : </label> <input type="date" id="fin" name="fin">
+		<label for="dateDebutEnchere">Début de l'enchère : </label>
+		 <input type="date" id="debut" name="debut" min="${today}"value="${today}"> 
+		<label for="dateFinEnchere">Fin de l'enchère : </label> 
+		<input type="date" id="fin" name="fin" min="${today}">
 
 	</div>
 

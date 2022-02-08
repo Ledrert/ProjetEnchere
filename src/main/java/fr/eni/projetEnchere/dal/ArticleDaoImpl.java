@@ -14,7 +14,7 @@ import fr.eni.projetEnchere.bo.Article;
 import fr.eni.projetEnchere.bo.Categorie;
 import fr.eni.projetEnchere.bo.Utilisateur;
 
-public class ArticleDaoImpl implements ArticleDAO {
+public class ArticleDaoImpl extends DAO implements ArticleDAO {
 
 	private final static String SELECT_ALL = "SELECT * FROM article ;";
 	private final static String SELECT_CATEGORIE = "SELECT * FROM categorie;";
@@ -29,6 +29,8 @@ public class ArticleDaoImpl implements ArticleDAO {
 			+ "and no_article not in (select no_article from enchere where no_utilisateur = ?);";
 	private final static String MY_ENCH_EC = "select a.* from enchere e JOIN article a on e.no_article = a.no_article WHERE a.date_fin_encheres > getDate() and e.no_utilisateur = ?;";
 	private final static String MY_ENCH_WIN = "select * from article WHERE no_acheteur = ?;";
+
+	private final static String SELECT_BY_ID = "SELECT * FROM article WHERE no_article =?;";
 	
 	@Override
 	public List<Article> listerArticle() throws DalException {
@@ -46,6 +48,7 @@ public class ArticleDaoImpl implements ArticleDAO {
 			
 			while(rs.next()) {
 				art = new Article();
+				art.setNoArticle(rs.getInt("no_article"));
 				art.setNomArticle(rs.getString("nom_article"));
 				art.setDescription(rs.getString("description"));
 				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
@@ -247,7 +250,7 @@ public class ArticleDaoImpl implements ArticleDAO {
 		}
 		return listeArticle;
 	}
-	
+
 	@Override
 	public List<Article> listerEnchereEnCours(Utilisateur user) throws DalException{
 		Connection cnx = null;
@@ -356,11 +359,40 @@ public class ArticleDaoImpl implements ArticleDAO {
 		return listeArticle;
 	}
 	
-	private void seDeconnecter(Connection cnx) throws DalException {
+
+	public Article selectByID(int no_article) throws DalException {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;	
+		ResultSet rs = null;
+		Article art = null;
 		try {
-			cnx.close();
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(SELECT_BY_ID);
+			pstmt.setInt(1, no_article);
+			rs = pstmt.executeQuery();
+			
+			UtilisateurDAOImpl userDAO = new UtilisateurDAOImpl();
+			
+			if (rs.next()) {
+				art = new Article();
+				art.setNoArticle(rs.getInt("no_article"));
+				art.setNomArticle(rs.getString("nom_article"));
+				art.setDescription(rs.getString("description"));
+				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
+				art.setDateFinEncheres(rs.getDate("date_fin_encheres"));
+				art.setPrixInitial(rs.getInt("prix_initial"));
+				art.setPrixVente(rs.getInt("prix_vente"));
+				art.setUtilisateurVendeur(userDAO.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
+				art.setUtilisateurAcheteur(userDAO.selectUtilisateurByiD(rs.getInt("no_acheteur")));
+				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
+			}
 		} catch (SQLException e) {
-			throw new DalException("Erreur déconnexion", e);
+			throw new DalException("Erreur sur la méthode select art by id", e); 
+		} finally {
+			ConnectionProvider.seDeconnecter(pstmt);
+			seDeconnecter(cnx);
 		}
+		return art;
 	}
 }
+

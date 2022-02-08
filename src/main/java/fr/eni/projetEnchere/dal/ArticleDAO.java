@@ -15,8 +15,11 @@ public interface ArticleDAO {
 	public void modifierArticle(Article art) throws DalException;
 	public void ajouterArticle(Article art) throws DalException;
 	public void supprimerArticle(int index) throws DalException;
+
 	public List<Article> listerEnchereEnCours(Utilisateur user) throws DalException;
 	public List<Article> chercherVenteEnCours(Utilisateur user) throws DalException;
 	List<Article> listerAchats(Utilisateur user) throws DalException;
 	List<Article> chercherEnchereRemportee(Utilisateur user) throws DalException;
+
+	public Article selectByID(int no_article) throws DalException;
 }
