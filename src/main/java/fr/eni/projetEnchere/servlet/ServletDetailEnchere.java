@@ -61,7 +61,6 @@ public class ServletDetailEnchere extends HttpServlet {
 			
 			int id =  Integer.valueOf(request.getParameter("id"));
 			Article article = ArticleManager.getInstance().getById(id);
-			
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/DetailEnchere.jsp");
 			request.setAttribute("listMenu", menu);
 			request.setAttribute("article", article);

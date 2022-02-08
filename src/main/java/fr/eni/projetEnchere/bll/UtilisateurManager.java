@@ -58,6 +58,15 @@ public class UtilisateurManager {
 		dao.supprimerUtilisateur(utilisateur);
 		listeUser.remove(utilisateur.getNoUtilisateur()-1);
 	}
+	
+	public Utilisateur getById(int id) throws DalException{
+		dao = DAOFactory.getUtilisateurDAO();
+		try {
+			return dao.selectUtilisateurByiD(id);
+		} catch (DalException e) {
+			throw new DalException("erreur chargement de l'utilisateur", e);
+		}
+	}
 
 
 }
