@@ -63,7 +63,6 @@ public class ServletAfficherProfil extends HttpServlet {
 	}
 	
 	
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

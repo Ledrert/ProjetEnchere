@@ -12,7 +12,6 @@
 <jsp:include page="jsp/header.jsp"></jsp:include>
 <h1>Informations du profil :</h1>
 
-
 <div class="afficherProfil">
 Pseudo : ${requestScope.user.pseudo} <br>
 Nom : ${requestScope.user.nom } <br>

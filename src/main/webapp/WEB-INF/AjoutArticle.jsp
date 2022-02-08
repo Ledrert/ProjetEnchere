@@ -61,7 +61,6 @@
       	<button class="button" type="submit" formmethod="post" formaction="vendre">Enregistrer</button></a>
 	<br>
 
-	
 		<button type="submit" name="annuler" formmethod="get"
 			formaction="enchere">Retour vers l'accueil</button>
 			
