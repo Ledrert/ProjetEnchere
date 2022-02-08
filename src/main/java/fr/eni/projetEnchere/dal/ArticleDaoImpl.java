@@ -25,10 +25,15 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 	private final static String DELETE_ARTICLE = "DELETE FROM article WHERE no_article = ?;";
 	
 	private final static String SEARCH_ACHATS = "select * from article where no_utilisateur != ?;";
-	private final static String ENCH_EC = "select * from article where date_debut_encheres < getdate() and date_fin_encheres > getdate() \r\n"
+	private final static String ENCH_EC = "select * from article where date_debut_encheres < getdate() and date_fin_encheres > getdate() and no_utilisateur != ? \r\n"
 			+ "and no_article not in (select no_article from enchere where no_utilisateur = ?);";
-	private final static String MY_ENCH_EC = "select a.* from enchere e JOIN article a on e.no_article = a.no_article WHERE a.date_fin_encheres > getDate() and e.no_utilisateur = ?;";
+	private final static String MY_ENCH_EC = "select a.* from enchere e JOIN article a on e.no_article = a.no_article WHERE a.date_fin_encheres > getDate() and e.no_utilisateur = ? and a.no_utilisateur != ?;";
 	private final static String MY_ENCH_WIN = "select * from article WHERE no_acheteur = ?;";
+	
+	private final static String SEARCH_VENTES = "select * from article where no_utilisateur = ?;";
+	private final static String VENTE_EC = "select * from article where date_debut_encheres < getdate() and date_fin_encheres > getdate() and no_utilisateur = ?;";
+	private final static String MY_VENTE_PREP = "select * from article WHERE date_debut_encheres > getdate() and no_utilisateur = ?;";
+	private final static String MY_VENTE_END = "select * from article WHERE date_fin_encheres < getdate()and no_utilisateur = ?;";
 
 	private final static String SELECT_BY_ID = "SELECT * FROM article WHERE no_article =?;";
 	
@@ -252,7 +257,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 	}
 
 	@Override
-	public List<Article> listerEnchereEnCours(Utilisateur user) throws DalException{
+	public List<Article> listerEnchereOuvertes(Utilisateur user) throws DalException{
 		Connection cnx = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -264,6 +269,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			cnx = ConnectionProvider.getConnection();
 			pst = cnx.prepareStatement(ENCH_EC);
 			pst.setInt(1, user.getNoUtilisateur());
+			pst.setInt(2, user.getNoUtilisateur());
 			rs = pst.executeQuery();
 			while(rs.next()) {
 				art = new Article();
@@ -288,7 +294,43 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 	}
 	
 	@Override
-	public List<Article> chercherVenteEnCours(Utilisateur user) throws DalException {
+	public List<Article> listerEnchereEnCours(Utilisateur user) throws DalException{
+		Connection cnx = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		List<Article> listeArticle = new ArrayList<Article>();
+		Article art;
+		UtilisateurDAOImpl userDao = new UtilisateurDAOImpl();
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pst = cnx.prepareStatement(MY_ENCH_EC);
+			pst.setInt(1, user.getNoUtilisateur());
+			pst.setInt(2, user.getNoUtilisateur());
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				art = new Article();
+				art.setNomArticle(rs.getString("nom_article"));
+				art.setDescription(rs.getString("description"));
+				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
+				art.setDateFinEncheres(rs.getDate("date_fin_encheres"));
+				art.setPrixInitial(rs.getInt("prix_initial"));
+				art.setPrixVente(rs.getInt("prix_vente"));
+				art.setUtilisateurVendeur(userDao.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
+				art.setUtilisateurAcheteur(userDao.selectUtilisateurByiD(rs.getInt("no_acheteur")));
+				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
+				listeArticle.add(art);
+			}
+		} catch (SQLException | DalException e) {
+			throw new DalException("Erreur SQL listerEnchereEnCours()", e);
+		} finally {
+			ConnectionProvider.seDeconnecter(pst);
+			seDeconnecter(cnx);
+		}
+		return listeArticle;
+	}
+	@Override
+	public List<Article> chercherEnchereEnCours(Utilisateur user) throws DalException {
 		Connection cnx = null;
 		PreparedStatement pst = null;
 		ResultSet rs = null;
@@ -359,7 +401,150 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 		return listeArticle;
 	}
 	
+	@Override
+	public List<Article> listerVentes(Utilisateur user) throws DalException{
+		Connection cnx = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		List<Article> listeArticle = new ArrayList<Article>();
+		Article art;
+		UtilisateurDAOImpl userDao = new UtilisateurDAOImpl();
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pst = cnx.prepareStatement(SEARCH_VENTES);
+			pst.setInt(1, user.getNoUtilisateur());
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				art = new Article();
+				art.setNomArticle(rs.getString("nom_article"));
+				art.setDescription(rs.getString("description"));
+				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
+				art.setDateFinEncheres(rs.getDate("date_fin_encheres"));
+				art.setPrixInitial(rs.getInt("prix_initial"));
+				art.setPrixVente(rs.getInt("prix_vente"));
+				art.setUtilisateurVendeur(userDao.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
+				art.setUtilisateurAcheteur(userDao.selectUtilisateurByiD(rs.getInt("no_acheteur")));
+				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
+				listeArticle.add(art);
+			}
+		} catch (SQLException | DalException e) {
+			throw new DalException("Erreur SQL listerVentes()", e);
+		} finally {
+			ConnectionProvider.seDeconnecter(pst);
+			seDeconnecter(cnx);
+		}
+		return listeArticle;
+	}
+	
+	@Override
+	public List<Article> listerVentesEnCours(Utilisateur user) throws DalException{
+		Connection cnx = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		List<Article> listeArticle = new ArrayList<Article>();
+		Article art;
+		UtilisateurDAOImpl userDao = new UtilisateurDAOImpl();
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pst = cnx.prepareStatement(VENTE_EC);
+			pst.setInt(1, user.getNoUtilisateur());
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				art = new Article();
+				art.setNomArticle(rs.getString("nom_article"));
+				art.setDescription(rs.getString("description"));
+				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
+				art.setDateFinEncheres(rs.getDate("date_fin_encheres"));
+				art.setPrixInitial(rs.getInt("prix_initial"));
+				art.setPrixVente(rs.getInt("prix_vente"));
+				art.setUtilisateurVendeur(userDao.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
+				art.setUtilisateurAcheteur(userDao.selectUtilisateurByiD(rs.getInt("no_acheteur")));
+				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
+				listeArticle.add(art);
+			}
+		} catch (SQLException | DalException e) {
+			throw new DalException("Erreur SQL listerAchats()", e);
+		} finally {
+			ConnectionProvider.seDeconnecter(pst);
+			seDeconnecter(cnx);
+		}
+		return listeArticle;
+	}
 
+	@Override
+	public List<Article> listerVentesNonDebut(Utilisateur user) throws DalException{
+		Connection cnx = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		List<Article> listeArticle = new ArrayList<Article>();
+		Article art;
+		UtilisateurDAOImpl userDao = new UtilisateurDAOImpl();
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pst = cnx.prepareStatement(MY_VENTE_PREP);
+			pst.setInt(1, user.getNoUtilisateur());
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				art = new Article();
+				art.setNomArticle(rs.getString("nom_article"));
+				art.setDescription(rs.getString("description"));
+				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
+				art.setDateFinEncheres(rs.getDate("date_fin_encheres"));
+				art.setPrixInitial(rs.getInt("prix_initial"));
+				art.setPrixVente(rs.getInt("prix_vente"));
+				art.setUtilisateurVendeur(userDao.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
+				art.setUtilisateurAcheteur(userDao.selectUtilisateurByiD(rs.getInt("no_acheteur")));
+				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
+				listeArticle.add(art);
+			}
+		} catch (SQLException | DalException e) {
+			throw new DalException("Erreur SQL listerVentesNonDebut()", e);
+		} finally {
+			ConnectionProvider.seDeconnecter(pst);
+			seDeconnecter(cnx);
+		}
+		return listeArticle;
+	}
+	
+	@Override
+	public List<Article> listerVentesTerminees(Utilisateur user) throws DalException{
+		Connection cnx = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		List<Article> listeArticle = new ArrayList<Article>();
+		Article art;
+		UtilisateurDAOImpl userDao = new UtilisateurDAOImpl();
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pst = cnx.prepareStatement(MY_VENTE_END);
+			pst.setInt(1, user.getNoUtilisateur());
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				art = new Article();
+				art.setNomArticle(rs.getString("nom_article"));
+				art.setDescription(rs.getString("description"));
+				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
+				art.setDateFinEncheres(rs.getDate("date_fin_encheres"));
+				art.setPrixInitial(rs.getInt("prix_initial"));
+				art.setPrixVente(rs.getInt("prix_vente"));
+				art.setUtilisateurVendeur(userDao.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
+				art.setUtilisateurAcheteur(userDao.selectUtilisateurByiD(rs.getInt("no_acheteur")));
+				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
+				listeArticle.add(art);
+			}
+		} catch (SQLException | DalException e) {
+			throw new DalException("Erreur SQL listerVentesTerminees()", e);
+		} finally {
+			ConnectionProvider.seDeconnecter(pst);
+			seDeconnecter(cnx);
+		}
+		return listeArticle;
+	}
+	
 	public Article selectByID(int no_article) throws DalException {
 		Connection cnx = null;
 		PreparedStatement pstmt = null;	
