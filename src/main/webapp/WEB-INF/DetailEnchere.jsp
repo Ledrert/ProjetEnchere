@@ -10,7 +10,7 @@
 <body>
 <jsp:include page="jsp/header.jsp"></jsp:include>
 
-<h1>Détails vente</h1>
+<h1>Détail vente</h1>
 
 <div class= infoEnchere>
 <p id="nomArticle">${article.nomArticle}</p>
@@ -30,8 +30,9 @@
 
 
        
-     <form><button type="submit" name="retour" formmethod="get" formaction="enchere">Retour vers l'accueil
-</button></form>
+<form><button type="submit" name="modifier" formmethod="get" formaction="modifArticle">Modifier mon article</button></form>
+<form><button type="submit" name="retour" formmethod="get" formaction="enchere">Retour vers l'accueil</button></form>
+
 
 
 </body>
