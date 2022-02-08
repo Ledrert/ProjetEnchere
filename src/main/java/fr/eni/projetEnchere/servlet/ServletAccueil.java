@@ -139,7 +139,7 @@ public class ServletAccueil extends HttpServlet {
 		try {
 			am = ArticleManager.getInstance();
 				if(begin.equals("on")) {
-					listArtFiltre = am.encheresEnCours(listArtFiltre, user);
+					listArtFiltre = am.encheresOuvertes(listArtFiltre, user);
 				}
 				if(ec.equals("on")) {
 					//A une enchère sur cette article dont la date d'enchère n'est pas terminé
