@@ -69,6 +69,7 @@ public class ServletDetailEnchere extends HttpServlet {
 			rd.forward(request, response);
 			
 		} catch (DalException e) {
+			e.printStackTrace();
 			response.sendRedirect("/ProjetEnchere/");
 			return;
 		}

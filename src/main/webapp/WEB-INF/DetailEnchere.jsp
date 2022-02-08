@@ -16,18 +16,20 @@
 <div class= infoEnchere>
 <p id="detailEnchere">${article.nomArticle}</p>
 <p id="detailEnchere">Description : ${article.description}</p>
-<p id="detailEnchere">Catégorie : ${article.nom_categorie}</p>
+<p id="detailEnchere">Catégorie : ${article.categorie.libelle}</p>
+<p id="detailEnchere">Meilleure offre : ${article.prixVente}</p>
+<p id="detailEnchere">Mise à prix : ${article.prixInitial}</p>
+<p id="detailEnchere">Fin de l'enchère : ${article.dateFinEncheres}</p>
+<p id="detailEnchere">Retrait : ${article.userVendeur.rue} ${article.userVendeur.codePostal} ${article.userVendeur.ville}</p>
+<p id="detailEnchere">Vendeur : ${article.userVendeur.pseudo}</p>
+<label for="prix">Ma proposition : </label>
+<input type="number" id="prix" name="prix" min="1" max="100000">
+       
 
-
-
-
-<p id="detailArticle">Prix : ${article.prixInitial }</p>
 </div>
 
 
-<label for="prix">Ma proposition : </label>
-<input type="number" id="prix" name="prix"
-       min="1" max="100000">
+
        
      <form><button type="submit" name="retour" formmethod="get" formaction="enchere">Retour vers l'accueil
 </button></form>
