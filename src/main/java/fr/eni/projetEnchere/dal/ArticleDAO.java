@@ -17,14 +17,14 @@ public interface ArticleDAO {
 	public void supprimerArticle(int index) throws DalException;
 
 	public List<Article> listerEnchereEnCours(Utilisateur user) throws DalException;
-	public List<Article> chercherEnchereEnCours(Utilisateur user) throws DalException;
-	List<Article> listerAchats(Utilisateur user) throws DalException;
-	List<Article> chercherEnchereRemportee(Utilisateur user) throws DalException;
+	public List<Article> listerAchats(Utilisateur user) throws DalException;
+	public List<Article> chercherEnchereRemportee(Utilisateur user) throws DalException;
+	public List<Article> listerEnchereOuvertes(Utilisateur user) throws DalException;
 
 	public Article selectByID(int no_article) throws DalException;
-	List<Article> listerVentes(Utilisateur user) throws DalException;
-	List<Article> listerVentesEnCours(Utilisateur user) throws DalException;
-	List<Article> listerVentesNonDebut(Utilisateur user) throws DalException;
-	List<Article> listerVentesTerminees(Utilisateur user) throws DalException;
-	List<Article> listerEnchereOuvertes(Utilisateur user) throws DalException;
+	public List<Article> listerVentes(Utilisateur user) throws DalException;
+	public List<Article> listerVentesEnCours(Utilisateur user) throws DalException;
+	public List<Article> listerVentesNonDebut(Utilisateur user) throws DalException;
+	public List<Article> listerVentesTerminees(Utilisateur user) throws DalException;
+	
 }

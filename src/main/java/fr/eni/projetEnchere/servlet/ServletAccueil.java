@@ -138,6 +138,9 @@ public class ServletAccueil extends HttpServlet {
 		List<Article> listArtFiltre = new ArrayList<Article>();
 		try {
 			am = ArticleManager.getInstance();
+			if(begin.equals("no") & ec.equals("no") & win.equals("no")) {
+				listArtFiltre = am.mesAchats(user);
+			} else {
 				if(begin.equals("on")) {
 					listArtFiltre = am.encheresOuvertes(listArtFiltre, user);
 				}
@@ -149,9 +152,7 @@ public class ServletAccueil extends HttpServlet {
 					//est l'acheteur de l'article
 					listArtFiltre = am.mesEncheresGagnes(listArtFiltre, user);
 				}
-				if(begin.equals("no") & ec.equals("no") & win.equals("no")) {
-					listArtFiltre = am.mesAchats(listArtFiltre, user);
-				}
+			}
 		} catch (DalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -165,20 +166,21 @@ public class ServletAccueil extends HttpServlet {
 		List<Article> listArtFiltre = new ArrayList<Article>();
 		try {
 			am = ArticleManager.getInstance();
-			if(ec.equals("on")) {
-				//les articles de l'utilisateur qui ont débuté mais qui ne sont pas terminés
-				listArtFiltre = am.mesVentesEnCours(listArtFiltre, user);
-			}
-			if(prep.equals("on")) {
-				//les articles de l'utilisateur qui n'ont pas commencés
-				listArtFiltre = am.mesVentesNonDebutees(listArtFiltre, user);
-			}
-			if(end.equals("on")) {
-				//les articles de l'utilisateur dont l'enchère a terminé
-				listArtFiltre = am.mesVentesTerminees(listArtFiltre, user);
-			}
 			if(prep.equals("no") & ec.equals("no") & end.equals("no")) {
-				listArtFiltre = am.mesVentes(listArtFiltre, user);
+				listArtFiltre = am.mesVentes(user);
+			} else {
+				if(ec.equals("on")) {
+					//les articles de l'utilisateur qui ont débuté mais qui ne sont pas terminés
+					listArtFiltre = am.mesVentesEnCours(listArtFiltre, user);
+				}
+				if(prep.equals("on")) {
+					//les articles de l'utilisateur qui n'ont pas commencés
+					listArtFiltre = am.mesVentesNonDebutees(listArtFiltre, user);
+				}
+				if(end.equals("on")) {
+					//les articles de l'utilisateur dont l'enchère a terminé
+					listArtFiltre = am.mesVentesTerminees(listArtFiltre, user);
+				}
 			}
 		} catch (DalException e) {
 			// TODO Auto-generated catch block

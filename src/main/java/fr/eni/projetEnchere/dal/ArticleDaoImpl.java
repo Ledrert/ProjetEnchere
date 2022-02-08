@@ -329,41 +329,6 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 		}
 		return listeArticle;
 	}
-	@Override
-	public List<Article> chercherEnchereEnCours(Utilisateur user) throws DalException {
-		Connection cnx = null;
-		PreparedStatement pst = null;
-		ResultSet rs = null;
-		List<Article> listeArticle = new ArrayList<Article>();
-		Article art;
-		UtilisateurDAOImpl userDao = new UtilisateurDAOImpl();
-		
-		try {
-			cnx = ConnectionProvider.getConnection();
-			pst = cnx.prepareStatement(MY_ENCH_EC);
-			pst.setInt(1, user.getNoUtilisateur());
-			rs = pst.executeQuery();
-			while(rs.next()) {
-				art = new Article();
-				art.setNomArticle(rs.getString("nom_article"));
-				art.setDescription(rs.getString("description"));
-				art.setDateDebutEncheres(rs.getDate("date_debut_encheres"));
-				art.setDateFinEncheres(rs.getDate("date_fin_encheres"));
-				art.setPrixInitial(rs.getInt("prix_initial"));
-				art.setPrixVente(rs.getInt("prix_vente"));
-				art.setUtilisateurVendeur(userDao.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
-				art.setUtilisateurAcheteur(userDao.selectUtilisateurByiD(rs.getInt("no_acheteur")));
-				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
-				listeArticle.add(art);
-			}
-		} catch (SQLException | DalException e) {
-			throw new DalException("Erreur SQL chercherVenteEnCours()", e);
-		} finally {
-			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
-		}
-		return listeArticle;
-	}
 	
 	@Override
 	public List<Article> chercherEnchereRemportee(Utilisateur user) throws DalException {
