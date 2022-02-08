@@ -30,7 +30,7 @@
 
 
        
-<form><button type="submit" name="modifier" formmethod="get" formaction="modifArticle">Modifier mon article</button></form>
+<a id="detailEnchere" href="modifArticle?id=${article.getNoArticle()}">>Modifier mon article</button></a>
 <form><button type="submit" name="retour" formmethod="get" formaction="enchere">Retour vers l'accueil</button></form>
 
 
