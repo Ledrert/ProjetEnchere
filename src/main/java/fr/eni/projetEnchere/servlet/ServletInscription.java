@@ -56,6 +56,5 @@ public class ServletInscription extends HttpServlet {
 			e.printStackTrace();
 		}
 		response.sendRedirect("/ProjetEnchere/enchere");
-		
 	}
 }

@@ -19,7 +19,6 @@ import fr.eni.projetEnchere.dal.DalException;
 public class ServletSuppression extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
