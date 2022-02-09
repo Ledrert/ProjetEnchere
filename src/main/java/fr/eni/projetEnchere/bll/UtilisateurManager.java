@@ -47,6 +47,7 @@ public class UtilisateurManager {
 	
 	public Utilisateur verifIdentifiants(String pseudo, String password) throws DalException {
 		return dao.verifIdentifiants(pseudo, password);
+		
 	}
 
 	public void ModifierUtilisateur(Utilisateur utilisateur) throws DalException {
@@ -68,8 +69,24 @@ public class UtilisateurManager {
 		}
 	}
 
-
+	public boolean verifPseudoExist (String pseudo) throws DalException {
+		dao = DAOFactory.getUtilisateurDAO();
+		for (Utilisateur user : listeUser)
+			if (pseudo.equals(user.getPseudo())) {
+				return true;
+			}
+		return false;
+		}
+	
+	public boolean verifEmailExist (String email) throws DalException {
+		dao = DAOFactory.getUtilisateurDAO();
+		for (Utilisateur user : listeUser)
+			if (email.equals(user.getEmail())) {
+				return true;
+			}
+		return false;
+		}
+	
+	
+	
 }
-
-
-
