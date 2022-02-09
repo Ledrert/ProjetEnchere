@@ -1,6 +1,5 @@
 package fr.eni.projetEnchere.bo;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 public class Enchere {
@@ -21,7 +20,6 @@ public class Enchere {
         this.dateEnchere = dateEnchere;
         this.montantEnchere = montantEnchere;
     }
-
     
     //Getters and Setters
 	public Utilisateur getNoEncherisseur() {

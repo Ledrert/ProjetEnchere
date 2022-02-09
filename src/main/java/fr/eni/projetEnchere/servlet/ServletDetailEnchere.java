@@ -117,8 +117,6 @@ public class ServletDetailEnchere extends HttpServlet {
 			
 		}
 		response.sendRedirect("/ProjetEnchere/");
-		
-		
 	}
 
 }
