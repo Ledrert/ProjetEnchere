@@ -77,6 +77,8 @@ function filtre(id) {
 </div>
 </c:otherwise>
 </c:choose>
+<button type="submit" name="annuler" formmethod="get"
+			formaction="enchere">Actualiser les filtres</button>
 </form>
 <div class="listEnchere">
 <c:forEach var="article" items="${listeArt}"> <!-- Pour chaque enchère : une case  -->
