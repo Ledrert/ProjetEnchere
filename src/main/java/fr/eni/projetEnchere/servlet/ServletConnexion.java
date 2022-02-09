@@ -100,4 +100,5 @@ public class ServletConnexion extends HttpServlet {
 		}
 		response.sendRedirect("/ProjetEnchere/enchere");
 	}
+	
 }
