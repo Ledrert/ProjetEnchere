@@ -81,14 +81,13 @@
 	</div>
 </div>
     <div class="buttonForm">
-    	 
       	<button type="submit" name="modification" formmethod="post" formaction="modifProfil">Modifier</button>					
 		<button type="submit" name="suppression" formmethod="get" formaction="SuppressionProfil">Supprimer mon compte</button>
-		
-		
 		</div>
-	
 </form>	
+<form><div class="buttonForm">
+<button type="submit" name="annuler" formmethod="get" formaction="enchere">Annuler</button>					
+</div></form>
 </main>
 
 <%-- 	<%@ include file="/WEB-INF/jsp/footer.jsp" %> --%> </body>
