@@ -1,8 +1,10 @@
 package fr.eni.projetEnchere.servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.Calendar;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -87,7 +89,34 @@ public class ServletDetailEnchere extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
+		Date dateEnchereSQL = new Date(Calendar.getInstance().getTime().getTime());
+
+		//recupérer session
+		HttpSession session = request.getSession();
+		//récupérer utilisateur inscrit dans la session -> récupérer id : utiliser.getNoUtilisateur
+		Utilisateur utilisateur = (Utilisateur) session.getAttribute("user");
+
+		Enchere enc = new Enchere();
+		enc.setNoEncherisseur(utilisateur);
+		enc.setDateEnchere(dateEnchereSQL);		
+		int montantEnchere = Integer.parseInt(request.getParameter("prix"));
+		enc.setMontantEnchere(montantEnchere);
+		int noArt = Integer.valueOf(request.getParameter("noArt"));
+		
+
+		try {
+			ArticleManager am = ArticleManager.getInstance();
+			enc.setArticleVendu(am.getById(noArt));
+			am.ajouterEnchere(enc);
+						
+			
+		} catch (DalException e) {
+			e.printStackTrace();
+			
+		}
+		response.sendRedirect("/detailEnchere");
+		
+		
 	}
 
 }

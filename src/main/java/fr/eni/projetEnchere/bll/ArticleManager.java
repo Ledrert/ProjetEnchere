@@ -145,4 +145,8 @@ public class ArticleManager {
 	public void ajoutRetrait(Retrait ret) throws DalException {
 		dao.ajoutRetrait(ret);
 	}
+	
+	public void ajouterEnchere(Enchere enc) throws DalException {
+		dao.ajoutEnchere(enc);
+		}
 }
