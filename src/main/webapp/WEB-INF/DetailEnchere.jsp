@@ -43,6 +43,5 @@
 <br>
 <form><button type="submit" name="retour" formmethod="get" formaction="enchere">Retour vers l'accueil</button></form> 
 </div>
-
 </body>
 </html>

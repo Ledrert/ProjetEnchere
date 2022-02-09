@@ -78,6 +78,12 @@ public class ArticleManager {
 		return null;
 	}
 	
+	public Enchere getDernierEnchere(Article art) throws DalException {
+		return dao.dernierEncherisseur(art);
+	}
+	
+	
+	
 	public List<Article> mesAchats(Utilisateur user) throws DalException {
 		return dao.listerAchats(user);
 	}

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.projetEnchere.bll.ArticleManager;
 import fr.eni.projetEnchere.bo.Article;
+import fr.eni.projetEnchere.bo.Enchere;
 import fr.eni.projetEnchere.bo.Utilisateur;
 import fr.eni.projetEnchere.dal.DalException;
 
@@ -39,7 +40,6 @@ public class ServletDetailEnchere extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> menu = new HashMap<>();
 		HttpSession session = request.getSession();
-		
 			Date today = java.sql.Date.valueOf(LocalDate.now());
 			request.setAttribute("today", today);
 		
@@ -60,13 +60,20 @@ public class ServletDetailEnchere extends HttpServlet {
 		}
 		
 		try {
-			
+			ArticleManager am = ArticleManager.getInstance();
 			int id =  Integer.valueOf(request.getParameter("id"));
-			Article article = ArticleManager.getInstance().getById(id);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/DetailEnchere.jsp");
+			Article article = am.getById(id);
+			Enchere enc = am.getDernierEnchere(article);
+			if(enc == null) {
+				enc = new Enchere();
+				enc.setMontantEnchere(article.getPrixInitial());
+				enc.setNoEncherisseur(article.getUserVendeur());
+			}
+			request.setAttribute("enchere", enc);
 			request.setAttribute("listMenu", menu);
 			request.setAttribute("article", article);
 			request.setAttribute("liensMenu", menu.keySet());
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/DetailEnchere.jsp");
 			rd.forward(request, response);
 			
 		} catch (DalException e) {
