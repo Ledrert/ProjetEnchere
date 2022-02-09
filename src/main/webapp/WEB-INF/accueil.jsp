@@ -51,15 +51,15 @@ function loadFiltre(){
 <div id="advSearch">
 <div id="achatsSearch">
 <input type="radio" id="RdAchat" name="radioFiltre" value="achat" onclick="filtre('achat')" ${ckAchat}><label for="RdAchat">Achats</label><ul id="listeSearch">
-<li><input type="checkbox" id="EncDebut" name="EncDebut"><label for="EncDebut">Enchères ouvertes</label></li>
-<li><input type="checkbox" id="MyEncEC" name="MyEncEC"><label for="MyEncEC">Mes enchères en cours</label></li>
-<li><input type="checkbox" id="MyEncWin" name="MyEncWin"><label for="MyEncWin">Mes enchères remportées</label></li>
+<li><input type="checkbox" id="EncDebut" name="EncDebut"${ckEncDeb}><label for="EncDebut">Enchères ouvertes</label></li>
+<li><input type="checkbox" id="MyEncEC" name="MyEncEC"${ckEncEC}><label for="MyEncEC">Mes enchères en cours</label></li>
+<li><input type="checkbox" id="MyEncWin" name="MyEncWin"${ckEncWin}><label for="MyEncWin">Mes enchères remportées</label></li>
 </ul></div>
 <div id="mesVentesSearch">
 <input type="radio" id="RdVente" name="radioFiltre" value="vente" onclick="filtre('vente')" ${ckVente}><label for="RdVente">Mes ventes</label><ul id="listeSearch">
-<li><input type="checkbox" id="MyVenteEC" name="MyVenteEC" disabled="disabled"><label for="MyVenteEC">Mes ventes en cours</label></li>
-<li><input type="checkbox" id="MyVenteNC" name="MyVenteNC" disabled="disabled"><label for="MyVenteNC">ventes non débutées</label></li>
-<li><input type="checkbox" id="MyVenteFin" name="MyVenteFin" disabled="disabled"><label for="MyVenteFin">ventes terminées</label></li>
+<li><input type="checkbox" id="MyVenteEC" name="MyVenteEC" disabled="disabled"${ckVEC}><label for="MyVenteEC">Mes ventes en cours</label></li>
+<li><input type="checkbox" id="MyVenteNC" name="MyVenteNC" disabled="disabled"${ckVNC}><label for="MyVenteNC">ventes non débutées</label></li>
+<li><input type="checkbox" id="MyVenteFin" name="MyVenteFin" disabled="disabled"${ckVEnd}><label for="MyVenteFin">ventes terminées</label></li>
 </ul></div>
 </div>
 </div>
