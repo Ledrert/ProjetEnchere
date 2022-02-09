@@ -34,6 +34,7 @@
 <c:if test="${sessionScope.user != null && article.userVendeur.noUtilisateur != user.noUtilisateur}">
 	<label for="prix">Ma proposition : </label>
 	<input type="number" id="prix" name="prix" min="1" max="100000">
+	<button type="submit" name="proposition" formmethod="post" formaction="detailEnchere">Enchérir</button>
 </c:if>
 <br>
 <c:if test="${article.userVendeur.noUtilisateur == user.noUtilisateur && article.dateDebutEncheres gt today}">
@@ -42,7 +43,6 @@
 <br>
 <form><button type="submit" name="retour" formmethod="get" formaction="enchere">Retour vers l'accueil</button></form> 
 </div>
-
 
 </body>
 </html>
