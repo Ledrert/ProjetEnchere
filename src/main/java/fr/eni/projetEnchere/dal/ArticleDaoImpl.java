@@ -574,6 +574,9 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			if(rs.next()) {
 				Utilisateur user = userDAO.selectUtilisateurByiD(rs.getInt("no_utilisateur"));
 				int montant = rs.getInt("montant_enchere");
+				vente = new Enchere();
+				vente.setNoEncherisseur(user);
+				vente.setMontantEnchere(montant);
 			}
 		} catch (SQLException | DalException e) {
 			throw new DalException("Erreur sur la méthode dernierEncherisseur()", e); 

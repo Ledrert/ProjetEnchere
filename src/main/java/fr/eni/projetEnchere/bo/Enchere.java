@@ -53,5 +53,11 @@ public class Enchere {
 
 	public void setMontantEnchere(int montantEnchere) {
 		this.montantEnchere = montantEnchere;
-	}    
+	}
+
+	@Override
+	public String toString() {
+		return "Enchere [dateEnchere=" + dateEnchere + ", montantEnchere=" + montantEnchere + ", articleVendu="
+				+ articleVendu + ", encherisseur=" + encherisseur + "]";
+	}   
 }
