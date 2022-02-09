@@ -65,6 +65,7 @@ function loadFiltre(){
 </div>
 <div>
 <button class="btnSearchAdv" type="submit" formaction="enchere" formmethod="post" >Rechercher</button>
+<button class="btnSearchAdv" type="submit" formmethod="get" formaction="enchere">Réinitialiser les filtres</button>
 </div>
 </c:when>
 <c:otherwise>
@@ -79,11 +80,10 @@ function loadFiltre(){
 </div>
 <div>
 <button class="btnSearch" type="submit" formaction="enchere" formmethod="post" >Rechercher</button>
+<button class="btnSearch" type="submit" formmethod="get" formaction="enchere">Réinitialiser les filtres</button>
 </div>
 </c:otherwise>
 </c:choose>
-<button type="submit" name="annuler" formmethod="get"
-			formaction="enchere">Actualiser les filtres</button>
 </form>
 <div class="listEnchere">
 <c:forEach var="article" items="${listeArt}"> <!-- Pour chaque enchère : une case  -->
