@@ -29,7 +29,7 @@
 </c:otherwise>
 </c:choose>
 <p id="finEnchere">Fin de l'enchère : ${article.dateFinEncheres}</p>
-<p id="Retrait">Retrait : ${article.userVendeur.rue} ${article.userVendeur.codePostal} ${article.userVendeur.ville}</p>
+<p id="Retrait">Retrait : ${article.getRetrait().rue} ${article.getRetrait().codePostal} ${article.getRetrait().ville}</p>
 </div>
 <c:if test="${sessionScope.user != null && article.userVendeur.noUtilisateur != user.noUtilisateur}">
 	<label for="prix">Ma proposition : </label>

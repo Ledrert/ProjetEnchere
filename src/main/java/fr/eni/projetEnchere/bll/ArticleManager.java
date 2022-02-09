@@ -141,8 +141,4 @@ public class ArticleManager {
 			throw new DalException("erreur chargement de l'article", e);
 		}
 	}
-	
-	public void ajoutRetrait(Retrait ret) throws DalException {
-		dao.ajoutRetrait(ret);
-	}
 }
