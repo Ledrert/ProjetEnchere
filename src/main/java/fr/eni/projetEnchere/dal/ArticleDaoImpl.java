@@ -45,6 +45,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 	private final static String UPDATE_FIN_ENCHERE = "UPDATE article SET no_acheteur = ?, prix_vente = ? WHERE no_article = ?;";
 	
 	private final static String AJOUT_RETRAIT = "INSERT INTO retrait VALUES (?,?,?,?);";
+	private final static String SELECT_RETRAIT = "SELECT * FROM retrait WHERE no_article=?;";
 	
 	@Override
 	public List<Article> listerArticle() throws DalException {
@@ -53,6 +54,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 		ResultSet rs = null;
 		List<Article> listeArticle = new ArrayList<Article>();
 		Article art;
+		Retrait ret;
 		UtilisateurDAOImpl user = new UtilisateurDAOImpl();
 		
 		try {
@@ -72,6 +74,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 				art.setUtilisateurVendeur(user.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
 				art.setUtilisateurAcheteur(user.selectUtilisateurByiD(rs.getInt("no_acheteur")));
 				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
+				art.setRetrait(recupererRetrait(art));
 				listeArticle.add(art);
 			}
 		} catch (SQLException e) {
@@ -202,6 +205,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			cst.registerOutParameter(1, Types.INTEGER);
 			cst.executeUpdate();
 			art.setNoArticle(cst.getInt(1));
+			ajoutRetrait(art.getRetrait());
 		} catch (SQLException e) {
 			throw new DalException("Erreur SQL ajouterArticle()", e);
 		} finally {
@@ -552,6 +556,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 				art.setUtilisateurVendeur(userDAO.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
 				art.setUtilisateurAcheteur(userDAO.selectUtilisateurByiD(rs.getInt("no_acheteur")));
 				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
+				art.setRetrait(recupererRetrait(art));
 			}
 		} catch (SQLException e) {
 			throw new DalException("Erreur sur la méthode select art by id", e); 
@@ -619,7 +624,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 		try {
 			cnx = ConnectionProvider.getConnection();
 			pst = cnx.prepareStatement(AJOUT_RETRAIT);
-			pst.setInt(1, ret.getArticleRetire().getNoArticle());
+			pst.setInt(1, ret.getArticle().getNoArticle());
 			pst.setString(2, ret.getRue());
 			pst.setString(3, ret.getCodePostal());
 			pst.setString(4, ret.getVille());
@@ -651,5 +656,33 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			ConnectionProvider.seDeconnecter(pst);
 			seDeconnecter(cnx);
 		}
+	}
+	
+	public Retrait recupererRetrait(Article art) throws DalException {
+		Connection cnx = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		Retrait ret = null;
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pst = cnx.prepareStatement(SELECT_RETRAIT);
+			pst.setInt(1, art.getNoArticle());
+			rs = pst.executeQuery();
+			
+			if(rs.next()) {
+				ret = new Retrait();
+				ret.setArticle(art);
+				ret.setRue(rs.getString("rue"));
+				ret.setCodePostal(rs.getString("code_postal"));
+				ret.setVille(rs.getString("ville"));
+			}
+		} catch (SQLException e) {
+			throw new DalException("Erreur sur la méthode recupererRetrait()", e); 
+		} finally {
+			ConnectionProvider.seDeconnecter(pst);
+			seDeconnecter(cnx);
+		}
+		return ret;
 	}
 }

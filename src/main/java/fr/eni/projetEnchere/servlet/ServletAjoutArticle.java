@@ -112,9 +112,9 @@ public class ServletAjoutArticle extends HttpServlet {
 		
 		Article art = new Article(article, description, prix, dateDebut, dateFin, utilisateur, cat);
 		Retrait ret = new Retrait(art, rue, cp, ville);
+		art.setRetrait(ret);
 		
 			am.ajouterArticle(art);
-			am.ajoutRetrait(ret);
 		} catch (DalException e) {
 			e.printStackTrace();
 		} catch (ParseException e) {

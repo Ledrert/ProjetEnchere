@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import fr.eni.projetEnchere.bll.ArticleManager;
 import fr.eni.projetEnchere.bo.Article;
 import fr.eni.projetEnchere.bo.Enchere;
+import fr.eni.projetEnchere.bo.Retrait;
 import fr.eni.projetEnchere.bo.Utilisateur;
 import fr.eni.projetEnchere.dal.DalException;
 

@@ -52,14 +52,14 @@
 	<div class="retrait">
 			<h2>Retrait :</h2>
 		<div>
-			<label for="rue">Rue : </label> <input type="text" id="rue" name="rue" maxlength="50" value="${user.rue}"> 
+			<label for="rue">Rue : </label> <input type="text" id="rue" name="rue" maxlength="50" value="${article.getRetrait().rue}"> 
 		</div>
 		<div>
 			<label for="codePostal">Code postal :</label> 
-			<input type="text" id="codePostal" name="codePostal" maxlength="10" value="${user.codePostal}">
+			<input type="text" id="codePostal" name="codePostal" maxlength="10" value="${article.getRetrait().codePostal}">
 		</div>
 		<div>
-			<label for="ville">Ville : </label> <input type="text" id="ville" name="ville" maxlength="30" value="${user.ville}">
+			<label for="ville">Ville : </label> <input type="text" id="ville" name="ville" maxlength="30" value="${article.getRetrait().ville}">
 		</div>
 	</div>
 

@@ -18,6 +18,7 @@ public class Article {
     private Utilisateur userVendeur;
     private Utilisateur userAcheteur;
 	private Categorie categorie;
+	private Retrait retrait;
 	
     //Constructors
     public Article() {
@@ -120,5 +121,13 @@ public class Article {
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", prixInitial="
 				+ prixInitial + ", prixVente=" + prixVente + ", userVendeur=" + userVendeur + ", userAcheteur="
 				+ userAcheteur + ", categorie=" + categorie + "]";
+	}
+
+	public Retrait getRetrait() {
+		return retrait;
+	}
+
+	public void setRetrait(Retrait retrait) {
+		this.retrait = retrait;
 	}
 }
