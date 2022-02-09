@@ -15,7 +15,8 @@
 
 <h1>Détail vente</h1>
 
-<div class= infoEnchere>
+<div class="infoEnchere">
+<div id="detailVente">
 <p id="nomArticle">${article.nomArticle}</p>
 <p id="description">Description : ${article.description}</p>
 <p id="categorie">Catégorie : ${article.categorie.libelle}</p>
@@ -24,9 +25,7 @@
 <p id="finEnchere">Fin de l'enchère : ${article.dateFinEncheres}</p>
 <p id="Retrait">Retrait : ${article.userVendeur.rue} ${article.userVendeur.codePostal} ${article.userVendeur.ville}</p>
 <p id="vendeur">Vendeur : ${article.userVendeur.pseudo}</p>
-       
 </div>
-
 <c:if test="${sessionScope.user != null && article.userVendeur.noUtilisateur != user.noUtilisateur}">
 	<label for="prix">Ma proposition : </label>
 	<input type="number" id="prix" name="prix" min="1" max="100000">
@@ -36,7 +35,10 @@
 <c:if test="${article.userVendeur.noUtilisateur == user.noUtilisateur && article.dateDebutEncheres gt today}">
 	<a id="detailEnchere" href="modifArticle?id=${article.getNoArticle()}">Modifier mon article</a>
 </c:if>
+<br>
+<form><button type="submit" name="retour" formmethod="get" formaction="enchere">Retour vers l'accueil</button></form> 
+</div>
 
-<form><button type="submit" name="retour" formmethod="get" formaction="enchere">Retour vers l'accueil</button></form>
+
 </body>
 </html>
