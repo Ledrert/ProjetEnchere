@@ -8,6 +8,7 @@ import java.util.List;
 import fr.eni.projetEnchere.bo.Article;
 import fr.eni.projetEnchere.bo.Categorie;
 import fr.eni.projetEnchere.bo.Enchere;
+import fr.eni.projetEnchere.bo.Retrait;
 import fr.eni.projetEnchere.bo.Utilisateur;
 import fr.eni.projetEnchere.dal.ArticleDAO;
 import fr.eni.projetEnchere.dal.DAOFactory;
@@ -51,8 +52,7 @@ public class ArticleManager {
 		}
 	}
 	
-	public void ajouterArticle(String article, String description, Categorie categorie, int prix, Date dateDebut, Date dateFin, Utilisateur utilisateur) throws DalException {
-			Article art = new Article(article, description, prix, dateDebut, dateFin, utilisateur, categorie);
+	public void ajouterArticle(Article art) throws DalException {
 			dao.ajouterArticle(art);
 			listeArticles.add(art);
 		}
@@ -135,11 +135,14 @@ public class ArticleManager {
 	}
 
 	public Article getById(int id) throws DalException{
-		dao = DAOFactory.getArticleDAO();
 		try {
 			return dao.selectByID(id);
 		} catch (DalException e) {
 			throw new DalException("erreur chargement de l'article", e);
 		}
+	}
+	
+	public void ajoutRetrait(Retrait ret) throws DalException {
+		dao.ajoutRetrait(ret);
 	}
 }

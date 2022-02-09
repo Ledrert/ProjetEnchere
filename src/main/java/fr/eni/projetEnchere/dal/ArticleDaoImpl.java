@@ -13,11 +13,13 @@ import java.util.List;
 import fr.eni.projetEnchere.bo.Article;
 import fr.eni.projetEnchere.bo.Categorie;
 import fr.eni.projetEnchere.bo.Enchere;
+import fr.eni.projetEnchere.bo.Retrait;
 import fr.eni.projetEnchere.bo.Utilisateur;
 
 public class ArticleDaoImpl extends DAO implements ArticleDAO {
 
 	private final static String SELECT_ALL = "SELECT * FROM article ;";
+	private final static String SELECT_BY_ID = "SELECT * FROM article WHERE no_article =?;";
 	private final static String SELECT_CATEGORIE = "SELECT * FROM categorie;";
 	private final static String CAT_BY_NOARTICLE = "SELECT nom_categorie, libelle FROM categorie WHERE nom_categorie = ?;";
 	private final static String CAT_BY_LIBEL = "SELECT nom_categorie, libelle FROM categorie WHERE libelle = ?;";
@@ -36,11 +38,13 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 	private final static String MY_VENTE_PREP = "select * from article WHERE date_debut_encheres > getdate() and no_utilisateur = ?;";
 	private final static String MY_VENTE_END = "select * from article WHERE date_fin_encheres < getdate()and no_utilisateur = ?;";
 
-	private final static String SELECT_BY_ID = "SELECT * FROM article WHERE no_article =?;";
+	private final static String AJOUT_ENCHERE = "INSERT INTO enchere VALUES (?,?,?,?);";
 	private final static String SELECT_ACHETEUR = "SELECT no_utilisateur, montant_enchere FROM enchere e INNER JOIN \r\n"
 			+ "(select no_article, MAX(date_enchere) as lastEnchere from enchere where no_article = ? group by no_article) m \r\n"
 			+ "ON e.no_article = m.no_article and e.date_enchere = m.lastEnchere;";
 	private final static String UPDATE_FIN_ENCHERE = "UPDATE article SET no_acheteur = ?, prix_vente = ? WHERE no_article = ?;";
+	
+	private final static String AJOUT_RETRAIT = "INSERT INTO retrait VALUES (?,?,?,?);";
 	
 	@Override
 	public List<Article> listerArticle() throws DalException {
@@ -601,6 +605,48 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			pst.executeUpdate();
 		} catch (SQLException e) {
 			throw new DalException("Erreur sur la méthode updateFinEnchere()", e); 
+		} finally {
+			ConnectionProvider.seDeconnecter(pst);
+			seDeconnecter(cnx);
+		}
+	}
+
+	@Override
+	public void ajoutRetrait(Retrait ret) throws DalException {
+		Connection cnx = null;
+		PreparedStatement pst = null;
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pst = cnx.prepareStatement(AJOUT_RETRAIT);
+			pst.setInt(1, ret.getArticleRetire().getNoArticle());
+			pst.setString(2, ret.getRue());
+			pst.setString(3, ret.getCodePostal());
+			pst.setString(4, ret.getVille());
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			throw new DalException("Erreur sur la méthode ajoutRetrait()", e); 
+		} finally {
+			ConnectionProvider.seDeconnecter(pst);
+			seDeconnecter(cnx);
+		}
+	}
+	
+	@Override
+	public void ajoutEnchere(Enchere enc) throws DalException {
+		Connection cnx = null;
+		PreparedStatement pst = null;
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pst = cnx.prepareStatement(AJOUT_ENCHERE);
+			pst.setDate(1, enc.getDateEnchere());
+			pst.setInt(2, enc.getNoEncherisseur().getNoUtilisateur());
+			pst.setInt(3, enc.getArticleVendu().getNoArticle());
+			pst.setInt(4, enc.getMontantEnchere());
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			throw new DalException("Erreur sur la méthode ajoutEnchere()", e); 
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
 			seDeconnecter(cnx);

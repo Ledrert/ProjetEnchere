@@ -19,7 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.projetEnchere.bll.ArticleManager;
+import fr.eni.projetEnchere.bo.Article;
 import fr.eni.projetEnchere.bo.Categorie;
+import fr.eni.projetEnchere.bo.Retrait;
 import fr.eni.projetEnchere.bo.Utilisateur;
 import fr.eni.projetEnchere.dal.DalException;
 
@@ -100,10 +102,19 @@ public class ServletAjoutArticle extends HttpServlet {
 		String fin = request.getParameter("fin");
 		java.util.Date jdatef = new SimpleDateFormat("yyyy-MM-dd").parse(fin);
         Date dateFin = new Date(jdatef.getTime());
+        
+        String rue = request.getParameter("rue");
+        String cp = request.getParameter("codePostal");
+        String ville = request.getParameter("ville");
+        
 		HttpSession session = request.getSession();
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("user");
-
-			am.ajouterArticle(article, description, cat, prix, dateDebut, dateFin, utilisateur);
+		
+		Article art = new Article(article, description, prix, dateDebut, dateFin, utilisateur, cat);
+		Retrait ret = new Retrait(art, rue, cp, ville);
+		
+			am.ajouterArticle(art);
+			am.ajoutRetrait(ret);
 		} catch (DalException e) {
 			e.printStackTrace();
 		} catch (ParseException e) {
