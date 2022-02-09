@@ -164,13 +164,13 @@ h3{
 	justify-content: space-between;
 }	
 
-.infoEnchere {
+.infosPage {
 	margin:auto;
 	width:500px;
 	justify-content: center;
 }
 
-#detailVente {
+#details {
 	padding-left: 5px;
 	border-left: 2px black solid;
 }

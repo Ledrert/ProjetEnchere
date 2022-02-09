@@ -11,11 +11,10 @@
 <body>
 <jsp:include page="jsp/header.jsp"></jsp:include>
 
-<h1>Détails du vendeur</h1>
+<h1>${utilisateur.pseudo}</h1>
 
-<div class = infoVendeur>
-
-<p id="pseudo">Pseudo : ${utilisateur.pseudo}</p>
+<div class="infosPage">
+<div id="details">
 <p id="nom">Nom : ${utilisateur.nom}</p>
 <p id="prénom">Prénom : ${utilisateur.prenom}</p>
 <p id="email">Email : ${utilisateur.email}</p>
@@ -23,15 +22,11 @@
 <p id="rue">Rue : ${utilisateur.rue}</p>
 <p id="codePostal">Code postal : ${utilisateur.codePostal}</p>
 <p id="ville">Ville : ${utilisateur.ville}</p>
-
+</div>
 <form>
 <a href="enchere">
 <button type="button" >Retour vers l'accueil</button></a>
 </form>
-
-
 </div>
- 
- 
 </body>
 </html>

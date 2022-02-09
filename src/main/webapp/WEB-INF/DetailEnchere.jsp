@@ -15,8 +15,8 @@
 
 <h1>${article.nomArticle}</h1>
 <h3>Vendu par ${article.userVendeur.pseudo}</h3>
-<div class="infoEnchere">
-<div id="detailVente">
+<div class="infosPage">
+<div id="details">
 <p id="description">Description : ${article.description}</p>
 <p id="categorie">Catégorie : ${article.categorie.libelle}</p>
 <p id="miseAprix">Mise à prix : ${article.prixInitial}</p>
