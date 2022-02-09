@@ -1,6 +1,8 @@
 package fr.eni.projetEnchere.servlet;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +39,10 @@ public class ServletDetailEnchere extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map<String, String> menu = new HashMap<>();
 		HttpSession session = request.getSession();
+		
+			Date today = java.sql.Date.valueOf(LocalDate.now());
+			request.setAttribute("today", today);
+		
 		if(session != null) { //S'il y a une session (donc : un login a été fait)
 			Utilisateur user = (Utilisateur)session.getAttribute("user"); //récupération des informations de l'utilisateur connecté
 			if(user == null) {

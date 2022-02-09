@@ -1,6 +1,9 @@
+<%@page import="java.util.Date"%>
+<%@page import="java.time.LocalDate"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>   
+ <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -21,19 +24,18 @@
 <p id="finEnchere">Fin de l'enchère : ${article.dateFinEncheres}</p>
 <p id="Retrait">Retrait : ${article.userVendeur.rue} ${article.userVendeur.codePostal} ${article.userVendeur.ville}</p>
 <p id="vendeur">Vendeur : ${article.userVendeur.pseudo}</p>
-<label for="prix">Ma proposition : </label>
-<input type="number" id="prix" name="prix" min="1" max="100000">
        
-
 </div>
 
+<c:if test="${sessionScope.user != null && article.userVendeur.noUtilisateur != user.noUtilisateur}">
+	<label for="prix">Ma proposition : </label>
+	<input type="number" id="prix" name="prix" min="1" max="100000">
+</c:if>
+<br>
+<c:if test="${article.userVendeur.noUtilisateur == user.noUtilisateur && article.dateDebutEncheres gt today}">
+	<a id="detailEnchere" href="modifArticle?id=${article.getNoArticle()}">Modifier mon article</a>
+</c:if>
 
-
-       
-<a id="detailEnchere" href="modifArticle?id=${article.getNoArticle()}">Modifier mon article</button></a>
 <form><button type="submit" name="retour" formmethod="get" formaction="enchere">Retour vers l'accueil</button></form>
-
-
-
 </body>
 </html>
