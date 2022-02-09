@@ -54,7 +54,6 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 		ResultSet rs = null;
 		List<Article> listeArticle = new ArrayList<Article>();
 		Article art;
-		Retrait ret;
 		UtilisateurDAOImpl user = new UtilisateurDAOImpl();
 		
 		try {
