@@ -54,6 +54,8 @@ public class ServletConnexion extends HttpServlet {
 			throws ServletException, IOException {
 		String identifiant = request.getParameter("identifiant");
 		String password = request.getParameter("MDP");
+		password = HashPassword.hashpassword(password);
+		System.out.println(password);
 //		String check = request.getParameter("saveMDP");
 //		if(check.equals("save")) {
 //			//creation de cookie
@@ -69,6 +71,7 @@ public class ServletConnexion extends HttpServlet {
 //		     response.addCookie( cpseudo );
 //		     response.addCookie( cpassword );
 //		}
+		
 		UtilisateurManager um;
 		Utilisateur utilisateur = null;
 		RequestDispatcher rd = null;
@@ -81,7 +84,6 @@ public class ServletConnexion extends HttpServlet {
 					return;
 				}
 			}
-
 			utilisateur = um.verifIdentifiants(identifiant, password);
 			if (password.isEmpty()) {
 				response.sendRedirect("connexion?error=1");
@@ -94,7 +96,6 @@ public class ServletConnexion extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("user", utilisateur);
 			}
-
 		} catch (DalException e) {
 			e.printStackTrace();
 		}
