@@ -55,7 +55,6 @@ public class ServletConnexion extends HttpServlet {
 		String identifiant = request.getParameter("identifiant");
 		String password = request.getParameter("MDP");
 		password = HashPassword.hashpassword(password);
-		System.out.println(password);
 //		String check = request.getParameter("saveMDP");
 //		if(check.equals("save")) {
 //			//creation de cookie
@@ -101,4 +100,5 @@ public class ServletConnexion extends HttpServlet {
 		}
 		response.sendRedirect("/ProjetEnchere/enchere");
 	}
+	
 }
