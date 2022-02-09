@@ -45,6 +45,15 @@ public class ServletAccueil extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		String CkVente="", ckAchat=" checked", ckEncDeb="", ckEncEC="", ckEncWin="", ckVEC="", ckVNC="", ckVEnd="";;
+		request.setAttribute("ckAchat", ckAchat);
+		request.setAttribute("ckVente", CkVente);
+		request.setAttribute("ckEncDeb", ckEncDeb);
+		request.setAttribute("ckEncEC", ckEncEC);
+		request.setAttribute("ckEncWin", ckEncWin);
+		request.setAttribute("ckVEC", ckVEC);
+		request.setAttribute("ckVNC", ckVNC);
+		request.setAttribute("ckVEnd", ckVEnd);
 		doRedirect(request, response, listeArt);
 	}
 
@@ -56,41 +65,61 @@ public class ServletAccueil extends HttpServlet {
 		List<Article> listArtFiltre = null;
 		ArticleManager artM;
 		String radioF, enchDebut, enchEC, enchEnd, venteEC, venteNC, venteFin;
+		String CkVente="", ckAchat="", ckEncDeb="", ckEncEC="", ckEncWin="", ckVEC="", ckVNC="", ckVEnd="";
 		if(request.getParameter("radioFiltre") == null) {
 			radioF = "no";
 		} else {
 			radioF = request.getParameter("radioFiltre");
 		}
+		if(radioF.equals("vente")) {
+			CkVente=" checked";
+		} else {
+			ckAchat=" checked";
+		}
+		request.setAttribute("ckVente", CkVente);
+		request.setAttribute("ckAchat", ckAchat);
 		if(request.getParameter("EncDebut") == null) {
 			enchDebut = "no";
 		} else {
 			enchDebut = request.getParameter("EncDebut");
+			ckEncDeb = " checked";
 		}
 		if(request.getParameter("MyEncEC") == null) {
 			enchEC = "no";
 		} else {
 			enchEC = request.getParameter("MyEncEC");
+			ckEncEC = " checked";
 		}
 		if(request.getParameter("MyEncWin") == null) {
 			enchEnd = "no";
 		} else {
 			enchEnd = request.getParameter("MyEncWin");
+			ckEncWin = " checked";
 		}
+		request.setAttribute("ckEncDeb", ckEncDeb);
+		request.setAttribute("ckEncEC", ckEncEC);
+		request.setAttribute("ckEncWin", ckEncWin);
 		if(request.getParameter("MyVenteEC") == null) {
 			venteEC = "no";
 		} else {
 			venteEC = request.getParameter("MyVenteEC");
+			ckVEC = " checked";
 		}
 		if(request.getParameter("MyVenteNC") == null) {
 			venteNC = "no";
 		} else {
 			venteNC = request.getParameter("MyVenteNC");
+			ckVNC = " checked";
 		}
 		if(request.getParameter("MyVenteFin") == null) {
 			venteFin = "no";
 		} else {
 			venteFin = request.getParameter("MyVenteFin");
+			ckVEnd = " checked";
 		}
+		request.setAttribute("ckVEC", ckVEC);
+		request.setAttribute("ckVNC", ckVNC);
+		request.setAttribute("ckVEnd", ckVEnd);
 		
 		try {
 			artM = ArticleManager.getInstance();
