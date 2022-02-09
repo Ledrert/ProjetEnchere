@@ -12,21 +12,22 @@
 <jsp:include page="jsp/header.jsp"></jsp:include>
 <h1>Informations du profil :</h1>
 
-<div class="afficherProfil">
-Pseudo : ${requestScope.user.pseudo} <br>
-Nom : ${requestScope.user.nom } <br>
-Prénom : ${requestScope.user.prenom} <br>
-Email : ${requestScope.user.email}  <br>
-Téléphone : ${requestScope.user.telephone}  <br>
-Rue : ${requestScope.user.rue}  <br>
-Code postal : ${requestScope.user.codePostal}  <br>
-Ville : ${requestScope.user.ville}  <br>
+<div class="infosPage">
+<div id="details">
+<p>Pseudo : ${requestScope.user.pseudo}</p>
+<p>Nom : ${requestScope.user.nom }</p>
+<p>Prénom : ${requestScope.user.prenom}</p>
+<p>Email : ${requestScope.user.email}</p>
+<p >Téléphone : ${requestScope.user.telephone}</p>
+<p>Rue : ${requestScope.user.rue}</p>
+<p>Code postal : ${requestScope.user.codePostal}</p>
+<p>Ville : ${requestScope.user.ville}</p>
 </div>
 
 <form>
 <button type="submit" name="modifier" formmethod="get" formaction="modifProfil">Modifier</button>
 <button type="submit" name="retour" formmethod="get" formaction="enchere" >Retour vers l'accueil</button>
-
 </form>
+</div>
 </body>
 </html>
