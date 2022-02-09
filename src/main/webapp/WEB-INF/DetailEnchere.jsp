@@ -13,18 +13,23 @@
 <body>
 <jsp:include page="jsp/header.jsp"></jsp:include>
 
-<h1>Détail vente</h1>
-
+<h1>${article.nomArticle}</h1>
+<h3>Vendu par ${article.userVendeur.pseudo}</h3>
 <div class="infoEnchere">
 <div id="detailVente">
-<p id="nomArticle">${article.nomArticle}</p>
 <p id="description">Description : ${article.description}</p>
 <p id="categorie">Catégorie : ${article.categorie.libelle}</p>
-<p id="prixVente">Meilleure offre : ${article.prixVente}</p>
 <p id="miseAprix">Mise à prix : ${article.prixInitial}</p>
+<c:choose>
+<c:when test="${enchere.montantEnchere == article.prixInitial && enchere.getNoEncherisseur().pseudo == article.userVendeur.pseudo }">
+<p id="prixVente">Meilleure offre actuelle : -</p>
+</c:when>
+<c:otherwise>
+<p id="prixVente">Meilleure offre actuelle : ${enchere.montantEnchere} par ${enchere.getNoEncherisseur().pseudo}</p>
+</c:otherwise>
+</c:choose>
 <p id="finEnchere">Fin de l'enchère : ${article.dateFinEncheres}</p>
 <p id="Retrait">Retrait : ${article.userVendeur.rue} ${article.userVendeur.codePostal} ${article.userVendeur.ville}</p>
-<p id="vendeur">Vendeur : ${article.userVendeur.pseudo}</p>
 </div>
 <c:if test="${sessionScope.user != null && article.userVendeur.noUtilisateur != user.noUtilisateur}">
 	<label for="prix">Ma proposition : </label>
