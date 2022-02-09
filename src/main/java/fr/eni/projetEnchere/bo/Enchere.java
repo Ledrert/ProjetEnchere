@@ -35,7 +35,7 @@ public class Enchere {
 		return articleVendu;
 	}
 
-	public void getArticleVendu(Article articleVendu) {
+	public void setArticleVendu(Article articleVendu) {
 		this.articleVendu = articleVendu;
 	}
 

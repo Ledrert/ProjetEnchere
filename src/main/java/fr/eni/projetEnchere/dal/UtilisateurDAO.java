@@ -13,6 +13,7 @@ public interface UtilisateurDAO {
 	public List<Utilisateur> selectAllUtilisateur () throws DalException;
 	public String chercherPseudo (String email) throws DalException;
 	public Utilisateur verifIdentifiants(String pseudo, String password) throws DalException;
+	public Utilisateur verifPassword(String password) throws DalException;
 	
 }
 

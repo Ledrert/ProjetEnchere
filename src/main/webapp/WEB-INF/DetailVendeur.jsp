@@ -15,13 +15,13 @@
 
 <div class="infosPage">
 <div id="details">
-<p id="nom">Nom : ${utilisateur.nom}</p>
-<p id="prénom">Prénom : ${utilisateur.prenom}</p>
-<p id="email">Email : ${utilisateur.email}</p>
-<p id="teléphone">Téléphone : ${utilisateur.telephone}</p>
-<p id="rue">Rue : ${utilisateur.rue}</p>
-<p id="codePostal">Code postal : ${utilisateur.codePostal}</p>
-<p id="ville">Ville : ${utilisateur.ville}</p>
+<p>Nom : ${utilisateur.nom}</p>
+<p>Prénom : ${utilisateur.prenom}</p>
+<p>Email : ${utilisateur.email}</p>
+<p >Téléphone : ${utilisateur.telephone}</p>
+<p>Rue : ${utilisateur.rue}</p>
+<p>Code postal : ${utilisateur.codePostal}</p>
+<p>Ville : ${utilisateur.ville}</p>
 </div>
 <form>
 <a href="enchere">

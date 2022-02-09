@@ -22,6 +22,8 @@ public class UtilisateurDAOImpl extends DAO implements UtilisateurDAO {
 	private final static String SQL_SELECT_ALL = "SELECT * FROM UTILISATEUR;";
 	private final static String SQL_SEARCH_PSEUDO = "SELECT pseudo FROM UTILISATEUR WHERE email=?;";
 	private final static String SQL_VERIF_ID = "SELECT * FROM UTILISATEUR WHERE pseudo=? AND mot_de_passe=?;";
+	private final static String SQL_VERIF_PASSWORD = "SELECT * FROM UTILISATEUR WHERE mot_de_passe=?;";
+	
 	
 	@Override
 	public void AjouterUtilisateur(Utilisateur utilisateur) throws DalException {	
@@ -234,5 +236,38 @@ public class UtilisateurDAOImpl extends DAO implements UtilisateurDAO {
 			seDeconnecter(cnx);		
 		} return utilisateur;
 }
+
+	@Override
+	public Utilisateur verifPassword(String password) throws DalException {
+		Connection cnx = null;
+		PreparedStatement pstmt = null;	
+		ResultSet rs = null;
+		Utilisateur utilisateur = null;
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pstmt = cnx.prepareStatement(SQL_VERIF_PASSWORD);
+			pstmt.setString(1, password);
+			rs = pstmt.executeQuery();
+				if (rs.next()) {
+					utilisateur = new Utilisateur();
+					utilisateur.setPseudo(rs.getString("pseudo"));
+					utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+					utilisateur.setPrenom(rs.getString("prenom"));
+					utilisateur.setNom(rs.getString("nom"));
+					utilisateur.setEmail(rs.getString("email"));
+					utilisateur.setTelephone(rs.getString("telephone"));
+					utilisateur.setRue(rs.getString("rue"));
+					utilisateur.setCodePostal(rs.getString("code_postal"));
+					utilisateur.setVille(rs.getString("ville"));
+					utilisateur.setPassword(rs.getString("mot_de_passe"));
+					utilisateur.setCredit(rs.getInt("credit"));
+				}
+		} catch (SQLException e) {
+		throw new DalException("Erreur sur la méthode verifIdentifiants()", e); 
+		} finally {
+			ConnectionProvider.seDeconnecter(pstmt);
+			seDeconnecter(cnx);		
+		} return utilisateur;
+	}
 }
 
