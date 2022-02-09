@@ -188,3 +188,12 @@ h3{
 #inputVente {
 	margin-bottom : 5px;
 }
+
+#descriptionArt {
+	width : 230px;
+	height: 60px;
+}
+
+#articleArt {
+	width : 230px;
+}

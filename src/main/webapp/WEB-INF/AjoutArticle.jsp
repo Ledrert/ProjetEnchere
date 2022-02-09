@@ -17,13 +17,13 @@
 		<div id="inputVente">
 			<div id="labelVente">
 				<label for="article">Article :</label></div>
-				<div><input type="text" id="article" name="article" maxlength="30">
+				<div><input type="text" id="articleArt" name="article" maxlength="30">
 			</div>
 			</div>
 			<div id="inputVente">
 			<div id="labelVente">
 				<label for="description">Description :</label></div>
-				<div><input type="text" id="description" name="description" maxlength="300">
+				<div><textarea id="descriptionArt" name="description" maxlength="300"></textarea>
 			</div></div>
 			<div id="inputVente">
 			<div id="labelVente">
