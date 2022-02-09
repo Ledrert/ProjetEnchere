@@ -645,7 +645,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 		try {
 			cnx = ConnectionProvider.getConnection();
 			pst = cnx.prepareStatement(AJOUT_ENCHERE);
-			pst.setDate(1, enc.getDateEnchere());
+			pst.setTimestamp(1, enc.getDateEnchere());
 			pst.setInt(2, enc.getNoEncherisseur().getNoUtilisateur());
 			pst.setInt(3, enc.getArticleVendu().getNoArticle());
 			pst.setInt(4, enc.getMontantEnchere());

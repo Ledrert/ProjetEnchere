@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -90,7 +91,7 @@ public class ServletDetailEnchere extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Date dateEnchereSQL = new Date(Calendar.getInstance().getTime().getTime());
+		Timestamp dateEnchereSQL = new Timestamp(Calendar.getInstance().getTime().getTime());
 
 		//recupérer session
 		HttpSession session = request.getSession();
@@ -115,7 +116,7 @@ public class ServletDetailEnchere extends HttpServlet {
 			e.printStackTrace();
 			
 		}
-		response.sendRedirect("/detailEnchere");
+		response.sendRedirect("/ProjetEnchere/");
 		
 		
 	}

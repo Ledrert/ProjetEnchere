@@ -1,11 +1,12 @@
 package fr.eni.projetEnchere.bo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Enchere {
 
 	//Declare
-	private Date dateEnchere;
+	private Timestamp dateEnchere;
 	private int montantEnchere;
 	private Article articleVendu;
     private Utilisateur encherisseur;
@@ -14,7 +15,7 @@ public class Enchere {
 	public Enchere() {		
 	}
 	
-    public Enchere(Utilisateur encherisseur, Article articleVendu, Date dateEnchere, int montantEnchere) {
+    public Enchere(Utilisateur encherisseur, Article articleVendu, Timestamp dateEnchere, int montantEnchere) {
         this.encherisseur = encherisseur;
         this.articleVendu = articleVendu;
         this.dateEnchere = dateEnchere;
@@ -39,11 +40,11 @@ public class Enchere {
 		this.articleVendu = articleVendu;
 	}
 
-	public Date getDateEnchere() {
+	public Timestamp getDateEnchere() {
 		return dateEnchere;
 	}
 
-	public void setDateEnchere(Date dateEnchere) {
+	public void setDateEnchere(Timestamp dateEnchere) {
 		this.dateEnchere = dateEnchere;
 	}
 
