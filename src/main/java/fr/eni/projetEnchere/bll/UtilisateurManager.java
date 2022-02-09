@@ -87,6 +87,11 @@ public class UtilisateurManager {
 		return false;
 		}
 	
-	
+	public boolean verifPassword(String password, String verif) throws DalException {
+		if(password.equals(verif)) {
+			return false;
+		}
+		return true;
+	}
 	
 }
