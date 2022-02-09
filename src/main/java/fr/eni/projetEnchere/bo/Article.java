@@ -4,8 +4,8 @@ import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-public class Article {
-	
+public class Article {	
+
 	//Declare
     private int noArticle;
     private String nomArticle;
@@ -113,4 +113,12 @@ public class Article {
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
     }
+    
+    @Override
+	public String toString() {
+		return "Article [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
+				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", prixInitial="
+				+ prixInitial + ", prixVente=" + prixVente + ", userVendeur=" + userVendeur + ", userAcheteur="
+				+ userAcheteur + ", categorie=" + categorie + "]";
+	}
 }
