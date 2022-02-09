@@ -40,7 +40,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 	private final static String SELECT_ACHETEUR = "SELECT no_utilisateur, montant_enchere FROM enchere e INNER JOIN \r\n"
 			+ "(select no_article, MAX(date_enchere) as lastEnchere from enchere where no_article = ? group by no_article) m \r\n"
 			+ "ON e.no_article = m.no_article and e.date_enchere = m.lastEnchere;";
-	private final static String UPDATE_FIN_ENCHERE = "UPDATE article SET no_acheteur = ? AND prix_vente = ? WHERE no_article = ?;";
+	private final static String UPDATE_FIN_ENCHERE = "UPDATE article SET no_acheteur = ?, prix_vente = ? WHERE no_article = ?;";
 	
 	@Override
 	public List<Article> listerArticle() throws DalException {

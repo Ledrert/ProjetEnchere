@@ -41,9 +41,9 @@ public class ArticleManager {
 	private void verifierFinEnchere() throws DalException {
 		Date now = new Date(Calendar.getInstance().getTime().getTime());
 		for(Article art : listeArticles) {
-			if(art.getDateFinEncheres().after(now) && art.getUserAcheteur() != null) {
+			if(art.getDateFinEncheres().before(now) && art.getUserAcheteur() == null) {
 				Enchere vente = dao.dernierEncherisseur(art);
-				System.out.println(vente);
+				System.out.println(art +" :" +vente);
 				dao.updateFinEnchere(art, vente);
 				art.setUtilisateurAcheteur(vente.getNoEncherisseur());
 				art.setPrixVente(vente.getMontantEnchere());
