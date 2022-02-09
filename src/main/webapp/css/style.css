@@ -25,6 +25,8 @@ h3{
 
 .formSearch {
 	display:flex;
+	padding-left: 20px;
+	border-left: 2px black solid;
 }
 
 .btnSearchAdv {
@@ -40,6 +42,7 @@ h3{
 
 #divSearch {
 	width:40%;
+	min-width : 475px;
 }
 
 #listeSearch {
@@ -48,6 +51,10 @@ h3{
 
 #advSearch {
 	display : flex;
+}
+
+#achatsSearch{
+	min-width:230px;
 }
 
 #filtreSearch {
