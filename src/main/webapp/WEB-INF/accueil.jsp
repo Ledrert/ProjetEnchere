@@ -89,7 +89,7 @@ function loadFiltre(){
 <div class="listEnchere">
 <c:forEach var="article" items="${listeArt}"> <!-- Pour chaque enchère : une case  -->
 <div id="cardEnchere">
-<img alt="img" src="" id="imgEnchere">
+<img alt="img" src="img/image.png" id="imgEnchere">
 <a id="nomArticle" href="detailEnchere?id=${article.getNoArticle()}">${article.getNomArticle() }</a>
 <p id="detailArticle">Prix : ${article.recupererDernierEnchere() }</p>
 <p>Fin de l'enchère : ${article.getDateFinEncheres() }</p>

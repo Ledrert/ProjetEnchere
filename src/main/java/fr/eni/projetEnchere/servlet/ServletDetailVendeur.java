@@ -35,7 +35,10 @@ public class ServletDetailVendeur extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Map<String, String> menu = new HashMap<>();
+		
+		
+		try { 
+			Map<String, String> menu = new HashMap<>();
 		HttpSession session = request.getSession();
 		if(session != null) { //S'il y a une session (donc : un login a été fait)
 			Utilisateur user = (Utilisateur)session.getAttribute("user"); //récupération des informations de l'utilisateur connecté
@@ -67,7 +70,10 @@ public class ServletDetailVendeur extends HttpServlet {
 			response.sendRedirect("/ProjetEnchere/");
 			return;
 		}
-	
+	} catch (Exception e) {
+		request.getRequestDispatcher("/WEB-INF/accueil.jsp").forward(request, response);
+		e.printStackTrace();
+	}
 	}
 
 	/**
