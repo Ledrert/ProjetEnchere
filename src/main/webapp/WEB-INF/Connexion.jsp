@@ -43,5 +43,6 @@
 		<button type="button" >Annuler</button></a>
 		</form>
 </div>
+<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 </body>
 </html>

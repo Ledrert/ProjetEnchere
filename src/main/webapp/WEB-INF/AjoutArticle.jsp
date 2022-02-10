@@ -84,6 +84,7 @@
 				formaction="enchere">Retour vers l'accueil</button>
 	</form>
 </div>
+<%@ include file="/WEB-INF/jsp/footer.jsp" %>
 
 </body>
 </html>
