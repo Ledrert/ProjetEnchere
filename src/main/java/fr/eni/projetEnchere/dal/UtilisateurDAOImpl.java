@@ -85,12 +85,10 @@ public class UtilisateurDAOImpl extends DAO implements UtilisateurDAO {
 	@Override
 	public void supprimerUtilisateur (Utilisateur utilisateur) throws DalException {
 		Connection cnx = null;
-		CallableStatement cstmt = null;		
-		System.out.println("test supprimer");
+		CallableStatement cstmt = null;
 			try {
 				cnx = ConnectionProvider.getConnection();
 				cstmt = cnx.prepareCall(SQL_DELETE_UTILISATEUR);
-				System.out.println(utilisateur.getNoUtilisateur());
 				cstmt.setInt(1, utilisateur.getNoUtilisateur());
 				cstmt.executeUpdate();
 				} catch (SQLException e) {
