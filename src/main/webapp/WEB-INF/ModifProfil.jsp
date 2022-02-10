@@ -82,7 +82,7 @@
 </div>
 
 	<c:if test="${param.error == 1}">	
-    <p style="color : red">Vos mdp ne correspondent pas. Veuillez reessayer</p>
+    <p style="color : red">Vos mots de passe ne sont pas identiques. Veuillez réessayer</p>
 	</c:if>
 
     <div class="buttonForm">
