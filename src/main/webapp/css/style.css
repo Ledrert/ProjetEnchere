@@ -199,5 +199,5 @@ h3{
 }
 
 #invisible {
-	display :none;
+	visibility: collapse;
 }
