@@ -16,7 +16,7 @@ import fr.eni.projetEnchere.bo.Enchere;
 import fr.eni.projetEnchere.bo.Retrait;
 import fr.eni.projetEnchere.bo.Utilisateur;
 
-public class ArticleDaoImpl extends DAO implements ArticleDAO {
+public class ArticleDaoImpl implements ArticleDAO {
 
 	private final static String SELECT_ALL = "SELECT * FROM article ;";
 	private final static String SELECT_BY_ID = "SELECT * FROM article WHERE no_article =?;";
@@ -82,7 +82,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur SQL listerArticle()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(st);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 		return listeArticle;
 	}
@@ -108,7 +108,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur SQL listerCategorie()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(st);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 		return listeCat;
 	}
@@ -134,7 +134,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur SQL rechercherCategorie()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 		return cat;
 	}
@@ -160,7 +160,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur SQL rechercherCategorie()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 		return cat;
 	}
@@ -183,7 +183,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur SQL modifierArticle()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 	}
 	
@@ -211,7 +211,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur SQL ajouterArticle()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(cst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 	}
 	
@@ -229,7 +229,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur SQL supprimerArticle()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 		
 	}
@@ -268,7 +268,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur SQL listerAchats()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 		return listeArticle;
 	}
@@ -308,7 +308,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur SQL listerEnchereEnCours()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 		return listeArticle;
 	}
@@ -348,7 +348,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur SQL listerEnchereEnCours()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 		return listeArticle;
 	}
@@ -387,7 +387,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur SQL chercherEnchereRemportee()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 		return listeArticle;
 	}
@@ -426,7 +426,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur SQL listerVentes()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 		return listeArticle;
 	}
@@ -465,7 +465,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur SQL listerAchats()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 		return listeArticle;
 	}
@@ -504,7 +504,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur SQL listerVentesNonDebut()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 		return listeArticle;
 	}
@@ -543,7 +543,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur SQL listerVentesTerminees()", e);
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 		return listeArticle;
 	}
@@ -580,7 +580,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur sur la méthode select art by id", e); 
 		} finally {
 			ConnectionProvider.seDeconnecter(pstmt);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 		return art;
 	}
@@ -609,7 +609,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur sur la méthode dernierEncherisseur()", e); 
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 		return vente;
 	}
@@ -630,7 +630,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur sur la méthode updateFinEnchere()", e); 
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 	}
 
@@ -651,7 +651,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur sur la méthode ajoutRetrait()", e); 
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 	}
 	
@@ -672,7 +672,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur sur la méthode ajoutEnchere()", e); 
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 	}
 	
@@ -700,7 +700,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur sur la méthode recupererRetrait()", e); 
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 		return ret;
 	}
@@ -731,7 +731,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			throw new DalException("Erreur sur la méthode recupererEnchereArticle()", e); 
 		} finally {
 			ConnectionProvider.seDeconnecter(pst);
-			seDeconnecter(cnx);
+			ConnectionProvider.seDeconnecter(cnx);
 		}
 		return liste;
 	}

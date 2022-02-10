@@ -63,6 +63,14 @@ public class ConnectionProvider {
 		} catch (SQLException e) {
 			throw new DalException("Problème fermeture CallableStatement");
 		}
-		
+	}
+	
+	public static void seDeconnecter(Connection cnx) {
+		try {
+			cnx.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
