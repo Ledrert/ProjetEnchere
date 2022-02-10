@@ -43,11 +43,17 @@ public class ArticleManager {
 		Date now = new Date(Calendar.getInstance().getTime().getTime());
 		for(Article art : listeArticles) {
 			if(art.getDateFinEncheres().before(now) && art.getUserAcheteur() == null) {
-				Enchere vente = dao.dernierEncherisseur(art);
-				System.out.println(art +" :" +vente);
-				dao.updateFinEnchere(art, vente);
-				art.setUtilisateurAcheteur(vente.getNoEncherisseur());
-				art.setPrixVente(vente.getMontantEnchere());
+				if(art.getListeEnchere().isEmpty()) {
+					art.setUtilisateurAcheteur(art.getUserVendeur());
+					art.setPrixVente(art.getPrixInitial());
+				} else {
+					Enchere vente = dao.dernierEncherisseur(art);
+					dao.updateFinEnchere(art, vente);
+					art.setUtilisateurAcheteur(vente.getNoEncherisseur());
+					art.setPrixVente(vente.getMontantEnchere());
+					art.getUserAcheteur().debiter(vente.getMontantEnchere());
+					art.getUserVendeur().crediter(vente.getMontantEnchere());
+				}
 			}
 		}
 	}

@@ -30,8 +30,8 @@ public interface ArticleDAO {
 	public List<Article> listerVentesTerminees(Utilisateur user) throws DalException;
 	public Enchere dernierEncherisseur(Article art) throws DalException;
 	public void updateFinEnchere(Article art, Enchere vente) throws DalException;
-	void ajoutRetrait(Retrait ret) throws DalException;
-	void ajoutEnchere(Enchere enc) throws DalException;
-	Retrait recupererRetrait(Article art) throws DalException;
+	public void ajoutRetrait(Retrait ret) throws DalException;
+	public void ajoutEnchere(Enchere enc) throws DalException;
+	public Retrait recupererRetrait(Article art) throws DalException;
 	
 }

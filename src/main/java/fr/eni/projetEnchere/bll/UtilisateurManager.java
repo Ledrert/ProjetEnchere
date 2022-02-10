@@ -52,12 +52,24 @@ public class UtilisateurManager {
 
 	public void ModifierUtilisateur(Utilisateur utilisateur) throws DalException {
 		dao.ModifierUtilisateur(utilisateur);
-		listeUser.set(utilisateur.getNoUtilisateur()-1, utilisateur);
+		for(Utilisateur user : listeUser) {
+			if(user.getNoUtilisateur() == utilisateur.getNoUtilisateur()) {
+				listeUser.set(utilisateur.getNoUtilisateur(), utilisateur);
+				break;
+			}
+		}
+		
 	}
 
 	public void supprimerUtilisateur (Utilisateur utilisateur) throws DalException {
 		dao.supprimerUtilisateur(utilisateur);
-		listeUser.remove(utilisateur.getNoUtilisateur()-1);
+		for(Utilisateur user : listeUser) {
+			if(user.getNoUtilisateur() == utilisateur.getNoUtilisateur()) {
+				listeUser.remove(utilisateur.getNoUtilisateur());
+				break;
+			}
+		}
+		
 	}
 	
 	public Utilisateur getById(int id) throws DalException{

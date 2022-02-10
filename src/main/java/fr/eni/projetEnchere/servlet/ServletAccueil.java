@@ -61,7 +61,6 @@ public class ServletAccueil extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Article> articles = new ArrayList<Article>();
 		List<Article> listArtFiltre = null;
 		ArticleManager artM;
 		String radioF, enchDebut, enchEC, enchEnd, venteEC, venteNC, venteFin;
