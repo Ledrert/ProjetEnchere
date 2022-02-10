@@ -197,3 +197,7 @@ h3{
 #articleArt {
 	width : 230px;
 }
+
+#invisible {
+	display :none;
+}

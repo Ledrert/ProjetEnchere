@@ -149,4 +149,15 @@ public class Article {
 		}
 		return max;
 	}
+
+	@Override
+	public String toString() {
+		return "Article [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
+				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", prixInitial="
+				+ prixInitial + ", prixVente=" + prixVente + ", userVendeur=" + userVendeur + ", userAcheteur="
+				+ userAcheteur + ", categorie=" + categorie + ", retrait=" + retrait + ", listeEnchere=" + listeEnchere
+				+ "]\n\n";
+	}
+	
+	
 }

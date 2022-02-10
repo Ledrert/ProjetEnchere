@@ -63,6 +63,7 @@ public class ServletAccueil extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<Article> listArtFiltre = null;
 		ArticleManager artM;
+		//gestion de la récupération des filtres selon leur ancienne valeur active
 		String radioF, enchDebut, enchEC, enchEnd, venteEC, venteNC, venteFin;
 		String CkVente="", ckAchat="", ckEncDeb="", ckEncEC="", ckEncWin="", ckVEC="", ckVNC="", ckVEnd="";
 		if(request.getParameter("radioFiltre") == null) {

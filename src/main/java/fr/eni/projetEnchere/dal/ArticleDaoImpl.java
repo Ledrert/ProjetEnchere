@@ -300,6 +300,8 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 				art.setUtilisateurVendeur(userDao.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
 				art.setUtilisateurAcheteur(userDao.selectUtilisateurByiD(rs.getInt("no_acheteur")));
 				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
+				art.setRetrait(recupererRetrait(art));
+				art.setListeEnchere(recupererEnchereArticle(art));
 				listeArticle.add(art);
 			}
 		} catch (SQLException | DalException e) {
@@ -338,6 +340,8 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 				art.setUtilisateurVendeur(userDao.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
 				art.setUtilisateurAcheteur(userDao.selectUtilisateurByiD(rs.getInt("no_acheteur")));
 				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
+				art.setRetrait(recupererRetrait(art));
+				art.setListeEnchere(recupererEnchereArticle(art));
 				listeArticle.add(art);
 			}
 		} catch (SQLException | DalException e) {
@@ -375,6 +379,8 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 				art.setUtilisateurVendeur(userDao.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
 				art.setUtilisateurAcheteur(userDao.selectUtilisateurByiD(rs.getInt("no_acheteur")));
 				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
+				art.setRetrait(recupererRetrait(art));
+				art.setListeEnchere(recupererEnchereArticle(art));
 				listeArticle.add(art);
 			}
 		} catch (SQLException | DalException e) {
@@ -412,6 +418,8 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 				art.setUtilisateurVendeur(userDao.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
 				art.setUtilisateurAcheteur(userDao.selectUtilisateurByiD(rs.getInt("no_acheteur")));
 				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
+				art.setRetrait(recupererRetrait(art));
+				art.setListeEnchere(recupererEnchereArticle(art));
 				listeArticle.add(art);
 			}
 		} catch (SQLException | DalException e) {
@@ -449,6 +457,8 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 				art.setUtilisateurVendeur(userDao.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
 				art.setUtilisateurAcheteur(userDao.selectUtilisateurByiD(rs.getInt("no_acheteur")));
 				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
+				art.setRetrait(recupererRetrait(art));
+				art.setListeEnchere(recupererEnchereArticle(art));
 				listeArticle.add(art);
 			}
 		} catch (SQLException | DalException e) {
@@ -486,6 +496,8 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 				art.setUtilisateurVendeur(userDao.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
 				art.setUtilisateurAcheteur(userDao.selectUtilisateurByiD(rs.getInt("no_acheteur")));
 				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
+				art.setRetrait(recupererRetrait(art));
+				art.setListeEnchere(recupererEnchereArticle(art));
 				listeArticle.add(art);
 			}
 		} catch (SQLException | DalException e) {
@@ -523,6 +535,8 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 				art.setUtilisateurVendeur(userDao.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
 				art.setUtilisateurAcheteur(userDao.selectUtilisateurByiD(rs.getInt("no_acheteur")));
 				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
+				art.setRetrait(recupererRetrait(art));
+				art.setListeEnchere(recupererEnchereArticle(art));
 				listeArticle.add(art);
 			}
 		} catch (SQLException | DalException e) {

@@ -168,6 +168,9 @@ public class ArticleManager {
 	
 	public void ajouterEnchere(Enchere enc) throws DalException {
 		dao.ajoutEnchere(enc);
-		enc.getArticleVendu().ajouterEnchere(enc);
+		for(Article art : listeArticles) {
+			if(art.getNoArticle() == enc.getArticleVendu().getNoArticle()) 
+				art.ajouterEnchere(enc);
+		}
 	}
 }
