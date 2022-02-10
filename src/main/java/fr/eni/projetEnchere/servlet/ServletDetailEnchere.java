@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.projetEnchere.bll.ArticleManager;
+import fr.eni.projetEnchere.bll.UtilisateurManager;
 import fr.eni.projetEnchere.bo.Article;
 import fr.eni.projetEnchere.bo.Enchere;
 import fr.eni.projetEnchere.bo.Retrait;
@@ -98,6 +99,9 @@ public class ServletDetailEnchere extends HttpServlet {
 		//récupérer utilisateur inscrit dans la session -> récupérer id : utiliser.getNoUtilisateur
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("user");
 
+		int oldEnchere = Integer.valueOf(request.getParameter("oldEnc"));
+		int noOldU = Integer.valueOf(request.getParameter("oldEncU"));
+		
 		Enchere enc = new Enchere();
 		enc.setNoEncherisseur(utilisateur);
 		enc.setDateEnchere(dateEnchereSQL);		
@@ -108,9 +112,11 @@ public class ServletDetailEnchere extends HttpServlet {
 
 		try {
 			ArticleManager am = ArticleManager.getInstance();
+			UtilisateurManager um = UtilisateurManager.getInstance();
+			Utilisateur old = um.getById(noOldU);
 			enc.setArticleVendu(am.getById(noArt));
 			am.ajouterEnchere(enc);
-						
+			um.paiementEnchere(old, utilisateur, oldEnchere, montantEnchere);
 			
 		} catch (DalException e) {
 			e.printStackTrace();

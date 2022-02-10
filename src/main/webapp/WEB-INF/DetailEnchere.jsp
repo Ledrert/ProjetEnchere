@@ -31,7 +31,10 @@
 <p id="Retrait">Retrait : ${article.getRetrait().rue} ${article.getRetrait().codePostal} ${article.getRetrait().ville}</p>
 </div>
 <c:if test="${sessionScope.user != null && article.userVendeur.noUtilisateur != user.noUtilisateur && article.dateFinEncheres gt today}">
-	<form><div id="invisible"><input type="text" id="noArt" name="noArt" value="${article.noArticle }"></div>
+	<form>
+	<div id="invisible"><input type="text" id="oldEnc" name="oldEnc" value="${enchere.montantEnchere}">
+<input type="text" id="oldEncU" name="oldEncU" value="${enchere.getNoEncherisseur().noUtilisateur}">
+<input type="text" id="noArt" name="noArt" value="${article.noArticle }"></div>
 	<label for="prix">Ma proposition : </label>
 	<input type="number" id="prix" name="prix" min="1" max="100000">
 	<button type="submit" id ="proposition" name="proposition" formmethod="post" formaction="detailEnchere">Enchérir</button></form>
