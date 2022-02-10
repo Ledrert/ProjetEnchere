@@ -19,6 +19,5 @@ attention, vos crédits vont disparaitre. vous ne pourrez pas les récuperer.
 
 
 <%@ include file="/WEB-INF/jsp/footer.jsp" %>
-
 </body>
 </html>

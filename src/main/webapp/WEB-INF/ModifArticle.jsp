@@ -70,6 +70,6 @@
 			<button type="submit" name="annuler" formmethod="get" formaction="enchere">Annuler</button>
 	</div>
 </form>
-<%@ include file="/WEB-INF/jsp/footer.jsp" %>
+<%@ include file="/WEB-INF/jsp/footer.jsp" %> 
 </body>
 </html>

@@ -28,6 +28,6 @@
 <button type="button" >Retour vers l'accueil</button></a>
 </form>
 </div>
-<%@ include file="/WEB-INF/jsp/footer.jsp" %>
+<%@ include file="/WEB-INF/jsp/footer.jsp" %> 
 </body>
 </html>

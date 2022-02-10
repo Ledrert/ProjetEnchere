@@ -46,8 +46,7 @@
 		<label for="phone">Téléphone :</label>
 	</div>
 	<div>
-		<input type="tel" id="phone" name="phone" placeholder="XXXXXXXXXX"
-			required>
+		<input type="tel" id="phone" name="phone" placeholder="XXXXXXXXXX" required>
 	</div>
 	<div id="labelCo">
 		<label for="adresse">Rue :</label>
@@ -77,9 +76,17 @@
 		<label for="confirmPassword">Confirmez le mot de passe :</label>
 	</div>
 	<div>
-		<input type="password" name="confirmPassword" id="confirmPassword"
-			maxlength="30" required>
+		<input type="password" name="confirmPassword" id="confirmPassword" maxlength="30" required>
 	</div>
+
+	<c:if test="${param.error == 1}">	
+    <p style="color : red">Votre Pseudo ou Email existe déjà. Veuillez en choisir un autre.</p>
+	</c:if>
+
+	<c:if test="${param.error == 2}">	
+    <p style="color : red">Les mots de passe ne se correspondent pas, veuillez réessayer.</p>
+	</c:if>
+	
 </div>
     <div class="buttonForm">
     	<a href="inscription"> 
@@ -93,6 +100,6 @@
 </div>
 
 
-<%-- 	<%@ include file="/WEB-INF/jsp/footer.jsp" %> --%> </body>
-
+<%@ include file="/WEB-INF/jsp/footer.jsp" %>
+</body>
 </html>

@@ -90,6 +90,6 @@
 </div></form>
 </main>
 
-<%-- 	<%@ include file="/WEB-INF/jsp/footer.jsp" %> --%> </body>
-
+<%@ include file="/WEB-INF/jsp/footer.jsp" %>
+</body>
 </html>
