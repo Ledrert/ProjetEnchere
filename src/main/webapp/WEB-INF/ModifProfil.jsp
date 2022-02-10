@@ -74,12 +74,17 @@
 		<input type="password" name="password" id="password" maxlength="30"  required>
 	</div>
 	<div id="labelCo">
-		<label for="confirmPassword">Confirmez le mot de passe :</label>
+		<label for="verif">Confirmez le mot de passe :</label>
 	</div>
 	<div>
-		<input type="password" name="confirmPassword" id="confirmPassword"	maxlength="30" required>
+		<input type="password" name="verif" id="verif"	maxlength="30" required>
 	</div>
 </div>
+
+	<c:if test="${param.error == 1}">	
+    <p style="color : red">Vos mdp ne correspondent pas. Veuillez reessayer</p>
+	</c:if>
+
     <div class="buttonForm">
       	<button type="submit" name="modification" formmethod="post" formaction="modifProfil">Modifier</button>					
 		<button type="submit" name="suppression" formmethod="get" formaction="SuppressionProfil">Supprimer mon compte</button>

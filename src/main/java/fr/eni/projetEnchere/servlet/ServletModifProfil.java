@@ -57,10 +57,21 @@ public class ServletModifProfil extends HttpServlet {
 			um = UtilisateurManager.getInstance();
 			um.ModifierUtilisateur(utilisateur);
 			session.setAttribute("user", utilisateur);
+			String password = request.getParameter("password");
+			String verif = request.getParameter("verif");
+	        if(um.verifPassword(password, verif)) {
+	            response.sendRedirect("modifProfil?error=1");
+	            return;
+	        }
+	        password = HashPassword.hashpassword(password);
 		} catch (DalException e) {
 			System.out.println("erreur la méthode ModifierUtilisateur()");
 			e.printStackTrace();
 		}
+		
+
+		
+		
 		request.getRequestDispatcher("/profil").forward(request, response);
 	}
 
