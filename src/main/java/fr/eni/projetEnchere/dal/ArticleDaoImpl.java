@@ -260,6 +260,8 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 				art.setUtilisateurVendeur(userDao.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
 				art.setUtilisateurAcheteur(userDao.selectUtilisateurByiD(rs.getInt("no_acheteur")));
 				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
+				art.setRetrait(recupererRetrait(art));
+				art.setListeEnchere(recupererEnchereArticle(art));
 				listeArticle.add(art);
 			}
 		} catch (SQLException | DalException e) {
@@ -558,6 +560,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 				art.setUtilisateurAcheteur(userDAO.selectUtilisateurByiD(rs.getInt("no_acheteur")));
 				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
 				art.setRetrait(recupererRetrait(art));
+				art.setListeEnchere(recupererEnchereArticle(art));
 			}
 		} catch (SQLException e) {
 			throw new DalException("Erreur sur la méthode select art by id", e); 
