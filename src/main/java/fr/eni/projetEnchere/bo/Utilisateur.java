@@ -151,14 +151,6 @@ public class Utilisateur {
 	public void setEncheres(List<Enchere> encheres) {
 		this.encheres = encheres;
 	}
-	
-	public void crediter(int somme) {
-		this.credit += somme;
-	}
-	
-	public void debiter(int somme) {
-		this.credit -= somme;
-	}
 
 	@Override
 	public String toString() {

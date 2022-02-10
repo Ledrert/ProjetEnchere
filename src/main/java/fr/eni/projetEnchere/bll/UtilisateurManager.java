@@ -20,10 +20,14 @@ public class UtilisateurManager {
 		return instance;
 	}
 	
+	private void rechargerListe() throws DalException {
+		listeUser = dao.selectAllUtilisateur();
+	}
+	
 	private UtilisateurManager() throws DalException {	
 		dao = DAOFactory.getUtilisateurDAO();
 		try {
-			listeUser = dao.selectAllUtilisateur();
+			rechargerListe();
 		} catch (DalException e) {
 			throw new DalException("erreur chargement liste utilisateur", e);
 		}
@@ -52,29 +56,13 @@ public class UtilisateurManager {
 
 	public void ModifierUtilisateur(Utilisateur utilisateur) throws DalException {
 		dao.ModifierUtilisateur(utilisateur);
-		int i=0;
-		for(Utilisateur user : listeUser) {
-			if(user.getNoUtilisateur() == utilisateur.getNoUtilisateur()) {
-				listeUser.set(i, utilisateur);
-				break;
-			}
-			i++;
-		}
+		rechargerListe();
 		
 	}
 
 	public void supprimerUtilisateur (Utilisateur utilisateur) throws DalException {
 		dao.supprimerUtilisateur(utilisateur);
-		int i=0;
-		for(Utilisateur user : listeUser) {
-			if(user.getNoUtilisateur() == utilisateur.getNoUtilisateur()) {
-				listeUser.remove(i);
-				ArticleManager am = ArticleManager.getInstance();
-				am.supprimerArticleUtilisateur(user);
-				break;
-			}
-			i++;
-		}
+		rechargerListe();
 		
 	}
 	
@@ -112,8 +100,7 @@ public class UtilisateurManager {
 	public void paiementEnchere(Utilisateur oldEncherisseur, Utilisateur newEncherisseur, int sommeOld, int SommeNew) throws DalException {
 		dao.crediter(oldEncherisseur, sommeOld);
 		dao.debiter(newEncherisseur, SommeNew);
-		oldEncherisseur.crediter(sommeOld);
-		newEncherisseur.debiter(SommeNew);
+		listerUtilisateur();
 	}
 	
 }

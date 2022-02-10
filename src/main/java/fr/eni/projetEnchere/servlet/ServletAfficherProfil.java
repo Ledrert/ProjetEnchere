@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.projetEnchere.bll.ArticleManager;
+import fr.eni.projetEnchere.bll.UtilisateurManager;
 import fr.eni.projetEnchere.bo.Utilisateur;
 import fr.eni.projetEnchere.dal.DalException;
 
@@ -53,6 +54,14 @@ public class ServletAfficherProfil extends HttpServlet {
 		} else {
 			menu.put("/connexion", "Se connecter");
 			menu.put("/inscription", "S'inscrire");
+		}
+		UtilisateurManager um;
+		try {
+			um = UtilisateurManager.getInstance();
+			user = um.getById(user.getNoUtilisateur());
+		} catch (DalException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		request.setAttribute("user", user);
 		request.setAttribute("listMenu", menu);

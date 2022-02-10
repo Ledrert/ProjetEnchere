@@ -124,9 +124,8 @@ public class UtilisateurDAOImpl extends DAO implements UtilisateurDAO {
 				utilisateur.setCodePostal(rs.getString("code_postal"));
 				utilisateur.setVille(rs.getString("ville"));
 				utilisateur.setPassword(rs.getString("mot_de_passe"));
-				
+				utilisateur.setCredit(rs.getInt("credit"));
 				String admin = rs.getString("administrateur");
-				
 				if (admin.equals("y")) {
 					utilisateur.setAdmin(true);
 				} else { 
@@ -165,6 +164,7 @@ public class UtilisateurDAOImpl extends DAO implements UtilisateurDAO {
 				utilisateur.setCodePostal(rs.getString("code_postal"));
 				utilisateur.setVille(rs.getString("ville"));
 				utilisateur.setPassword(rs.getString("mot_de_passe"));
+				utilisateur.setCredit(rs.getInt("credit"));
 				String admin = rs.getString("administrateur");
 				if (admin.equals("y")) {
 					utilisateur.setAdmin(true);
@@ -178,6 +178,7 @@ public class UtilisateurDAOImpl extends DAO implements UtilisateurDAO {
 			throw new DalException("Erreur sur la méthode SelectAll()", e); 
 		} finally {
 			ConnectionProvider.seDeconnecter(stmt);
+			seDeconnecter(cnx);
 		}
 		return listeUtilisateur;
 	}

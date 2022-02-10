@@ -28,11 +28,15 @@ public class ArticleManager {
 		return instance;
 	}
 	
+	private void rechargerListe() throws DalException {
+		listeCat = dao.listerCategorie();
+		listeArticles = dao.listerArticle();
+	}
+	
 	private ArticleManager() throws DalException {
 		dao = DAOFactory.getArticleDAO();
 		try {
-			listeCat = dao.listerCategorie();
-			listeArticles = dao.listerArticle();
+			rechargerListe();
 			verifierFinEnchere();
 		} catch (DalException e) {
 			throw new DalException("erreur chargement liste article", e);
@@ -51,8 +55,8 @@ public class ArticleManager {
 					dao.updateFinEnchere(art, vente);
 					art.setUtilisateurAcheteur(vente.getNoEncherisseur());
 					art.setPrixVente(vente.getMontantEnchere());
-					art.getUserVendeur().crediter(vente.getMontantEnchere());
 					DAOFactory.getUtilisateurDAO().crediter(art.getUserVendeur(), vente.getMontantEnchere());
+					rechargerListe();
 				}
 			}
 		}
