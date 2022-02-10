@@ -23,6 +23,7 @@ public class Article {
 	
     //Constructors
     public Article() {
+    	this.listeEnchere = new ArrayList<Enchere>();
     }
 
     public Article(String nomArticle, String description, int prix, Date dateDebutEncheres,Date dateFinEncheres, Utilisateur userVendeur, Categorie categorie) {
