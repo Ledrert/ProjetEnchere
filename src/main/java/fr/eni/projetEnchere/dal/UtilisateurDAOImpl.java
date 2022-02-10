@@ -23,6 +23,7 @@ public class UtilisateurDAOImpl extends DAO implements UtilisateurDAO {
 	private final static String SQL_SEARCH_PSEUDO = "SELECT pseudo FROM UTILISATEUR WHERE email=?;";
 	private final static String SQL_VERIF_ID = "SELECT * FROM UTILISATEUR WHERE pseudo=? AND mot_de_passe=?;";
 	private final static String SQL_VERIF_PASSWORD = "SELECT * FROM UTILISATEUR WHERE mot_de_passe=?;";
+	private final static String PAIEMENT = "UPDATE utilisateur SET credit = ? WHERE no_utilisateur=?;";
 	
 	
 	@Override
@@ -263,11 +264,49 @@ public class UtilisateurDAOImpl extends DAO implements UtilisateurDAO {
 					utilisateur.setCredit(rs.getInt("credit"));
 				}
 		} catch (SQLException e) {
-		throw new DalException("Erreur sur la méthode verifIdentifiants()", e); 
+			throw new DalException("Erreur sur la méthode verifIdentifiants()", e); 
 		} finally {
 			ConnectionProvider.seDeconnecter(pstmt);
 			seDeconnecter(cnx);		
 		} return utilisateur;
+	}
+	
+	@Override
+	public void crediter(Utilisateur user, int somme) throws DalException {
+		Connection cnx = null;
+		PreparedStatement pst = null;
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pst = cnx.prepareStatement(PAIEMENT);
+			pst.setInt(1, somme);
+			pst.setInt(2, user.getNoUtilisateur());
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			throw new DalException("Erreur sur la méthode verifIdentifiants()", e); 
+		} finally {
+			ConnectionProvider.seDeconnecter(pst);
+			seDeconnecter(cnx);		
+		}
+	}
+	
+	@Override
+	public void debiter(Utilisateur user, int somme) throws DalException {
+		Connection cnx = null;
+		PreparedStatement pst = null;
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pst = cnx.prepareStatement(PAIEMENT);
+			pst.setInt(1, -somme);
+			pst.setInt(2, user.getNoUtilisateur());
+			pst.executeUpdate();
+		} catch (SQLException e) {
+			throw new DalException("Erreur sur la méthode verifIdentifiants()", e); 
+		} finally {
+			ConnectionProvider.seDeconnecter(pst);
+			seDeconnecter(cnx);		
+		}
 	}
 }
 

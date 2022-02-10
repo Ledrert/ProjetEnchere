@@ -22,6 +22,7 @@
 <p>Rue : ${requestScope.user.rue}</p>
 <p>Code postal : ${requestScope.user.codePostal}</p>
 <p>Ville : ${requestScope.user.ville}</p>
+<p>Crédit : ${requestScope.user.credit }</p>
 </div>
 
 <form>

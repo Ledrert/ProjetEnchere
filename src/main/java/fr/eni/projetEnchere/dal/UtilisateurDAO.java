@@ -14,6 +14,8 @@ public interface UtilisateurDAO {
 	public String chercherPseudo (String email) throws DalException;
 	public Utilisateur verifIdentifiants(String pseudo, String password) throws DalException;
 	public Utilisateur verifPassword(String password) throws DalException;
+	void debiter(Utilisateur user, int somme) throws DalException;
+	void crediter(Utilisateur user, int somme) throws DalException;
 	
 }
 
