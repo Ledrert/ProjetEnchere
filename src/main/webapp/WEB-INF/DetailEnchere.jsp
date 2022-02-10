@@ -30,15 +30,21 @@
 <p id="finEnchere">Fin de l'enchère : ${article.dateFinEncheres}</p>
 <p id="Retrait">Retrait : ${article.getRetrait().rue} ${article.getRetrait().codePostal} ${article.getRetrait().ville}</p>
 </div>
-<c:if test="${sessionScope.user != null && article.userVendeur.noUtilisateur != user.noUtilisateur && article.dateFinEncheres gt today}">
-	<form>
-	<div id="invisible"><input type="text" id="oldEnc" name="oldEnc" value="${enchere.montantEnchere}">
+<c:if test="${sessionScope.user != null && article.userVendeur.noUtilisateur != user.noUtilisateur}">
+	<form><div id="invisible"><input type="text" id="oldEnc" name="oldEnc" value="${enchere.montantEnchere}">
 <input type="text" id="oldEncU" name="oldEncU" value="${enchere.getNoEncherisseur().noUtilisateur}">
-<input type="text" id="noArt" name="noArt" value="${article.noArticle }"></div>
+<input type="text" id="noArt" name="noArt" value="${article.noArticle }"><input type="text" id="noArt" name="noArt" value="${article.noArticle }">
+	<input type="number" id="mtnArt" name="mtnArt" value="${enchere.montantEnchere }"></div>
 	<label for="prix">Ma proposition : </label>
 	<input type="number" id="prix" name="prix" min="1" max="100000">
 	<button type="submit" id ="proposition" name="proposition" formmethod="post" formaction="detailEnchere">Enchérir</button></form>
 </c:if>
+	
+<c:if test="${param.error == 1}">	
+    <p style="color : red">Veuillez saisir une enchère plus élevée que l'enchère actuelle. </p>
+</c:if>
+
+
 <br>
 <c:if test="${article.userVendeur.noUtilisateur == user.noUtilisateur && article.dateDebutEncheres gt today}">
 	<a id="detailEnchere" href="modifArticle?id=${article.getNoArticle()}">Modifier mon article</a>

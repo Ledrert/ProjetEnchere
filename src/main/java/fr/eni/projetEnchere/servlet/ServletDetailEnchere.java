@@ -1,14 +1,11 @@
 package fr.eni.projetEnchere.servlet;
-
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,22 +13,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import fr.eni.projetEnchere.bll.ArticleManager;
 import fr.eni.projetEnchere.bll.UtilisateurManager;
 import fr.eni.projetEnchere.bo.Article;
 import fr.eni.projetEnchere.bo.Enchere;
-import fr.eni.projetEnchere.bo.Retrait;
 import fr.eni.projetEnchere.bo.Utilisateur;
 import fr.eni.projetEnchere.dal.DalException;
-
 /**
  * Servlet implementation class ServletDetailEnchere
  */
 @WebServlet(name="/ServletDetailEnchere", urlPatterns = "/detailEnchere")
 public class ServletDetailEnchere extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
+    private static final long serialVersionUID = 1L;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -66,7 +59,14 @@ public class ServletDetailEnchere extends HttpServlet {
 		
 		try {
 			ArticleManager am = ArticleManager.getInstance();
-			int id =  Integer.valueOf(request.getParameter("id"));
+			int id, error;
+            if(request.getParameter("id") == null) {
+                error = 1;
+                request.setAttribute("error", error);
+                id = (int)session.getAttribute("article");
+            } else {
+            id =  Integer.valueOf(request.getParameter("id"));
+            }
 			Article article = am.getById(id);
 			Enchere enc = am.getDernierEnchere(article);
 			if(enc == null) {
@@ -108,21 +108,25 @@ public class ServletDetailEnchere extends HttpServlet {
 		int montantEnchere = Integer.parseInt(request.getParameter("prix"));
 		enc.setMontantEnchere(montantEnchere);
 		int noArt = Integer.valueOf(request.getParameter("noArt"));
-		
-
-		try {
-			ArticleManager am = ArticleManager.getInstance();
-			UtilisateurManager um = UtilisateurManager.getInstance();
-			Utilisateur old = um.getById(noOldU);
-			enc.setArticleVendu(am.getById(noArt));
-			am.ajouterEnchere(enc);
-			um.paiementEnchere(old, utilisateur, oldEnchere, montantEnchere);
-			
-		} catch (DalException e) {
-			e.printStackTrace();
-			
-		}
-		response.sendRedirect("/ProjetEnchere/");
+		int ancienneEnchere = Integer.parseInt(request.getParameter("mtnArt"));
+        if (montantEnchere < ancienneEnchere) {
+            session.setAttribute("article", noArt);
+            response.sendRedirect("detailEnchere?error=1");
+        } else {
+	
+			try {
+				ArticleManager am = ArticleManager.getInstance();
+				UtilisateurManager um = UtilisateurManager.getInstance();
+				Utilisateur old = um.getById(noOldU);
+				enc.setArticleVendu(am.getById(noArt));
+				am.ajouterEnchere(enc);
+				um.paiementEnchere(old, utilisateur, oldEnchere, montantEnchere);
+				
+			} catch (DalException e) {
+				e.printStackTrace();
+				
+			}
+			response.sendRedirect("/ProjetEnchere/");
+        }
 	}
-
 }

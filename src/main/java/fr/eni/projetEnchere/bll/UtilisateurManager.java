@@ -79,7 +79,6 @@ public class UtilisateurManager {
 	}
 	
 	public Utilisateur getById(int id) throws DalException{
-		dao = DAOFactory.getUtilisateurDAO();
 		try {
 			return dao.selectUtilisateurByiD(id);
 		} catch (DalException e) {
@@ -88,7 +87,6 @@ public class UtilisateurManager {
 	}
 
 	public boolean verifPseudoExist (String pseudo) throws DalException {
-		dao = DAOFactory.getUtilisateurDAO();
 		for (Utilisateur user : listeUser)
 			if (pseudo.equals(user.getPseudo())) {
 				return true;
@@ -97,7 +95,6 @@ public class UtilisateurManager {
 		}
 	
 	public boolean verifEmailExist (String email) throws DalException {
-		dao = DAOFactory.getUtilisateurDAO();
 		for (Utilisateur user : listeUser)
 			if (email.equals(user.getEmail())) {
 				return true;
@@ -110,6 +107,13 @@ public class UtilisateurManager {
 			return false;
 		}
 		return true;
+	}
+	
+	public void paiementEnchere(Utilisateur oldEncherisseur, Utilisateur newEncherisseur, int sommeOld, int SommeNew) throws DalException {
+		dao.crediter(oldEncherisseur, sommeOld);
+		dao.debiter(newEncherisseur, SommeNew);
+		oldEncherisseur.crediter(sommeOld);
+		newEncherisseur.debiter(SommeNew);
 	}
 	
 }

@@ -51,8 +51,8 @@ public class ArticleManager {
 					dao.updateFinEnchere(art, vente);
 					art.setUtilisateurAcheteur(vente.getNoEncherisseur());
 					art.setPrixVente(vente.getMontantEnchere());
-					art.getUserAcheteur().debiter(vente.getMontantEnchere());
 					art.getUserVendeur().crediter(vente.getMontantEnchere());
+					DAOFactory.getUtilisateurDAO().crediter(art.getUserVendeur(), vente.getMontantEnchere());
 				}
 			}
 		}
