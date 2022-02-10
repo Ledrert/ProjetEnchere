@@ -112,21 +112,25 @@ public class ServletDetailEnchere extends HttpServlet {
         if (montantEnchere < ancienneEnchere) {
             session.setAttribute("article", noArt);
             response.sendRedirect("detailEnchere?error=1");
-        } else {
-	
-			try {
-				ArticleManager am = ArticleManager.getInstance();
-				UtilisateurManager um = UtilisateurManager.getInstance();
-				Utilisateur old = um.getById(noOldU);
-				enc.setArticleVendu(am.getById(noArt));
-				am.ajouterEnchere(enc);
-				um.paiementEnchere(old, utilisateur, oldEnchere, montantEnchere);
-				
-			} catch (DalException e) {
-				e.printStackTrace();
-				
-			}
-			response.sendRedirect("/ProjetEnchere/");
+        } else { if (utilisateur.getCredit() < montantEnchere) {
+        	session.setAttribute("article", noArt);
+            response.sendRedirect("detailEnchere?error=2");
+	        } else {
+		
+				try {
+					ArticleManager am = ArticleManager.getInstance();
+					UtilisateurManager um = UtilisateurManager.getInstance();
+					Utilisateur old = um.getById(noOldU);
+					enc.setArticleVendu(am.getById(noArt));
+					am.ajouterEnchere(enc);
+					um.paiementEnchere(old, utilisateur, oldEnchere, montantEnchere);
+					
+				} catch (DalException e) {
+					e.printStackTrace();
+					
+				}
+				response.sendRedirect("/ProjetEnchere/");
+	        }
         }
 	}
 }

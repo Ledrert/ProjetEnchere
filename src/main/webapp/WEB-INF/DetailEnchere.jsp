@@ -39,12 +39,12 @@
 	<input type="number" id="prix" name="prix" min="1" max="100000">
 	<button type="submit" id ="proposition" name="proposition" formmethod="post" formaction="detailEnchere">Enchérir</button></form>
 </c:if>
-	
 <c:if test="${param.error == 1}">	
     <p style="color : red">Veuillez saisir une enchère plus élevée que l'enchère actuelle. </p>
 </c:if>
-
-
+<c:if test="${param.error == 2}">	
+    <p style="color : red">Nous n'avez pas les crédits suffisants </p>
+</c:if>
 <br>
 <c:if test="${article.userVendeur.noUtilisateur == user.noUtilisateur && article.dateDebutEncheres gt today}">
 	<a id="detailEnchere" href="modifArticle?id=${article.getNoArticle()}">Modifier mon article</a>
