@@ -1,3 +1,4 @@
+<%@page import="fr.eni.projetEnchere.bll.ArticleManager"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
@@ -90,7 +91,7 @@ function loadFiltre(){
 <div id="cardEnchere">
 <img alt="img" src="" id="imgEnchere">
 <a id="nomArticle" href="detailEnchere?id=${article.getNoArticle()}">${article.getNomArticle() }</a>
-<p id="detailArticle">Prix : ${article.getPrixInitial() }</p>
+<p id="detailArticle">Prix : ${article.recupererDernierEnchere() }</p>
 <p>Fin de l'enchère : ${article.getDateFinEncheres() }</p>
 <p>Vendeur : <a href="detailVendeur?id=${article.getUserVendeur().getNoUtilisateur()}">${article.getUserVendeur().getPseudo() }</a></p>
 </div>

@@ -32,5 +32,6 @@ public interface ArticleDAO {
 	public void updateFinEnchere(Article art, Enchere vente) throws DalException;
 	void ajoutRetrait(Retrait ret) throws DalException;
 	void ajoutEnchere(Enchere enc) throws DalException;
+	Retrait recupererRetrait(Article art) throws DalException;
 	
 }

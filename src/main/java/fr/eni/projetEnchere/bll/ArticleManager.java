@@ -148,5 +148,5 @@ public class ArticleManager {
 	
 	public void ajouterEnchere(Enchere enc) throws DalException {
 		dao.ajoutEnchere(enc);
-		}
+	}
 }

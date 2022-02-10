@@ -43,6 +43,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			+ "(select no_article, MAX(date_enchere) as lastEnchere from enchere where no_article = ? group by no_article) m \r\n"
 			+ "ON e.no_article = m.no_article and e.date_enchere = m.lastEnchere;";
 	private final static String UPDATE_FIN_ENCHERE = "UPDATE article SET no_acheteur = ?, prix_vente = ? WHERE no_article = ?;";
+	private final static String SELECT_ENCHERES_ART = "SELECT * FROM enchere WHERE no_article = ?;";
 	
 	private final static String AJOUT_RETRAIT = "INSERT INTO retrait VALUES (?,?,?,?);";
 	private final static String SELECT_RETRAIT = "SELECT * FROM retrait WHERE no_article=?;";
@@ -74,6 +75,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 				art.setUtilisateurAcheteur(user.selectUtilisateurByiD(rs.getInt("no_acheteur")));
 				art.setCategorie(rechercherCategorieParNom(rs.getString("nom_categorie")));
 				art.setRetrait(recupererRetrait(art));
+				art.setListeEnchere(recupererEnchereArticle(art));
 				listeArticle.add(art);
 			}
 		} catch (SQLException e) {
@@ -657,6 +659,7 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 		}
 	}
 	
+	@Override
 	public Retrait recupererRetrait(Article art) throws DalException {
 		Connection cnx = null;
 		PreparedStatement pst = null;
@@ -683,5 +686,36 @@ public class ArticleDaoImpl extends DAO implements ArticleDAO {
 			seDeconnecter(cnx);
 		}
 		return ret;
+	}
+	
+	public List<Enchere> recupererEnchereArticle(Article art) throws DalException{
+		Connection cnx = null;
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		Enchere enc = null;
+		List<Enchere> liste = new ArrayList<Enchere>();
+		UtilisateurDAOImpl user = new UtilisateurDAOImpl();
+		
+		try {
+			cnx = ConnectionProvider.getConnection();
+			pst = cnx.prepareStatement(SELECT_ENCHERES_ART);
+			pst.setInt(1, art.getNoArticle());
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				enc = new Enchere();
+				enc.setArticleVendu(art);
+				enc.setDateEnchere(rs.getTimestamp("date_enchere"));
+				enc.setMontantEnchere(rs.getInt("montant_enchere"));
+				enc.setNoEncherisseur(user.selectUtilisateurByiD(rs.getInt("no_utilisateur")));
+				liste.add(enc);
+			}
+		} catch (SQLException e) {
+			throw new DalException("Erreur sur la méthode recupererEnchereArticle()", e); 
+		} finally {
+			ConnectionProvider.seDeconnecter(pst);
+			seDeconnecter(cnx);
+		}
+		return liste;
 	}
 }

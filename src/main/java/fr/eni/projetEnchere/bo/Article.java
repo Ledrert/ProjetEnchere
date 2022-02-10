@@ -3,6 +3,7 @@ package fr.eni.projetEnchere.bo;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class Article {	
 
@@ -19,6 +20,7 @@ public class Article {
     private Utilisateur userAcheteur;
 	private Categorie categorie;
 	private Retrait retrait;
+	private List<Enchere> listeEnchere;
 	
     //Constructors
     public Article() {
@@ -114,14 +116,6 @@ public class Article {
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
     }
-    
-    @Override
-	public String toString() {
-		return "Article [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
-				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", prixInitial="
-				+ prixInitial + ", prixVente=" + prixVente + ", userVendeur=" + userVendeur + ", userAcheteur="
-				+ userAcheteur + ", categorie=" + categorie + "]";
-	}
 
 	public Retrait getRetrait() {
 		return retrait;
@@ -129,5 +123,25 @@ public class Article {
 
 	public void setRetrait(Retrait retrait) {
 		this.retrait = retrait;
+	}
+
+	public List<Enchere> getListeEnchere() {
+		return listeEnchere;
+	}
+
+	public void setListeEnchere(List<Enchere> listeEnchere) {
+		this.listeEnchere = listeEnchere;
+	}
+	
+	public int recupererDernierEnchere() {
+		int max = this.getPrixInitial();
+		if(!this.getListeEnchere().isEmpty()) {
+			for(Enchere enc : this.getListeEnchere()) {
+				if(enc.getMontantEnchere() > max) {
+					max = enc.getMontantEnchere();
+				}
+			}
+		}
+		return max;
 	}
 }
