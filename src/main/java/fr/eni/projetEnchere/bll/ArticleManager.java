@@ -68,6 +68,7 @@ public class ArticleManager {
 		}
 	
 	public List<Article> listerArticle() throws DalException {
+		rechargerListe();
 		return listeArticles;
 	}
 	
