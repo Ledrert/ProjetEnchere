@@ -67,6 +67,20 @@ public class ArticleManager {
 		return listeArticles;
 	}
 	
+	public void supprimerArticleUtilisateur(Utilisateur user) {
+		int i=0; boolean notFound=true;
+		do {
+			for(Article art : listeArticles) {
+				if(art.getUserVendeur().getNoUtilisateur() == user.getNoUtilisateur()) {
+					listeArticles.remove(i);
+					notFound=false;
+					break;
+				}
+				i++;
+			}
+		} while(notFound);
+	}
+	
 	public List<String> listerCategorie() throws DalException{
 		List<String> liste = new ArrayList<String>();
 		for(Categorie cat : listeCat) {
@@ -154,5 +168,6 @@ public class ArticleManager {
 	
 	public void ajouterEnchere(Enchere enc) throws DalException {
 		dao.ajoutEnchere(enc);
+		enc.getArticleVendu().ajouterEnchere(enc);
 	}
 }

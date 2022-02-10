@@ -52,22 +52,28 @@ public class UtilisateurManager {
 
 	public void ModifierUtilisateur(Utilisateur utilisateur) throws DalException {
 		dao.ModifierUtilisateur(utilisateur);
+		int i=0;
 		for(Utilisateur user : listeUser) {
 			if(user.getNoUtilisateur() == utilisateur.getNoUtilisateur()) {
-				listeUser.set(utilisateur.getNoUtilisateur(), utilisateur);
+				listeUser.set(i, utilisateur);
 				break;
 			}
+			i++;
 		}
 		
 	}
 
 	public void supprimerUtilisateur (Utilisateur utilisateur) throws DalException {
 		dao.supprimerUtilisateur(utilisateur);
+		int i=0;
 		for(Utilisateur user : listeUser) {
 			if(user.getNoUtilisateur() == utilisateur.getNoUtilisateur()) {
-				listeUser.remove(utilisateur.getNoUtilisateur());
+				listeUser.remove(i);
+				ArticleManager am = ArticleManager.getInstance();
+				am.supprimerArticleUtilisateur(user);
 				break;
 			}
+			i++;
 		}
 		
 	}

@@ -135,6 +135,10 @@ public class Article {
 		this.listeEnchere = listeEnchere;
 	}
 	
+	public void ajouterEnchere(Enchere enc) {
+		listeEnchere.add(enc);
+	}
+	
 	public int recupererDernierEnchere() {
 		int max = this.getPrixInitial();
 		if(!this.getListeEnchere().isEmpty()) {
