@@ -175,8 +175,12 @@ public class UtilisateurManager {
 	 * @throws DalException
 	 */
 	public void paiementEnchere(Utilisateur oldEncherisseur, Utilisateur newEncherisseur, int sommeOld, int SommeNew) throws DalException {
-		dao.crediter(oldEncherisseur, sommeOld);
-		dao.debiter(newEncherisseur, SommeNew);
+		if(oldEncherisseur.getNoUtilisateur() == newEncherisseur.getNoUtilisateur()) {
+			dao.debiter(newEncherisseur, SommeNew-sommeOld);
+			} else {
+			dao.crediter(oldEncherisseur, sommeOld);
+			dao.debiter(newEncherisseur, SommeNew);
+		}
 		listerUtilisateur();
 	}
 	

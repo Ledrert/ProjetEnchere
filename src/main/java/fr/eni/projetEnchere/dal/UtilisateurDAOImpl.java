@@ -278,7 +278,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		try {
 			cnx = ConnectionProvider.getConnection();
 			pst = cnx.prepareStatement(PAIEMENT);
-			pst.setInt(1, somme);
+			pst.setInt(1, user.getCredit()+somme);
 			pst.setInt(2, user.getNoUtilisateur());
 			pst.executeUpdate();
 		} catch (SQLException e) {
@@ -297,7 +297,7 @@ public class UtilisateurDAOImpl implements UtilisateurDAO {
 		try {
 			cnx = ConnectionProvider.getConnection();
 			pst = cnx.prepareStatement(PAIEMENT);
-			pst.setInt(1, -somme);
+			pst.setInt(1, user.getCredit()-somme);
 			pst.setInt(2, user.getNoUtilisateur());
 			pst.executeUpdate();
 		} catch (SQLException e) {
