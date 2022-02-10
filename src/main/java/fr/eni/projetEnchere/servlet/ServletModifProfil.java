@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import fr.eni.projetEnchere.bll.UtilisateurManager;
 import fr.eni.projetEnchere.bo.Utilisateur;
 import fr.eni.projetEnchere.dal.DalException;
+import fr.eni.projetEnchere.helpers.HashPassword;
 
 /**
  * Servlet implementation class ServletModifProfil
@@ -50,7 +51,9 @@ public class ServletModifProfil extends HttpServlet {
 		utilisateur.setRue(request.getParameter("adresse"));
 		utilisateur.setCodePostal(request.getParameter("codePostal"));
 		utilisateur.setVille(request.getParameter("ville"));
-		utilisateur.setPassword(request.getParameter("password"));
+		String hashPassword = request.getParameter("password");
+		utilisateur.setPassword(HashPassword.hashpassword(hashPassword));
+
 		try {
 			um = UtilisateurManager.getInstance();
 			um.ModifierUtilisateur(utilisateur);
