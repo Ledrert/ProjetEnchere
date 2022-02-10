@@ -24,7 +24,7 @@
     </div>
 	
 	<c:if test="${param.error == 1}">	
-    <p style="color : red">Votre Email/Pseudo ou Mdp est incorrect, veuillez réessayer.</p>
+    <p style="color : red">Identifiants incorrectes, veuillez réessayer.</p>
 	</c:if>
 	
     <div id="btmCo">
